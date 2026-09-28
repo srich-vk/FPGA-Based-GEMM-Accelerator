@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'gemm'" level="0">
-<item name = "Date">Mon Sep 28 19:03:50 2026
+<item name = "Date">Mon Sep 28 19:16:39 2026
 </item>
 <item name = "Version">2025.1 (Build 6135595 on May 21 2025)</item>
 <item name = "Project">hls</item>
@@ -54,7 +54,7 @@
 <column name="DSP">-, -, -, -, -</column>
 <column name="Expression">-, -, 0, 647, -</column>
 <column name="FIFO">-, -, -, -, -</column>
-<column name="Instance">2, 17, 3427, 3304, 0</column>
+<column name="Instance">2, 17, 3279, 3325, 0</column>
 <column name="Memory">2, -, 0, 0, 0</column>
 <column name="Multiplexer">-, -, 0, 1469, -</column>
 <column name="Register">-, -, 1207, -, -</column>
@@ -70,7 +70,7 @@
 <keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
 <column name="control_s_axi_U">control_s_axi, 0, 0, 360, 616, 0</column>
 <column name="grp_gemm_Pipeline_1_fu_199">gemm_Pipeline_1, 0, 0, 12, 61, 0</column>
-<column name="grp_gemm_Pipeline_VITIS_LOOP_42_3_fu_214">gemm_Pipeline_VITIS_LOOP_42_3, 0, 5, 775, 445, 0</column>
+<column name="grp_gemm_Pipeline_VITIS_LOOP_42_3_fu_214">gemm_Pipeline_VITIS_LOOP_42_3, 0, 5, 627, 466, 0</column>
 <column name="grp_gemm_Pipeline_VITIS_LOOP_47_4_fu_205">gemm_Pipeline_VITIS_LOOP_47_4, 0, 0, 57, 105, 0</column>
 <column name="gmem0_m_axi_U">gmem0_m_axi, 1, 0, 604, 650, 0</column>
 <column name="gmem1_m_axi_U">gmem1_m_axi, 1, 0, 604, 650, 0</column>

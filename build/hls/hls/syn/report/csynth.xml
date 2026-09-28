@@ -75,8 +75,8 @@
         <Resources>
             <BRAM_18K>4</BRAM_18K>
             <DSP>17</DSP>
-            <FF>4634</FF>
-            <LUT>5420</LUT>
+            <FF>4486</FF>
+            <LUT>5441</LUT>
             <URAM>0</URAM>
         </Resources>
         <AvailableResources>
@@ -1952,7 +1952,7 @@
                     <ModuleName>gemm_Pipeline_VITIS_LOOP_42_3</ModuleName>
                     <IsCompInst>true</IsCompInst>
                     <ID>214</ID>
-                    <BindInstances>icmp_ln42_fu_122_p2 add_ln42_fu_128_p2 fmul_32ns_32ns_32_4_max_dsp_1_U3 fadd_32ns_32ns_32_7_full_dsp_1_U2</BindInstances>
+                    <BindInstances>icmp_ln42_fu_124_p2 add_ln42_fu_130_p2 fmul_32ns_32ns_32_4_max_dsp_1_U3 fadd_32ns_32ns_32_7_full_dsp_1_U2</BindInstances>
                 </Instance>
             </InstancesList>
             <BindInstances>crow_U icmp_ln39_fu_236_p2 cmp23_fu_242_p2 cmp255_fu_248_p2 mul_32ns_32ns_63_2_1_U15 mul_32ns_32ns_63_2_1_U16 select_ln39_fu_274_p3 empty_fu_300_p3 mul_32ns_32ns_63_2_1_U17 select_ln39_1_fu_307_p3 empty_29_fu_323_p3 empty_31_fu_330_p3 empty_32_fu_346_p3 icmp_ln39_1_fu_390_p2 add_ln39_fu_395_p2 icmp_ln40_fu_405_p2 add_ln40_fu_410_p2 control_s_axi_U gmem0_m_axi_U gmem1_m_axi_U gmem2_m_axi_U</BindInstances>
@@ -2064,7 +2064,7 @@
                         <isPerfectNested>1</isPerfectNested>
                         <Latency>undef</Latency>
                         <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
-                        <PipelineII>1</PipelineII>
+                        <PipelineII>13</PipelineII>
                         <PipelineDepth>14</PipelineDepth>
                         <PipelineType>yes</PipelineType>
                         <PerformancePragma>-</PerformancePragma>
@@ -2090,10 +2090,10 @@
                     <DSP>5</DSP>
                     <AVAIL_DSP>5952</AVAIL_DSP>
                     <UTIL_DSP>~0</UTIL_DSP>
-                    <FF>775</FF>
+                    <FF>627</FF>
                     <AVAIL_FF>1743360</AVAIL_FF>
                     <UTIL_FF>~0</UTIL_FF>
-                    <LUT>445</LUT>
+                    <LUT>466</LUT>
                     <AVAIL_LUT>871680</AVAIL_LUT>
                     <UTIL_LUT>~0</UTIL_LUT>
                     <BRAM_18K>0</BRAM_18K>
@@ -2105,8 +2105,8 @@
                 </Resources>
             </AreaEstimates>
             <BindNodes>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="VITIS_LOOP_42_3" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln42_fu_122_p2" SOURCE="../src/kernel.cpp:42" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln42" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_42_3" OPTYPE="add" PRAGMA="" RTLNAME="add_ln42_fu_128_p2" SOURCE="../src/kernel.cpp:42" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln42" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="VITIS_LOOP_42_3" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln42_fu_124_p2" SOURCE="../src/kernel.cpp:42" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln42" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="VITIS_LOOP_42_3" OPTYPE="add" PRAGMA="" RTLNAME="add_ln42_fu_130_p2" SOURCE="../src/kernel.cpp:42" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln42" VISIBLE="true"/>
                 <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fmul" DSP="3" ID="" IMPL="maxdsp" LATENCY="3" LOOP="VITIS_LOOP_42_3" OPTYPE="fmul" PRAGMA="" RTLNAME="fmul_32ns_32ns_32_4_max_dsp_1_U3" SOURCE="../src/kernel.cpp:44" STORAGESUBTYPE="" URAM="0" VARIABLE="mul" VISIBLE="true"/>
                 <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="VITIS_LOOP_42_3" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U2" SOURCE="../src/kernel.cpp:44" STORAGESUBTYPE="" URAM="0" VARIABLE="add" VISIBLE="true"/>
             </BindNodes>
@@ -2270,10 +2270,10 @@
                     <DSP>17</DSP>
                     <AVAIL_DSP>5952</AVAIL_DSP>
                     <UTIL_DSP>~0</UTIL_DSP>
-                    <FF>4634</FF>
+                    <FF>4486</FF>
                     <AVAIL_FF>1743360</AVAIL_FF>
                     <UTIL_FF>~0</UTIL_FF>
-                    <LUT>5420</LUT>
+                    <LUT>5441</LUT>
                     <AVAIL_LUT>871680</AVAIL_LUT>
                     <UTIL_LUT>~0</UTIL_LUT>
                     <URAM>0</URAM>
@@ -2800,7 +2800,7 @@
         <Pragma type="interface" location="../src/kernel.cpp:26" status="valid" parentFunction="gemm" variable="K" isDirective="0" options="s_axilite port=K"/>
         <Pragma type="interface" location="../src/kernel.cpp:27" status="valid" parentFunction="gemm" variable="N" isDirective="0" options="s_axilite port=N"/>
         <Pragma type="interface" location="../src/kernel.cpp:28" status="valid" parentFunction="gemm" variable="return" isDirective="0" options="s_axilite port=return"/>
-        <Pragma type="pipeline" location="../src/kernel.cpp:43" status="valid" parentFunction="gemm" variable="" isDirective="0" options="ii=1"/>
+        <Pragma type="pipeline" location="../src/kernel.cpp:43" status="valid" parentFunction="gemm" variable="" isDirective="0" options="ii=13"/>
         <Pragma type="pipeline" location="../src/kernel.cpp:48" status="valid" parentFunction="gemm" variable="" isDirective="0" options="ii=1"/>
     </PragmaReport>
     <AutoPragmaReport>

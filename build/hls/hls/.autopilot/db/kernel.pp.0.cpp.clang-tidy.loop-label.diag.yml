@@ -34,7 +34,7 @@ Diagnostics:
     FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/src/kernel.cpp
     Replacements:    
       - FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp
-        Offset:          10363
+        Offset:          10364
         Length:          0
         ReplacementText: 'VITIS_LOOP_47_4: '
 ...

@@ -241,7 +241,7 @@
 <isPerfectNested>1</isPerfectNested>
 <Latency>undef</Latency>
 <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
-<PipelineII>1</PipelineII>
+<PipelineII>13</PipelineII>
 <PipelineDepth>14</PipelineDepth>
 <PipelineType>yes</PipelineType>
 <PerformancePragma>-</PerformancePragma>
@@ -268,10 +268,10 @@
 <DSP>5</DSP>
 <AVAIL_DSP>5952</AVAIL_DSP>
 <UTIL_DSP>~0</UTIL_DSP>
-<FF>775</FF>
+<FF>627</FF>
 <AVAIL_FF>1743360</AVAIL_FF>
 <UTIL_FF>~0</UTIL_FF>
-<LUT>445</LUT>
+<LUT>466</LUT>
 <AVAIL_LUT>871680</AVAIL_LUT>
 <UTIL_LUT>~0</UTIL_LUT>
 <BRAM_18K>0</BRAM_18K>
@@ -1796,10 +1796,10 @@
 <DSP>17</DSP>
 <AVAIL_DSP>5952</AVAIL_DSP>
 <UTIL_DSP>~0</UTIL_DSP>
-<FF>4634</FF>
+<FF>4486</FF>
 <AVAIL_FF>1743360</AVAIL_FF>
 <UTIL_FF>~0</UTIL_FF>
-<LUT>5420</LUT>
+<LUT>5441</LUT>
 <AVAIL_LUT>871680</AVAIL_LUT>
 <UTIL_LUT>~0</UTIL_LUT>
 <URAM>0</URAM>

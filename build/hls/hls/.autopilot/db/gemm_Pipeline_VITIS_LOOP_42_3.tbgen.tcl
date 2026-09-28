@@ -171,7 +171,7 @@ set ArgLastReadFirstWriteLatency {
 		N {Type I LastRead 0 FirstWrite -1}
 		p_cast_cast {Type I LastRead 0 FirstWrite -1}
 		a_ik {Type I LastRead 0 FirstWrite -1}
-		crow {Type IO LastRead 4 FirstWrite 13}}}
+		crow {Type IO LastRead 0 FirstWrite 13}}}
 
 set hasDtUnsupportedChannel 0
 
