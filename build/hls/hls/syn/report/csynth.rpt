@@ -4,7 +4,7 @@
 == Synthesis Summary Report of 'gemm'
 ================================================================
 + General Information: 
-    * Date:           Mon Sep 28 19:26:21 2026
+    * Date:           Mon Sep 28 22:00:09 2026
     * Version:        2025.1 (Build 6135595 on May 21 2025)
     * Project:        hls
     * Solution:       hls (Vitis Kernel Flow Target)
@@ -19,15 +19,15 @@
     |          Modules          |  Issue  |       |       Latency       | Iteration|         | Trip |          |         |          |            |            |     |
     |          & Loops          |   Type  | Slack | (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined|  BRAM   |    DSP   |     FF     |     LUT    | URAM|
     +---------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
-    |+ gemm                     |   Timing|  -0.00|        -|          -|         -|        -|     -|        no|  4 (~0%)|  17 (~0%)|  4486 (~0%)|  5441 (~0%)|    -|
+    |+ gemm                     |   Timing|  -0.00|        -|          -|         -|        -|     -|        no|  4 (~0%)|  17 (~0%)|  4634 (~0%)|  5420 (~0%)|    -|
     | + gemm_Pipeline_1         |        -|   0.12|      770|  2.564e+03|         -|      769|     -|    rewind|        -|         -|    12 (~0%)|    61 (~0%)|    -|
     |  o Loop 1                 |        -|   2.43|      768|  2.557e+03|         1|        1|   768|       yes|        -|         -|           -|           -|    -|
     | o i_loop                  |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
     |  + gemm_Pipeline_wb_loop  |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|         -|    57 (~0%)|   105 (~0%)|    -|
     |   o wb_loop               |        -|   2.43|        -|          -|         3|        1|     -|       yes|        -|         -|           -|           -|    -|
     |  o k_loop                 |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
-    |   + gemm_Pipeline_j_loop  |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|   5 (~0%)|   627 (~0%)|   466 (~0%)|    -|
-    |    o j_loop               |        -|   2.43|        -|          -|        14|       13|     -|       yes|        -|         -|           -|           -|    -|
+    |   + gemm_Pipeline_j_loop  |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|   5 (~0%)|   775 (~0%)|   445 (~0%)|    -|
+    |    o j_loop               |        -|   2.43|        -|          -|        14|        1|     -|       yes|        -|         -|           -|           -|    -|
     +---------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
 
 
@@ -177,8 +177,8 @@
 |    icmp_ln47_fu_112_p2               |     |        | icmp_ln47     | setlt  | auto     | 0       |
 |    add_ln47_fu_118_p2                |     |        | add_ln47      | add    | fabric   | 0       |
 |  + gemm_Pipeline_j_loop              | 5   |        |               |        |          |         |
-|    icmp_ln42_fu_124_p2               |     |        | icmp_ln42     | setlt  | auto     | 0       |
-|    add_ln42_fu_130_p2                |     |        | add_ln42      | add    | fabric   | 0       |
+|    icmp_ln42_fu_122_p2               |     |        | icmp_ln42     | setlt  | auto     | 0       |
+|    add_ln42_fu_128_p2                |     |        | add_ln42      | add    | fabric   | 0       |
 |    fmul_32ns_32ns_32_4_max_dsp_1_U3  | 3   |        | mul           | fmul   | maxdsp   | 3       |
 |    fadd_32ns_32ns_32_7_full_dsp_1_U2 | 2   |        | add           | fadd   | fulldsp  | 6       |
 +--------------------------------------+-----+--------+---------------+--------+----------+---------+
@@ -221,7 +221,7 @@
 | INTERFACE | s_axilite port=K                                   | ../src/kernel.cpp:26 in gemm, K      |
 | INTERFACE | s_axilite port=N                                   | ../src/kernel.cpp:27 in gemm, N      |
 | INTERFACE | s_axilite port=return                              | ../src/kernel.cpp:28 in gemm, return |
-| PIPELINE  | ii=13                                              | ../src/kernel.cpp:43 in gemm         |
+| PIPELINE  | ii=1                                               | ../src/kernel.cpp:43 in gemm         |
 | PIPELINE  | ii=1                                               | ../src/kernel.cpp:48 in gemm         |
 +-----------+----------------------------------------------------+--------------------------------------+
 

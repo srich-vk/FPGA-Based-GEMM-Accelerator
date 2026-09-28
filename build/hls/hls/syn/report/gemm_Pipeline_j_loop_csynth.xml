@@ -39,7 +39,7 @@
 <isPerfectNested>1</isPerfectNested>
 <Latency>undef</Latency>
 <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
-<PipelineII>13</PipelineII>
+<PipelineII>1</PipelineII>
 <PipelineDepth>14</PipelineDepth>
 <PerformancePragma>-</PerformancePragma>
 <InstanceList>
@@ -64,8 +64,8 @@
 <AreaEstimates>
 <Resources>
 <DSP>5</DSP>
-<FF>627</FF>
-<LUT>466</LUT>
+<FF>775</FF>
+<LUT>445</LUT>
 <BRAM_18K>0</BRAM_18K>
 <URAM>0</URAM>
 </Resources>

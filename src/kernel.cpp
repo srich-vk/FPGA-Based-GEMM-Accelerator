@@ -40,7 +40,7 @@ extern "C" void gemm(const float *A, const float *B, float *C, int M, int K, int
         k_loop: for(int k = 0; k < K; k++){
             float a_ik = A[(long)i * K + k];
             j_loop: for(int j = 0; j < N; j++){
-                #pragma HLS PIPELINE II=13
+                #pragma HLS PIPELINE II=1
                 crow[j] += a_ik * B[(long)k * N + j];
             }
         }

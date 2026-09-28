@@ -11820,11 +11820,11 @@
             </item>
             <item>
               <first>FF</first>
-              <second>627</second>
+              <second>775</second>
             </item>
             <item>
               <first>LUT</first>
-              <second>466</second>
+              <second>445</second>
             </item>
           </second>
         </item>

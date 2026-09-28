@@ -3,7 +3,7 @@
 ================================================================
 == Vitis HLS Report for 'gemm'
 ================================================================
-* Date:           Mon Sep 28 19:26:21 2026
+* Date:           Mon Sep 28 22:00:08 2026
 
 * Version:        2025.1 (Build 6135595 on May 21 2025)
 * Project:        hls
@@ -832,9 +832,9 @@ State 150 <SV = 149> <Delay = 1.26>
 ST_150 : Operation 445 [1/1] (0.00ns)   --->   "%a_ik = bitcast i32 %gmem0_addr_read" [../src/kernel.cpp:41]   --->   Operation 445 'bitcast' 'a_ik' <Predicate = true> <Delay = 0.00>
 ST_150 : Operation 446 [2/2] (1.26ns)   --->   "%call_ln41 = call void @gemm_Pipeline_j_loop, i32 %gmem1, i32 %N_read, i62 %p_cast, i32 %a_ik, i32 %crow" [../src/kernel.cpp:41]   --->   Operation 446 'call' 'call_ln41' <Predicate = true> <Delay = 1.26> <CoreType = "Generic">   --->   Generic Core
 
-State 151 <SV = 150> <Delay = 1.65>
+State 151 <SV = 150> <Delay = 0.00>
 ST_151 : Operation 447 [1/1] (0.00ns)   --->   "%specloopname_ln40 = specloopname void @_ssdm_op_SpecLoopName, void @empty_17" [../src/kernel.cpp:40]   --->   Operation 447 'specloopname' 'specloopname_ln40' <Predicate = true> <Delay = 0.00>
-ST_151 : Operation 448 [1/2] (1.65ns)   --->   "%call_ln41 = call void @gemm_Pipeline_j_loop, i32 %gmem1, i32 %N_read, i62 %p_cast, i32 %a_ik, i32 %crow" [../src/kernel.cpp:41]   --->   Operation 448 'call' 'call_ln41' <Predicate = true> <Delay = 1.65> <CoreType = "Generic">   --->   Generic Core
+ST_151 : Operation 448 [1/2] (0.00ns)   --->   "%call_ln41 = call void @gemm_Pipeline_j_loop, i32 %gmem1, i32 %N_read, i62 %p_cast, i32 %a_ik, i32 %crow" [../src/kernel.cpp:41]   --->   Operation 448 'call' 'call_ln41' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Generic Core
 ST_151 : Operation 449 [1/1] (0.00ns)   --->   "%br_ln40 = br void %j_loop" [../src/kernel.cpp:40]   --->   Operation 449 'br' 'br_ln40' <Predicate = true> <Delay = 0.00>
 
 State 152 <SV = 148> <Delay = 0.00>
@@ -3201,7 +3201,7 @@ ret_ln53           (ret          ) [ 0000000000000000000000000000000000000000000
 |----------|----------------------------------|---------|---------|---------|---------|
 |          |    grp_gemm_Pipeline_1_fu_199    |    0    |    0    |    10   |    34   |
 |   call   | grp_gemm_Pipeline_wb_loop_fu_205 |    0    |  0.387  |   117   |    65   |
-|          |  grp_gemm_Pipeline_j_loop_fu_214 |    5    |  0.774  |   706   |   350   |
+|          |  grp_gemm_Pipeline_j_loop_fu_214 |    5    |  0.774  |   748   |   350   |
 |----------|----------------------------------|---------|---------|---------|---------|
 |          |            grp_fu_224            |    4    |    0    |   165   |    49   |
 |    mul   |            grp_fu_228            |    4    |    0    |   165   |    49   |
@@ -3255,7 +3255,7 @@ ret_ln53           (ret          ) [ 0000000000000000000000000000000000000000000
 |   sext   |        sext_ln39_1_fu_357        |    0    |    0    |    0    |    0    |
 |          |        p_cast_cast_fu_371        |    0    |    0    |    0    |    0    |
 |----------|----------------------------------|---------|---------|---------|---------|
-|   Total  |                                  |    17   |  1.161  |   1328  |   1239  |
+|   Total  |                                  |    17   |  1.161  |   1370  |   1239  |
 |----------|----------------------------------|---------|---------|---------|---------|
 
 Memories:
@@ -3325,10 +3325,10 @@ Memories:
 +-----------+--------+--------+--------+--------+--------+--------+
 |           |  BRAM  |   DSP  |  Delay |   FF   |   LUT  |  URAM  |
 +-----------+--------+--------+--------+--------+--------+--------+
-|  Function |    -   |   17   |    1   |  1328  |  1239  |    -   |
+|  Function |    -   |   17   |    1   |  1370  |  1239  |    -   |
 |   Memory  |    2   |    -   |    -   |    0   |    0   |    0   |
 |Multiplexer|    -   |    -   |    3   |    0   |   72   |    -   |
 |  Register |    -   |    -   |    -   |  1202  |    -   |    -   |
 +-----------+--------+--------+--------+--------+--------+--------+
-|   Total   |    2   |   17   |    4   |  2530  |  1311  |    0   |
+|   Total   |    2   |   17   |    4   |  2572  |  1311  |    0   |
 +-----------+--------+--------+--------+--------+--------+--------+

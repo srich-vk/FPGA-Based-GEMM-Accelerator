@@ -48,7 +48,7 @@ INFO: [COSIM 212-12] Generating RTL test bench ...
   **** SW Build 6140274 on Wed May 21 22:58:25 MDT 2025
   **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
   **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-  **** Start of session at: Mon Sep 28 19:23:23 2026
+  **** Start of session at: Mon Sep 28 19:32:34 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -60,7 +60,7 @@ INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'gemm_fmul_32ns_32n
 INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'gemm_fmul_32ns_32ns_32_4_max_dsp_1_ip'...
 INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'gemm_fadd_32ns_32ns_32_7_full_dsp_1_ip'...
 INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'gemm_fadd_32ns_32ns_32_7_full_dsp_1_ip'...
-INFO: [Common 17-206] Exiting Vivado at Mon Sep 28 19:23:29 2026...
+INFO: [Common 17-206] Exiting Vivado at Mon Sep 28 19:32:41 2026...
 INFO: [COSIM 212-1] *** C/RTL co-simulation file generation completed. ***
 INFO: [COSIM 212-323] Starting verilog simulation. 
 INFO: [COSIM 212-15] Starting XSIM ...
@@ -374,7 +374,6 @@ Compiling module xil_defaultlib.sv_module_top
 Compiling module xil_defaultlib.nodf_module_intf_default
 Compiling module xil_defaultlib.seq_loop_intf(FSM_WIDTH=220)
 Compiling module xil_defaultlib.upc_loop_intf(FSM_WIDTH=1)
-Compiling module xil_defaultlib.upc_loop_intf(FSM_WIDTH=13)
 Compiling module xil_defaultlib.dataflow_monitor_1
 Compiling module xil_defaultlib.apatb_gemm_top
 Compiling module xil_defaultlib.glbl
@@ -384,7 +383,7 @@ Built simulation snapshot gemm
   **** SW Build 6140274 on Wed May 21 22:58:25 MDT 2025
   **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
   **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-  **** Start of session at: Mon Sep 28 19:24:29 2026
+  **** Start of session at: Mon Sep 28 19:33:39 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -930,13 +929,13 @@ UVM_INFO /home/Xilinx/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package
 // RTL Simulation : 0 / 3 [n/a] @ "109000"
 // RTL Simulation : 1 / 3 [n/a] @ "268999000"
 // RTL Simulation : 2 / 3 [n/a] @ "623029000"
-// RTL Simulation : 3 / 3 [n/a] @ "2643902000"
+// RTL Simulation : 3 / 3 [n/a] @ "843188000"
 ////////////////////////////////////////////////////////////////////////////////////
-$finish called at time : 2643925630 ps : File "/home/Xilinx/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 18699
-run: Time (s): cpu = 00:00:00.01 ; elapsed = 00:01:18 . Memory (MB): peak = 1591.508 ; gain = 0.000 ; free physical = 189714 ; free virtual = 495198
+$finish called at time : 843211390 ps : File "/home/Xilinx/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 18699
+run: Time (s): cpu = 00:00:00.01 ; elapsed = 00:01:03 . Memory (MB): peak = 1591.508 ; gain = 0.000 ; free physical = 186717 ; free virtual = 501659
 ## quit
-INFO: xsimkernel Simulation Memory Usage: 7035032 KB (Peak: 7035032 KB), Simulation CPU Usage: 78580 ms
-INFO: [Common 17-206] Exiting xsim at Mon Sep 28 19:25:50 2026...
+INFO: xsimkernel Simulation Memory Usage: 3168352 KB (Peak: 3168352 KB), Simulation CPU Usage: 64610 ms
+INFO: [Common 17-206] Exiting xsim at Mon Sep 28 19:34:46 2026...
 INFO: [COSIM 212-316] Starting C post checking ...
 === kernel_tb (tiny shapes, cosim-sized buffers) ===
   M=16     K=288  N=1    PASS  max|err|=2.72e-06
@@ -944,5 +943,5 @@ INFO: [COSIM 212-316] Starting C post checking ...
   M=4      K=288  N=40   PASS  max|err|=9.99e-06
 === ALL PASS ===
 INFO: [COSIM 212-1000] *** C/RTL co-simulation finished: PASS ***
-INFO: [HLS 200-112] Total CPU user time: 252.22 seconds. Total CPU system time: 12.78 seconds. Total elapsed time: 158.95 seconds; peak allocated memory: 528.535 MB.
-INFO: [vitis-run 60-791] Total elapsed time: 0h 2m 44s
+INFO: [HLS 200-112] Total CPU user time: 241 seconds. Total CPU system time: 10.58 seconds. Total elapsed time: 143.69 seconds; peak allocated memory: 528.535 MB.
+INFO: [vitis-run 60-791] Total elapsed time: 0h 2m 28s

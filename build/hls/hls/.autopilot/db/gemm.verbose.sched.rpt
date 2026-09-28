@@ -3,7 +3,7 @@
 ================================================================
 == Vitis HLS Report for 'gemm'
 ================================================================
-* Date:           Mon Sep 28 19:26:21 2026
+* Date:           Mon Sep 28 22:00:08 2026
 
 * Version:        2025.1 (Build 6135595 on May 21 2025)
 * Project:        hls
@@ -825,9 +825,9 @@ State 150 <SV = 149> <Delay = 1.26>
 ST_150 : Operation 445 [1/1] (0.00ns)   --->   "%a_ik = bitcast i32 %gmem0_addr_read" [../src/kernel.cpp:41]   --->   Operation 445 'bitcast' 'a_ik' <Predicate = true> <Delay = 0.00>
 ST_150 : Operation 446 [2/2] (1.26ns)   --->   "%call_ln41 = call void @gemm_Pipeline_j_loop, i32 %gmem1, i32 %N_read, i62 %p_cast, i32 %a_ik, i32 %crow" [../src/kernel.cpp:41]   --->   Operation 446 'call' 'call_ln41' <Predicate = true> <Delay = 1.26> <CoreType = "Generic">   --->   Generic Core
 
-State 151 <SV = 150> <Delay = 1.65>
+State 151 <SV = 150> <Delay = 0.00>
 ST_151 : Operation 447 [1/1] (0.00ns)   --->   "%specloopname_ln40 = specloopname void @_ssdm_op_SpecLoopName, void @empty_17" [../src/kernel.cpp:40]   --->   Operation 447 'specloopname' 'specloopname_ln40' <Predicate = true> <Delay = 0.00>
-ST_151 : Operation 448 [1/2] (1.65ns)   --->   "%call_ln41 = call void @gemm_Pipeline_j_loop, i32 %gmem1, i32 %N_read, i62 %p_cast, i32 %a_ik, i32 %crow" [../src/kernel.cpp:41]   --->   Operation 448 'call' 'call_ln41' <Predicate = true> <Delay = 1.65> <CoreType = "Generic">   --->   Generic Core
+ST_151 : Operation 448 [1/2] (0.00ns)   --->   "%call_ln41 = call void @gemm_Pipeline_j_loop, i32 %gmem1, i32 %N_read, i62 %p_cast, i32 %a_ik, i32 %crow" [../src/kernel.cpp:41]   --->   Operation 448 'call' 'call_ln41' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Generic Core
 ST_151 : Operation 449 [1/1] (0.00ns)   --->   "%br_ln40 = br void %j_loop" [../src/kernel.cpp:40]   --->   Operation 449 'br' 'br_ln40' <Predicate = true> <Delay = 0.00>
 
 State 152 <SV = 148> <Delay = 0.00>
@@ -1649,9 +1649,8 @@ The critical path consists of the following:
 The critical path consists of the following:
 	'call' operation 0 bit ('call_ln41', ../src/kernel.cpp:41) to 'gemm_Pipeline_j_loop' [94]  (1.267 ns)
 
- <State 151>: 1.654ns
+ <State 151>: 0.000ns
 The critical path consists of the following:
-	'call' operation 0 bit ('call_ln41', ../src/kernel.cpp:41) to 'gemm_Pipeline_j_loop' [94]  (1.654 ns)
 
  <State 152>: 0.000ns
 The critical path consists of the following:

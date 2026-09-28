@@ -2050,7 +2050,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>e1b4dc85</spirit:value>
+            <spirit:value>c2be3b58</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2069,7 +2069,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>373b639e</spirit:value>
+            <spirit:value>a16d0c7e</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2088,7 +2088,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>3d6739fa</spirit:value>
+            <spirit:value>b9cabc43</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2107,7 +2107,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>02883248</spirit:value>
+            <spirit:value>16f1444f</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -5377,7 +5377,7 @@
       <spirit:file>
         <spirit:name>hdl/vhdl/gemm.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_d872a499</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_577ef021</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -5915,8 +5915,8 @@
       </xilinx:taxonomies>
       <xilinx:displayName>Gemm</xilinx:displayName>
       <xilinx:definitionSource>HLS</xilinx:definitionSource>
-      <xilinx:coreRevision>2114806166</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2026-09-28T13:56:33Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>2114806320</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2026-09-28T16:30:21Z</xilinx:coreCreationDateTime>
       <xilinx:sdxKernelAttributes>
         <xilinx:sdx_kernel>true</xilinx:sdx_kernel>
         <xilinx:sdx_kernel_type>hls</xilinx:sdx_kernel_type>
@@ -5927,7 +5927,7 @@
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="81a4bf8f"/>
       <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="d37294b6"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="a13dbbfb"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="2b75a2ff"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b405db71"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="c580f756"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="5bfb73f0"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="3449003e"/>
