@@ -226,7 +226,7 @@
             <Obj>
               <type>0</type>
               <id>7</id>
-              <name>exitcond3</name>
+              <name>exitcond213</name>
               <fileName></fileName>
               <fileDirectory></fileDirectory>
               <lineNumber>0</lineNumber>
@@ -237,7 +237,7 @@
                 <item_version>0</item_version>
               </inlineStackInfo>
               <originalName></originalName>
-              <rtlName>exitcond3_fu_52_p2</rtlName>
+              <rtlName>exitcond213_fu_52_p2</rtlName>
               <control>auto</control>
               <opType>seteq</opType>
               <implIndex>auto</implIndex>
@@ -356,7 +356,7 @@
             <Obj>
               <type>0</type>
               <id>11</id>
-              <name>p_cast4</name>
+              <name>p_cast1</name>
               <fileName></fileName>
               <fileDirectory></fileDirectory>
               <lineNumber>0</lineNumber>
@@ -367,7 +367,7 @@
                 <item_version>0</item_version>
               </inlineStackInfo>
               <originalName></originalName>
-              <rtlName>p_cast4_fu_64_p1</rtlName>
+              <rtlName>p_cast1_fu_64_p1</rtlName>
               <control></control>
               <opType></opType>
               <implIndex></implIndex>
@@ -908,7 +908,7 @@
           <Obj>
             <type>3</type>
             <id>20</id>
-            <name>VITIS_LOOP_41_2.exitStub</name>
+            <name>VITIS_LOOP_39_1.exitStub</name>
             <fileName></fileName>
             <fileDirectory></fileDirectory>
             <lineNumber>0</lineNumber>
@@ -1367,7 +1367,7 @@
           </second>
         </item>
         <item>
-          <first>exitcond3_fu_52_p2 ( icmp ) </first>
+          <first>exitcond213_fu_52_p2 ( icmp ) </first>
           <second>
             <count>4</count>
             <item_version>0</item_version>
@@ -1571,7 +1571,7 @@
           </second>
         </item>
         <item>
-          <first>exitcond3_fu_52_p2 ( icmp ) </first>
+          <first>exitcond213_fu_52_p2 ( icmp ) </first>
           <second>
             <count>1</count>
             <item_version>0</item_version>
@@ -1844,7 +1844,7 @@
         </second>
       </item>
       <item>
-        <first>exitcond3_fu_52</first>
+        <first>exitcond213_fu_52</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>
@@ -1852,7 +1852,7 @@
         </second>
       </item>
       <item>
-        <first>p_cast4_fu_64</first>
+        <first>p_cast1_fu_64</first>
         <second>
           <count>1</count>
           <item_version>0</item_version>

@@ -3,7 +3,7 @@
 ================================================================
 == Vitis HLS Report for 'gemm_Pipeline_1'
 ================================================================
-* Date:           Mon Sep 28 18:27:04 2026
+* Date:           Mon Sep 28 19:03:49 2026
 
 * Version:        2025.1 (Build 6135595 on May 21 2025)
 * Project:        hls
@@ -88,17 +88,17 @@ ST_1 : Operation 4 [1/1] (0.00ns)   --->   "%empty = alloca i32 1"   --->   Oper
 ST_1 : Operation 5 [1/1] (0.38ns)   --->   "%store_ln0 = store i10 0, i10 %empty"   --->   Operation 5 'store' 'store_ln0' <Predicate = true> <Delay = 0.38>
 ST_1 : Operation 6 [1/1] (0.00ns)   --->   "%br_ln0 = br void %memset.loop"   --->   Operation 6 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
 ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%p_load = load i10 %empty"   --->   Operation 7 'load' 'p_load' <Predicate = true> <Delay = 0.00>
-ST_1 : Operation 8 [1/1] (0.72ns)   --->   "%exitcond3 = icmp_eq  i10 %p_load, i10 768"   --->   Operation 8 'icmp' 'exitcond3' <Predicate = true> <Delay = 0.72> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.72> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
+ST_1 : Operation 8 [1/1] (0.72ns)   --->   "%exitcond213 = icmp_eq  i10 %p_load, i10 768"   --->   Operation 8 'icmp' 'exitcond213' <Predicate = true> <Delay = 0.72> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.72> <FuncUnit> <Opcode : 'seteq' 'setne' 'setle' 'setge' 'setlt' 'setgt'> <InPorts = 2> <OutPorts = 1>
 ST_1 : Operation 9 [1/1] (0.72ns)   --->   "%empty_27 = add i10 %p_load, i10 1"   --->   Operation 9 'add' 'empty_27' <Predicate = true> <Delay = 0.72> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 0.72> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
-ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%br_ln0 = br i1 %exitcond3, void %memset.loop.split, void %VITIS_LOOP_41_2.exitStub"   --->   Operation 10 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
-ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%p_cast4 = zext i10 %p_load"   --->   Operation 11 'zext' 'p_cast4' <Predicate = (!exitcond3)> <Delay = 0.00>
-ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%specpipeline_ln0 = specpipeline void @_ssdm_op_SpecPipeline, i32 4294967295, i32 0, i32 0, i32 0, void @empty_9"   --->   Operation 12 'specpipeline' 'specpipeline_ln0' <Predicate = (!exitcond3)> <Delay = 0.00>
-ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%speclooptripcount_ln0 = speclooptripcount void @_ssdm_op_SpecLoopTripCount, i64 768, i64 768, i64 768"   --->   Operation 13 'speclooptripcount' 'speclooptripcount_ln0' <Predicate = (!exitcond3)> <Delay = 0.00>
-ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%crow_addr = getelementptr i32 %crow, i64 0, i64 %p_cast4"   --->   Operation 14 'getelementptr' 'crow_addr' <Predicate = (!exitcond3)> <Delay = 0.00>
-ST_1 : Operation 15 [1/1] ( I:1.20ns O:1.20ns )   --->   "%store_ln0 = store i32 0, i10 %crow_addr"   --->   Operation 15 'store' 'store_ln0' <Predicate = (!exitcond3)> <Delay = 1.20> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 1.20> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 768> <RAM>
-ST_1 : Operation 16 [1/1] (0.38ns)   --->   "%store_ln0 = store i10 %empty_27, i10 %empty"   --->   Operation 16 'store' 'store_ln0' <Predicate = (!exitcond3)> <Delay = 0.38>
-ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%br_ln0 = br void %memset.loop"   --->   Operation 17 'br' 'br_ln0' <Predicate = (!exitcond3)> <Delay = 0.00>
-ST_1 : Operation 18 [1/1] (0.38ns)   --->   "%ret_ln0 = ret"   --->   Operation 18 'ret' 'ret_ln0' <Predicate = (exitcond3)> <Delay = 0.38>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%br_ln0 = br i1 %exitcond213, void %memset.loop.split, void %VITIS_LOOP_39_1.exitStub"   --->   Operation 10 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%p_cast1 = zext i10 %p_load"   --->   Operation 11 'zext' 'p_cast1' <Predicate = (!exitcond213)> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%specpipeline_ln0 = specpipeline void @_ssdm_op_SpecPipeline, i32 4294967295, i32 0, i32 0, i32 0, void @empty_9"   --->   Operation 12 'specpipeline' 'specpipeline_ln0' <Predicate = (!exitcond213)> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%speclooptripcount_ln0 = speclooptripcount void @_ssdm_op_SpecLoopTripCount, i64 768, i64 768, i64 768"   --->   Operation 13 'speclooptripcount' 'speclooptripcount_ln0' <Predicate = (!exitcond213)> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%crow_addr = getelementptr i32 %crow, i64 0, i64 %p_cast1"   --->   Operation 14 'getelementptr' 'crow_addr' <Predicate = (!exitcond213)> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] ( I:1.20ns O:1.20ns )   --->   "%store_ln0 = store i32 0, i10 %crow_addr"   --->   Operation 15 'store' 'store_ln0' <Predicate = (!exitcond213)> <Delay = 1.20> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 1.20> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 768> <RAM>
+ST_1 : Operation 16 [1/1] (0.38ns)   --->   "%store_ln0 = store i10 %empty_27, i10 %empty"   --->   Operation 16 'store' 'store_ln0' <Predicate = (!exitcond213)> <Delay = 0.38>
+ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%br_ln0 = br void %memset.loop"   --->   Operation 17 'br' 'br_ln0' <Predicate = (!exitcond213)> <Delay = 0.00>
+ST_1 : Operation 18 [1/1] (0.38ns)   --->   "%ret_ln0 = ret"   --->   Operation 18 'ret' 'ret_ln0' <Predicate = (exitcond213)> <Delay = 0.38>
 
 
 ============================================================
@@ -110,7 +110,7 @@ Target clock period: 3.330ns, clock uncertainty: 0.899ns.
 The critical path consists of the following:
 	'store' operation 0 bit ('store_ln0') of constant 0 on local variable 'empty' [3]  (0.387 ns)
 	'load' operation 10 bit ('p_load') on local variable 'empty' [6]  (0.000 ns)
-	'icmp' operation 1 bit ('exitcond3') [7]  (0.725 ns)
+	'icmp' operation 1 bit ('exitcond213') [7]  (0.725 ns)
 	'store' operation 0 bit ('store_ln0') of constant 0 on array 'crow' [15]  (1.200 ns)
 
 

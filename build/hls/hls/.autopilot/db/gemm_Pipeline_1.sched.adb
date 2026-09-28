@@ -226,7 +226,7 @@
 					<Obj>
 						<type>0</type>
 						<id>7</id>
-						<name>exitcond3</name>
+						<name>exitcond213</name>
 						<fileName></fileName>
 						<fileDirectory></fileDirectory>
 						<lineNumber>0</lineNumber>
@@ -356,7 +356,7 @@
 					<Obj>
 						<type>0</type>
 						<id>11</id>
-						<name>p_cast4</name>
+						<name>p_cast1</name>
 						<fileName></fileName>
 						<fileDirectory></fileDirectory>
 						<lineNumber>0</lineNumber>
@@ -908,7 +908,7 @@
 				<Obj>
 					<type>3</type>
 					<id>20</id>
-					<name>VITIS_LOOP_41_2.exitStub</name>
+					<name>VITIS_LOOP_39_1.exitStub</name>
 					<fileName></fileName>
 					<fileDirectory></fileDirectory>
 					<lineNumber>0</lineNumber>

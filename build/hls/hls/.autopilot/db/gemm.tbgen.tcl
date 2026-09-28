@@ -360,8 +360,8 @@ set NewPortList {[
 
 set ArgLastReadFirstWriteLatency {
 	gemm {
-		gmem0 {Type I LastRead 149 FirstWrite -1}
-		gmem1 {Type I LastRead 77 FirstWrite -1}
+		gmem0 {Type I LastRead 148 FirstWrite -1}
+		gmem1 {Type I LastRead 76 FirstWrite -1}
 		gmem2 {Type O LastRead 76 FirstWrite 2}
 		A {Type I LastRead 3 FirstWrite -1}
 		B {Type I LastRead 3 FirstWrite -1}
@@ -371,12 +371,12 @@ set ArgLastReadFirstWriteLatency {
 		N {Type I LastRead 0 FirstWrite -1}}
 	gemm_Pipeline_1 {
 		crow {Type O LastRead -1 FirstWrite 0}}
-	gemm_Pipeline_VITIS_LOOP_48_4 {
+	gemm_Pipeline_VITIS_LOOP_47_4 {
 		gmem2 {Type O LastRead -1 FirstWrite 2}
 		N {Type I LastRead 0 FirstWrite -1}
 		sext_ln39_1 {Type I LastRead 0 FirstWrite -1}
-		crow {Type I LastRead 0 FirstWrite -1}}
-	gemm_Pipeline_VITIS_LOOP_43_3 {
+		crow {Type IO LastRead 0 FirstWrite 1}}
+	gemm_Pipeline_VITIS_LOOP_42_3 {
 		gmem1 {Type I LastRead 1 FirstWrite -1}
 		N {Type I LastRead 0 FirstWrite -1}
 		p_cast_cast {Type I LastRead 0 FirstWrite -1}

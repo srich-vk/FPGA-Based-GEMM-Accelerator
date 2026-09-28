@@ -10,10 +10,10 @@
     "loads": {
       "L": 2
     },
-    "memory_accesses": 6,
+    "memory_accesses": 7,
     "name": "gemm",
     "stores": {
-      "L": 2
+      "L": 3
     },
     "total_instructions": 109
   }

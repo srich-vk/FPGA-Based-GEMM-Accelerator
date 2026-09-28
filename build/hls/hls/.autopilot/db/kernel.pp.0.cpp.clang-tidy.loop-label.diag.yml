@@ -7,34 +7,34 @@ Diagnostics:
     FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/src/kernel.cpp
     Replacements:    
       - FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp
-        Offset:          10090
+        Offset:          10117
         Length:          0
         ReplacementText: 'VITIS_LOOP_39_1: '
   - DiagnosticName:  xilinx-label-all-loops
-    Message:         'Added loop label VITIS_LOOP_41_2:  '
-    FileOffset:      41
+    Message:         'Added loop label VITIS_LOOP_40_2:  '
+    FileOffset:      40
     FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/src/kernel.cpp
     Replacements:    
       - FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp
-        Offset:          10157
+        Offset:          10153
         Length:          0
-        ReplacementText: 'VITIS_LOOP_41_2: '
+        ReplacementText: 'VITIS_LOOP_40_2: '
   - DiagnosticName:  xilinx-label-all-loops
-    Message:         'Added loop label VITIS_LOOP_43_3:  '
-    FileOffset:      43
+    Message:         'Added loop label VITIS_LOOP_42_3:  '
+    FileOffset:      42
     FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/src/kernel.cpp
     Replacements:    
       - FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp
-        Offset:          10242
+        Offset:          10238
         Length:          0
-        ReplacementText: 'VITIS_LOOP_43_3: '
+        ReplacementText: 'VITIS_LOOP_42_3: '
   - DiagnosticName:  xilinx-label-all-loops
-    Message:         'Added loop label VITIS_LOOP_48_4:  '
-    FileOffset:      48
+    Message:         'Added loop label VITIS_LOOP_47_4:  '
+    FileOffset:      47
     FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/src/kernel.cpp
     Replacements:    
       - FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp
-        Offset:          10367
+        Offset:          10363
         Length:          0
-        ReplacementText: 'VITIS_LOOP_48_4: '
+        ReplacementText: 'VITIS_LOOP_47_4: '
 ...

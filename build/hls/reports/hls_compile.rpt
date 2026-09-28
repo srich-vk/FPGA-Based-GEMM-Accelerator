@@ -4,7 +4,7 @@
 == Synthesis Summary Report of 'gemm'
 ================================================================
 + General Information: 
-    * Date:           Mon Sep 28 18:27:05 2026
+    * Date:           Mon Sep 28 19:03:50 2026
     * Version:        2025.1 (Build 6135595 on May 21 2025)
     * Project:        hls
     * Solution:       hls (Vitis Kernel Flow Target)
@@ -19,15 +19,15 @@
     |               Modules              |  Issue  |       |       Latency       | Iteration|         | Trip |          |         |          |            |            |     |
     |               & Loops              |   Type  | Slack | (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined|  BRAM   |    DSP   |     FF     |     LUT    | URAM|
     +------------------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
-    |+ gemm                              |   Timing|  -0.00|        -|          -|         -|        -|     -|        no|  4 (~0%)|  17 (~0%)|  4646 (~0%)|  5415 (~0%)|    -|
+    |+ gemm                              |   Timing|  -0.00|        -|          -|         -|        -|     -|        no|  4 (~0%)|  17 (~0%)|  4634 (~0%)|  5420 (~0%)|    -|
+    | + gemm_Pipeline_1                  |        -|   0.12|      770|  2.564e+03|         -|      769|     -|    rewind|        -|         -|    12 (~0%)|    61 (~0%)|    -|
+    |  o Loop 1                          |        -|   2.43|      768|  2.557e+03|         1|        1|   768|       yes|        -|         -|           -|           -|    -|
     | o VITIS_LOOP_39_1                  |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
-    |  + gemm_Pipeline_1                 |        -|   0.12|      770|  2.564e+03|         -|      769|     -|    rewind|        -|         -|    12 (~0%)|    61 (~0%)|    -|
-    |   o Loop 1                         |        -|   2.43|      768|  2.557e+03|         1|        1|   768|       yes|        -|         -|           -|           -|    -|
-    |  + gemm_Pipeline_VITIS_LOOP_48_4   |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|         -|    68 (~0%)|   126 (~0%)|    -|
-    |   o VITIS_LOOP_48_4                |        -|   2.43|        -|          -|         3|        1|     -|       yes|        -|         -|           -|           -|    -|
-    |  o VITIS_LOOP_41_2                 |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
-    |   + gemm_Pipeline_VITIS_LOOP_43_3  |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|   5 (~0%)|   775 (~0%)|   445 (~0%)|    -|
-    |    o VITIS_LOOP_43_3               |        -|   2.43|        -|          -|        14|        1|     -|       yes|        -|         -|           -|           -|    -|
+    |  + gemm_Pipeline_VITIS_LOOP_47_4   |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|         -|    57 (~0%)|   105 (~0%)|    -|
+    |   o VITIS_LOOP_47_4                |        -|   2.43|        -|          -|         3|        1|     -|       yes|        -|         -|           -|           -|    -|
+    |  o VITIS_LOOP_40_2                 |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
+    |   + gemm_Pipeline_VITIS_LOOP_42_3  |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|   5 (~0%)|   775 (~0%)|   445 (~0%)|    -|
+    |    o VITIS_LOOP_42_3               |        -|   2.43|        -|          -|        14|        1|     -|       yes|        -|         -|           -|           -|    -|
     +------------------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
 
 
@@ -133,16 +133,16 @@
 +--------------+----------+-------------------------+-----------+--------------+----------+-----------------+-------------------------+------------+------------------------------------------------+
 | HW Interface | Variable | Access Location         | Direction | Burst Status | Length   | Loop            | Loop Location           | Resolution | Problem                                        |
 +--------------+----------+-------------------------+-----------+--------------+----------+-----------------+-------------------------+------------+------------------------------------------------+
-| m_axi_gmem0  | A        | ../src/kernel.cpp:42:26 | read      | Widen Fail   |          | VITIS_LOOP_41_2 | ../src/kernel.cpp:41:26 | 214-235    | Start index of the access is unaligned         |
-| m_axi_gmem0  | A        | ../src/kernel.cpp:42:26 | read      | Widen Fail   |          | VITIS_LOOP_41_2 | ../src/kernel.cpp:41:26 | 214-234    | Sequential access length is not divisible by 2 |
-| m_axi_gmem0  | A        | ../src/kernel.cpp:42:26 | read      | Inferred     | variable | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:19 |            |                                                |
-| m_axi_gmem1  | B        | ../src/kernel.cpp:45:20 | read      | Widen Fail   |          | VITIS_LOOP_43_3 | ../src/kernel.cpp:43:30 | 214-235    | Start index of the access is unaligned         |
-| m_axi_gmem1  | B        | ../src/kernel.cpp:45:20 | read      | Widen Fail   |          | VITIS_LOOP_43_3 | ../src/kernel.cpp:43:30 | 214-234    | Sequential access length is not divisible by 2 |
-| m_axi_gmem1  | B        | ../src/kernel.cpp:45:20 | read      | Fail         |          | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:19 | 214-229    | Could not analyze pattern                      |
-| m_axi_gmem1  | B        | ../src/kernel.cpp:45:20 | read      | Inferred     | variable | VITIS_LOOP_41_2 | ../src/kernel.cpp:41:26 |            |                                                |
-| m_axi_gmem2  | C        | ../src/kernel.cpp:50:21 | write     | Widen Fail   |          | VITIS_LOOP_48_4 | ../src/kernel.cpp:48:26 | 214-235    | Start index of the access is unaligned         |
-| m_axi_gmem2  | C        | ../src/kernel.cpp:50:21 | write     | Widen Fail   |          | VITIS_LOOP_48_4 | ../src/kernel.cpp:48:26 | 214-234    | Sequential access length is not divisible by 2 |
-| m_axi_gmem2  | C        | ../src/kernel.cpp:50:21 | write     | Inferred     | variable | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:19 |            |                                                |
+| m_axi_gmem0  | A        | ../src/kernel.cpp:41:26 | read      | Widen Fail   |          | VITIS_LOOP_40_2 | ../src/kernel.cpp:40:26 | 214-235    | Start index of the access is unaligned         |
+| m_axi_gmem0  | A        | ../src/kernel.cpp:41:26 | read      | Widen Fail   |          | VITIS_LOOP_40_2 | ../src/kernel.cpp:40:26 | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem0  | A        | ../src/kernel.cpp:41:26 | read      | Inferred     | variable | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:22 |            |                                                |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Widen Fail   |          | VITIS_LOOP_42_3 | ../src/kernel.cpp:42:30 | 214-235    | Start index of the access is unaligned         |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Widen Fail   |          | VITIS_LOOP_42_3 | ../src/kernel.cpp:42:30 | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Fail         |          | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:22 | 214-229    | Could not analyze pattern                      |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Inferred     | variable | VITIS_LOOP_40_2 | ../src/kernel.cpp:40:26 |            |                                                |
+| m_axi_gmem2  | C        | ../src/kernel.cpp:49:21 | write     | Widen Fail   |          | VITIS_LOOP_47_4 | ../src/kernel.cpp:47:26 | 214-235    | Start index of the access is unaligned         |
+| m_axi_gmem2  | C        | ../src/kernel.cpp:49:21 | write     | Widen Fail   |          | VITIS_LOOP_47_4 | ../src/kernel.cpp:47:26 | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem2  | C        | ../src/kernel.cpp:49:21 | write     | Inferred     | variable | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:22 |            |                                                |
 +--------------+----------+-------------------------+-----------+--------------+----------+-----------------+-------------------------+------------+------------------------------------------------+
 
     * Resolution URL: docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=XXX-YYY.html (replace XXX-YYY with column value)
@@ -154,31 +154,31 @@
 | Name                                 | DSP | Pragma | Variable      | Op     | Impl     | Latency |
 +--------------------------------------+-----+--------+---------------+--------+----------+---------+
 | + gemm                               | 17  |        |               |        |          |         |
-|   icmp_ln39_fu_235_p2                |     |        | icmp_ln39     | setgt  | auto     | 0       |
-|   cmp23_fu_241_p2                    |     |        | cmp23         | setgt  | auto     | 0       |
-|   cmp255_fu_247_p2                   |     |        | cmp255        | setgt  | auto     | 0       |
+|   icmp_ln39_fu_236_p2                |     |        | icmp_ln39     | setgt  | auto     | 0       |
+|   cmp23_fu_242_p2                    |     |        | cmp23         | setgt  | auto     | 0       |
+|   cmp255_fu_248_p2                   |     |        | cmp255        | setgt  | auto     | 0       |
 |   mul_32ns_32ns_63_2_1_U15           | 4   |        | mul_ln39      | mul    | auto     | 1       |
 |   mul_32ns_32ns_63_2_1_U16           | 4   |        | mul_ln39_1    | mul    | auto     | 1       |
-|   select_ln39_fu_273_p3              |     |        | select_ln39   | select | auto_sel | 0       |
-|   empty_fu_299_p3                    |     |        | empty         | select | auto_sel | 0       |
+|   select_ln39_fu_274_p3              |     |        | select_ln39   | select | auto_sel | 0       |
+|   empty_fu_300_p3                    |     |        | empty         | select | auto_sel | 0       |
 |   mul_32ns_32ns_63_2_1_U17           | 4   |        | mul_ln39_2    | mul    | auto     | 1       |
-|   select_ln39_1_fu_306_p3            |     |        | select_ln39_1 | select | auto_sel | 0       |
-|   empty_29_fu_322_p3                 |     |        | empty_29      | select | auto_sel | 0       |
-|   empty_31_fu_329_p3                 |     |        | empty_31      | select | auto_sel | 0       |
-|   empty_32_fu_345_p3                 |     |        | empty_32      | select | auto_sel | 0       |
-|   icmp_ln39_1_fu_389_p2              |     |        | icmp_ln39_1   | setlt  | auto     | 0       |
-|   add_ln39_fu_394_p2                 |     |        | add_ln39      | add    | fabric   | 0       |
-|   icmp_ln41_fu_404_p2                |     |        | icmp_ln41     | setlt  | auto     | 0       |
-|   add_ln41_fu_409_p2                 |     |        | add_ln41      | add    | fabric   | 0       |
+|   select_ln39_1_fu_307_p3            |     |        | select_ln39_1 | select | auto_sel | 0       |
+|   empty_29_fu_323_p3                 |     |        | empty_29      | select | auto_sel | 0       |
+|   empty_31_fu_330_p3                 |     |        | empty_31      | select | auto_sel | 0       |
+|   empty_32_fu_346_p3                 |     |        | empty_32      | select | auto_sel | 0       |
+|   icmp_ln39_1_fu_390_p2              |     |        | icmp_ln39_1   | setlt  | auto     | 0       |
+|   add_ln39_fu_395_p2                 |     |        | add_ln39      | add    | fabric   | 0       |
+|   icmp_ln40_fu_405_p2                |     |        | icmp_ln40     | setlt  | auto     | 0       |
+|   add_ln40_fu_410_p2                 |     |        | add_ln40      | add    | fabric   | 0       |
 |  + gemm_Pipeline_1                   | 0   |        |               |        |          |         |
-|    exitcond3_fu_52_p2                |     |        | exitcond3     | seteq  | auto     | 0       |
+|    exitcond213_fu_52_p2              |     |        | exitcond213   | seteq  | auto     | 0       |
 |    empty_27_fu_58_p2                 |     |        | empty_27      | add    | fabric   | 0       |
-|  + gemm_Pipeline_VITIS_LOOP_48_4     | 0   |        |               |        |          |         |
-|    icmp_ln48_fu_105_p2               |     |        | icmp_ln48     | setlt  | auto     | 0       |
-|    add_ln48_fu_111_p2                |     |        | add_ln48      | add    | fabric   | 0       |
-|  + gemm_Pipeline_VITIS_LOOP_43_3     | 5   |        |               |        |          |         |
-|    icmp_ln43_fu_122_p2               |     |        | icmp_ln43     | setlt  | auto     | 0       |
-|    add_ln43_fu_128_p2                |     |        | add_ln43      | add    | fabric   | 0       |
+|  + gemm_Pipeline_VITIS_LOOP_47_4     | 0   |        |               |        |          |         |
+|    icmp_ln47_fu_112_p2               |     |        | icmp_ln47     | setlt  | auto     | 0       |
+|    add_ln47_fu_118_p2                |     |        | add_ln47      | add    | fabric   | 0       |
+|  + gemm_Pipeline_VITIS_LOOP_42_3     | 5   |        |               |        |          |         |
+|    icmp_ln42_fu_122_p2               |     |        | icmp_ln42     | setlt  | auto     | 0       |
+|    add_ln42_fu_128_p2                |     |        | add_ln42      | add    | fabric   | 0       |
 |    fmul_32ns_32ns_32_4_max_dsp_1_U3  | 3   |        | mul           | fmul   | maxdsp   | 3       |
 |    fadd_32ns_32ns_32_7_full_dsp_1_U2 | 2   |        | add           | fadd   | fulldsp  | 6       |
 +--------------------------------------+-----+--------+---------------+--------+----------+---------+
@@ -187,17 +187,17 @@
 ================================================================
 == Storage Report
 ================================================================
-+-------------------+--------------+-----------+------+------+--------+----------+------+---------+------------------+
-| Name              | Usage        | Type      | BRAM | URAM | Pragma | Variable | Impl | Latency | Bitwidth, Depth, |
-|                   |              |           |      |      |        |          |      |         | Banks            |
-+-------------------+--------------+-----------+------+------+--------+----------+------+---------+------------------+
-| + gemm            |              |           | 4    | 0    |        |          |      |         |                  |
-|   control_s_axi_U | interface    | s_axilite |      |      |        |          |      |         |                  |
-|   gmem0_m_axi_U   | interface    | m_axi     | 1    |      |        |          |      |         |                  |
-|   gmem1_m_axi_U   | interface    | m_axi     | 1    |      |        |          |      |         |                  |
-|   gmem2_m_axi_U   | interface    | m_axi     |      |      |        |          |      |         |                  |
-|   crow_U          | ram_2p array |           | 2    |      |        | crow     | auto | 1       | 32, 768, 1       |
-+-------------------+--------------+-----------+------+------+--------+----------+------+---------+------------------+
++-------------------+---------------+-----------+------+------+--------+----------+------+---------+------------------+
+| Name              | Usage         | Type      | BRAM | URAM | Pragma | Variable | Impl | Latency | Bitwidth, Depth, |
+|                   |               |           |      |      |        |          |      |         | Banks            |
++-------------------+---------------+-----------+------+------+--------+----------+------+---------+------------------+
+| + gemm            |               |           | 4    | 0    |        |          |      |         |                  |
+|   control_s_axi_U | interface     | s_axilite |      |      |        |          |      |         |                  |
+|   gmem0_m_axi_U   | interface     | m_axi     | 1    |      |        |          |      |         |                  |
+|   gmem1_m_axi_U   | interface     | m_axi     | 1    |      |        |          |      |         |                  |
+|   gmem2_m_axi_U   | interface     | m_axi     |      |      |        |          |      |         |                  |
+|   crow_U          | ram_s2p array |           | 2    |      |        | crow     | auto | 1       | 32, 768, 1       |
++-------------------+---------------+-----------+------+------+--------+----------+------+---------+------------------+
 
 
 ================================================================
@@ -207,7 +207,7 @@
 +--------------+---------+-----------------------------------------------------------------------------+----------------------------------+
 | Type         | Options | Location                                                                    | Inferred From                    |
 +--------------+---------+-----------------------------------------------------------------------------+----------------------------------+
-| LOOP_FLATTEN | 0       | loop VITIS_LOOP_41_2 (../src/kernel.cpp:41:26) in gemm ../src/kernel.cpp:41 | performance ../src/kernel.cpp:41 |
+| LOOP_FLATTEN | 0       | loop VITIS_LOOP_40_2 (../src/kernel.cpp:40:26) in gemm ../src/kernel.cpp:40 | performance ../src/kernel.cpp:40 |
 +--------------+---------+-----------------------------------------------------------------------------+----------------------------------+
 
 * Valid Pragma Syntax
@@ -221,8 +221,8 @@
 | INTERFACE | s_axilite port=K                                   | ../src/kernel.cpp:26 in gemm, K      |
 | INTERFACE | s_axilite port=N                                   | ../src/kernel.cpp:27 in gemm, N      |
 | INTERFACE | s_axilite port=return                              | ../src/kernel.cpp:28 in gemm, return |
-| PIPELINE  | ii=1                                               | ../src/kernel.cpp:44 in gemm         |
-| PIPELINE  | ii=1                                               | ../src/kernel.cpp:49 in gemm         |
+| PIPELINE  | ii=1                                               | ../src/kernel.cpp:43 in gemm         |
+| PIPELINE  | ii=1                                               | ../src/kernel.cpp:48 in gemm         |
 +-----------+----------------------------------------------------+--------------------------------------+
 
 

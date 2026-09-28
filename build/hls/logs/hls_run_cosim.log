@@ -48,7 +48,7 @@ INFO: [COSIM 212-12] Generating RTL test bench ...
   **** SW Build 6140274 on Wed May 21 22:58:25 MDT 2025
   **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
   **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-  **** Start of session at: Mon Sep 28 18:24:14 2026
+  **** Start of session at: Mon Sep 28 18:58:08 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -60,7 +60,7 @@ INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'gemm_fmul_32ns_32n
 INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'gemm_fmul_32ns_32ns_32_4_max_dsp_1_ip'...
 INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'gemm_fadd_32ns_32ns_32_7_full_dsp_1_ip'...
 INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'gemm_fadd_32ns_32ns_32_7_full_dsp_1_ip'...
-INFO: [Common 17-206] Exiting Vivado at Mon Sep 28 18:24:21 2026...
+INFO: [Common 17-206] Exiting Vivado at Mon Sep 28 18:58:14 2026...
 INFO: [COSIM 212-1] *** C/RTL co-simulation file generation completed. ***
 INFO: [COSIM 212-323] Starting verilog simulation. 
 INFO: [COSIM 212-15] Starting XSIM ...
@@ -72,6 +72,8 @@ Multi-threading is on. Using 46 slave threads.
 Determining compilation order of HDL files.
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/verilog/glbl.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/verilog/gemm_gemm_Pipeline_VITIS_LOOP_42_3.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gemm_gemm_Pipeline_VITIS_LOOP_42_3
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/verilog/gemm_fmul_32ns_32ns_32_4_max_dsp_1.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module gemm_fmul_32ns_32ns_32_4_max_dsp_1
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/verilog/gemm_fadd_32ns_32ns_32_7_full_dsp_1.v" into library xil_defaultlib
@@ -101,10 +103,6 @@ INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-fi
 INFO: [VRFC 10-311] analyzing module gemm_control_s_axi
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/verilog/gemm.autotb.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module apatb_gemm_top
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/verilog/gemm_gemm_Pipeline_VITIS_LOOP_48_4.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module gemm_gemm_Pipeline_VITIS_LOOP_48_4
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/verilog/gemm_gemm_Pipeline_VITIS_LOOP_43_3.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module gemm_gemm_Pipeline_VITIS_LOOP_43_3
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/verilog/gemm_gmem2_m_axi.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module gemm_gmem2_m_axi
 INFO: [VRFC 10-311] analyzing module gemm_gmem2_m_axi_store
@@ -117,6 +115,8 @@ INFO: [VRFC 10-311] analyzing module gemm_gmem2_m_axi_reg_slice
 INFO: [VRFC 10-311] analyzing module gemm_gmem2_m_axi_fifo
 INFO: [VRFC 10-311] analyzing module gemm_gmem2_m_axi_srl
 INFO: [VRFC 10-311] analyzing module gemm_gmem2_m_axi_mem
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/verilog/gemm_gemm_Pipeline_VITIS_LOOP_47_4.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gemm_gemm_Pipeline_VITIS_LOOP_47_4
 INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/verilog/gemm_gmem0_m_axi.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module gemm_gmem0_m_axi
 INFO: [VRFC 10-311] analyzing module gemm_gmem0_m_axi_load
@@ -180,7 +180,7 @@ Compiling package xil_defaultlib.$unit_dataflow_monitor_sv
 Compiling module xil_defaultlib.gemm_crow_RAM_AUTO_1R1W
 Compiling module xil_defaultlib.gemm_flow_control_loop_pipe_sequ...
 Compiling module xil_defaultlib.gemm_gemm_Pipeline_1
-Compiling module xil_defaultlib.gemm_gemm_Pipeline_VITIS_LOOP_48...
+Compiling module xil_defaultlib.gemm_gemm_Pipeline_VITIS_LOOP_47...
 Compiling architecture muxcy_v of entity unisim.MUXCY [muxcy_default]
 Compiling architecture synth of entity xbip_pipe_v3_0_10.xbip_pipe_v3_0_10_viv [\xbip_pipe_v3_0_10_viv(c_has_ce=...]
 Compiling architecture rtl of entity floating_point_v7_1_20.delay [\delay(width=7,length=0)\]
@@ -318,7 +318,7 @@ Compiling architecture xilinx of entity floating_point_v7_1_20.floating_point_v7
 Compiling architecture xilinx of entity floating_point_v7_1_20.floating_point_v7_1_20 [\floating_point_v7_1_20(c_xdevic...]
 Compiling architecture gemm_fmul_32ns_32ns_32_4_max_dsp_1_ip_arch of entity xil_defaultlib.gemm_fmul_32ns_32ns_32_4_max_dsp_1_ip [gemm_fmul_32ns_32ns_32_4_max_dsp...]
 Compiling module xil_defaultlib.gemm_fmul_32ns_32ns_32_4_max_dsp...
-Compiling module xil_defaultlib.gemm_gemm_Pipeline_VITIS_LOOP_43...
+Compiling module xil_defaultlib.gemm_gemm_Pipeline_VITIS_LOOP_42...
 Compiling module xil_defaultlib.gemm_control_s_axi
 Compiling module xil_defaultlib.gemm_gmem0_m_axi_srl(DATA_WIDTH=...
 Compiling module xil_defaultlib.gemm_gmem0_m_axi_fifo(DATA_WIDTH...
@@ -372,7 +372,7 @@ Compiling module xil_defaultlib.axi_if(ADDR_WIDTH=64,STRB_WIDTH=...
 Compiling module xil_defaultlib.axi_if(ADDR_WIDTH=7,STRB_WIDTH=4...
 Compiling module xil_defaultlib.sv_module_top
 Compiling module xil_defaultlib.nodf_module_intf_default
-Compiling module xil_defaultlib.seq_loop_intf(FSM_WIDTH=221)
+Compiling module xil_defaultlib.seq_loop_intf(FSM_WIDTH=220)
 Compiling module xil_defaultlib.upc_loop_intf(FSM_WIDTH=1)
 Compiling module xil_defaultlib.dataflow_monitor_1
 Compiling module xil_defaultlib.apatb_gemm_top
@@ -383,7 +383,7 @@ Built simulation snapshot gemm
   **** SW Build 6140274 on Wed May 21 22:58:25 MDT 2025
   **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
   **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-  **** Start of session at: Mon Sep 28 18:25:21 2026
+  **** Start of session at: Mon Sep 28 18:59:13 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -927,15 +927,15 @@ UVM_INFO /home/Xilinx/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package
 // RTL Simulation : "Inter-Transaction Progress" ["Intra-Transaction Progress"] @ "Simulation Time"
 ////////////////////////////////////////////////////////////////////////////////////
 // RTL Simulation : 0 / 3 [n/a] @ "109000"
-// RTL Simulation : 1 / 3 [n/a] @ "307529000"
-// RTL Simulation : 2 / 3 [n/a] @ "679541000"
-// RTL Simulation : 3 / 3 [n/a] @ "907410000"
+// RTL Simulation : 1 / 3 [n/a] @ "268999000"
+// RTL Simulation : 2 / 3 [n/a] @ "623029000"
+// RTL Simulation : 3 / 3 [n/a] @ "843188000"
 ////////////////////////////////////////////////////////////////////////////////////
-$finish called at time : 907432910 ps : File "/home/Xilinx/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 18699
-run: Time (s): cpu = 00:00:00.01 ; elapsed = 00:01:03 . Memory (MB): peak = 1591.508 ; gain = 0.000 ; free physical = 191120 ; free virtual = 490410
+$finish called at time : 843211390 ps : File "/home/Xilinx/2025.1/Vivado/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 18699
+run: Time (s): cpu = 00:00:00.01 ; elapsed = 00:01:03 . Memory (MB): peak = 1591.508 ; gain = 0.000 ; free physical = 185774 ; free virtual = 489245
 ## quit
-INFO: xsimkernel Simulation Memory Usage: 3299420 KB (Peak: 3299420 KB), Simulation CPU Usage: 64450 ms
-INFO: [Common 17-206] Exiting xsim at Mon Sep 28 18:26:27 2026...
+INFO: xsimkernel Simulation Memory Usage: 3168352 KB (Peak: 3168352 KB), Simulation CPU Usage: 64230 ms
+INFO: [Common 17-206] Exiting xsim at Mon Sep 28 19:00:20 2026...
 INFO: [COSIM 212-316] Starting C post checking ...
 === kernel_tb (tiny shapes, cosim-sized buffers) ===
   M=16     K=288  N=1    PASS  max|err|=2.72e-06
@@ -943,5 +943,5 @@ INFO: [COSIM 212-316] Starting C post checking ...
   M=4      K=288  N=40   PASS  max|err|=9.99e-06
 === ALL PASS ===
 INFO: [COSIM 212-1000] *** C/RTL co-simulation finished: PASS ***
-INFO: [HLS 200-112] Total CPU user time: 243.27 seconds. Total CPU system time: 10.14 seconds. Total elapsed time: 144.34 seconds; peak allocated memory: 528.543 MB.
+INFO: [HLS 200-112] Total CPU user time: 241.02 seconds. Total CPU system time: 9.87 seconds. Total elapsed time: 143.53 seconds; peak allocated memory: 528.535 MB.
 INFO: [vitis-run 60-791] Total elapsed time: 0h 2m 28s

@@ -6,17 +6,17 @@
     "def_use_depth": 5,
     "file": "kernel.cpp",
     "fileloc": 19,
-    "instructions": 94,
+    "instructions": 93,
     "loads": {
       "L": 2,
       "T": 2
     },
-    "memory_accesses": 8,
+    "memory_accesses": 9,
     "name": "gemm",
     "stores": {
-      "L": 2,
+      "L": 3,
       "T": 1
     },
-    "total_instructions": 94
+    "total_instructions": 93
   }
 }

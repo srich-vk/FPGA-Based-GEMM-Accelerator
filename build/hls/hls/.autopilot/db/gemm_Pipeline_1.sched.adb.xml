@@ -79,10 +79,10 @@ memset.loop:0 %p_load = load i10 %empty
 
 <Node id="7" bw="1" op_0_bw="10" op_1_bw="10">
 <![CDATA[
-memset.loop:1 %exitcond3 = icmp_eq  i10 %p_load, i10 768
+memset.loop:1 %exitcond213 = icmp_eq  i10 %p_load, i10 768
 
 ]]></Node>
-<StgValue><ssdm name="exitcond3"/></StgValue>
+<StgValue><ssdm name="exitcond213"/></StgValue>
 </operation>
 
 <operation id="9" st_id="1" stage="1" lat="1">
@@ -109,7 +109,7 @@ memset.loop:2 %empty_27 = add i10 %p_load, i10 1
 
 <Node id="9" bw="0" op_0_bw="1" op_1_bw="0" op_2_bw="0">
 <![CDATA[
-memset.loop:3 %br_ln0 = br i1 %exitcond3, void %memset.loop.split, void %VITIS_LOOP_41_2.exitStub
+memset.loop:3 %br_ln0 = br i1 %exitcond213, void %memset.loop.split, void %VITIS_LOOP_39_1.exitStub
 
 ]]></Node>
 <StgValue><ssdm name="br_ln0"/></StgValue>
@@ -119,23 +119,23 @@ memset.loop:3 %br_ln0 = br i1 %exitcond3, void %memset.loop.split, void %VITIS_L
 <core>NULL</core>
 <MemPortIdVec></MemPortIdVec>
 <condition id="-1">
-<or_exp><and_exp><literal name="exitcond3" val="0"/>
+<or_exp><and_exp><literal name="exitcond213" val="0"/>
 </and_exp></or_exp>
 </condition>
 
 <Node id="11" bw="64" op_0_bw="10">
 <![CDATA[
-memset.loop.split:0 %p_cast4 = zext i10 %p_load
+memset.loop.split:0 %p_cast1 = zext i10 %p_load
 
 ]]></Node>
-<StgValue><ssdm name="p_cast4"/></StgValue>
+<StgValue><ssdm name="p_cast1"/></StgValue>
 </operation>
 
 <operation id="12" st_id="1" stage="1" lat="1">
 <core>NULL</core>
 <MemPortIdVec></MemPortIdVec>
 <condition id="-1">
-<or_exp><and_exp><literal name="exitcond3" val="0"/>
+<or_exp><and_exp><literal name="exitcond213" val="0"/>
 </and_exp></or_exp>
 </condition>
 
@@ -151,7 +151,7 @@ memset.loop.split:1 %specpipeline_ln0 = specpipeline void @_ssdm_op_SpecPipeline
 <core>NULL</core>
 <MemPortIdVec></MemPortIdVec>
 <condition id="-1">
-<or_exp><and_exp><literal name="exitcond3" val="0"/>
+<or_exp><and_exp><literal name="exitcond213" val="0"/>
 </and_exp></or_exp>
 </condition>
 
@@ -167,13 +167,13 @@ memset.loop.split:2 %speclooptripcount_ln0 = speclooptripcount void @_ssdm_op_Sp
 <core>NULL</core>
 <MemPortIdVec></MemPortIdVec>
 <condition id="-1">
-<or_exp><and_exp><literal name="exitcond3" val="0"/>
+<or_exp><and_exp><literal name="exitcond213" val="0"/>
 </and_exp></or_exp>
 </condition>
 
 <Node id="14" bw="10" op_0_bw="32" op_1_bw="64" op_2_bw="64">
 <![CDATA[
-memset.loop.split:3 %crow_addr = getelementptr i32 %crow, i64 0, i64 %p_cast4
+memset.loop.split:3 %crow_addr = getelementptr i32 %crow, i64 0, i64 %p_cast1
 
 ]]></Node>
 <StgValue><ssdm name="crow_addr"/></StgValue>
@@ -183,7 +183,7 @@ memset.loop.split:3 %crow_addr = getelementptr i32 %crow, i64 0, i64 %p_cast4
 <core>RAM</core>
 <MemPortIdVec></MemPortIdVec>
 <condition id="-1">
-<or_exp><and_exp><literal name="exitcond3" val="0"/>
+<or_exp><and_exp><literal name="exitcond213" val="0"/>
 </and_exp></or_exp>
 </condition>
 
@@ -199,7 +199,7 @@ memset.loop.split:4 %store_ln0 = store i32 0, i10 %crow_addr
 <core>NULL</core>
 <MemPortIdVec></MemPortIdVec>
 <condition id="-1">
-<or_exp><and_exp><literal name="exitcond3" val="0"/>
+<or_exp><and_exp><literal name="exitcond213" val="0"/>
 </and_exp></or_exp>
 </condition>
 
@@ -215,7 +215,7 @@ memset.loop.split:5 %store_ln0 = store i10 %empty_27, i10 %empty
 <core>NULL</core>
 <MemPortIdVec></MemPortIdVec>
 <condition id="-1">
-<or_exp><and_exp><literal name="exitcond3" val="0"/>
+<or_exp><and_exp><literal name="exitcond213" val="0"/>
 </and_exp></or_exp>
 </condition>
 
@@ -231,13 +231,13 @@ memset.loop.split:6 %br_ln0 = br void %memset.loop
 <core>NULL</core>
 <MemPortIdVec></MemPortIdVec>
 <condition id="-1">
-<or_exp><and_exp><literal name="exitcond3" val="1"/>
+<or_exp><and_exp><literal name="exitcond213" val="1"/>
 </and_exp></or_exp>
 </condition>
 
 <Node id="19" bw="0">
 <![CDATA[
-VITIS_LOOP_41_2.exitStub:0 %ret_ln0 = ret
+VITIS_LOOP_39_1.exitStub:0 %ret_ln0 = ret
 
 ]]></Node>
 <StgValue><ssdm name="ret_ln0"/></StgValue>

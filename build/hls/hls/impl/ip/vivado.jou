@@ -3,8 +3,8 @@
 # SW Build 6140274 on Wed May 21 22:58:25 MDT 2025
 # IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
 # SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-# Start of session at: Mon Sep 28 18:27:08 2026
-# Process ID         : 2692374
+# Start of session at: Mon Sep 28 19:03:53 2026
+# Process ID         : 2786997
 # Current directory  : /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/impl/ip
 # Command line       : vivado -notrace -mode batch -source run_ippack.tcl
 # Log file           : /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/impl/ip/vivado.log
@@ -19,6 +19,6 @@
 # Host memory        : 539784 MB
 # Swap memory        : 4294 MB
 # Total Virtual      : 544079 MB
-# Available Virtual  : 510623 MB
+# Available Virtual  : 515914 MB
 #-----------------------------------------------------------
 source run_ippack.tcl -notrace

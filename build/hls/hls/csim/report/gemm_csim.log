@@ -1,7 +1,8 @@
 INFO: [SIM 2] *************** CSIM start ***************
 INFO: [SIM 4] CSIM will launch CLANG as the compiler.
 make[1]: Entering directory '/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/csim/build'
-make[1]: 'csim.exe' is up to date.
+   Compiling ../../../../../src/kernel.cpp in debug mode
+   Generating csim.exe
 make[1]: Leaving directory '/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/csim/build'
 === kernel_tb (full: target shapes) ===
   M=288    K=288  N=1    PASS  max|err|=5.23e-06

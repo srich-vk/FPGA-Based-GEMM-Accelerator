@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'gemm_Pipeline_1'" level="0">
-<item name = "Date">Mon Sep 28 18:27:04 2026
+<item name = "Date">Mon Sep 28 19:03:49 2026
 </item>
 <item name = "Version">2025.1 (Build 6135595 on May 21 2025)</item>
 <item name = "Project">hls</item>
@@ -81,7 +81,7 @@
 <item name = "Expression"><table name="" hasTotal="1">
 <keys size="7">Variable Name, Operation, DSP, FF, LUT, Bitwidth P0, Bitwidth P1</keys>
 <column name="empty_27_fu_58_p2">+, 0, 0, 17, 10, 1</column>
-<column name="exitcond3_fu_52_p2">icmp, 0, 0, 17, 10, 10</column>
+<column name="exitcond213_fu_52_p2">icmp, 0, 0, 17, 10, 10</column>
 </table>
 </item>
 <item name = "Multiplexer"><table name="" hasTotal="1">
