@@ -2050,7 +2050,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>1db77e1f</spirit:value>
+            <spirit:value>e1b4dc85</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2069,7 +2069,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>4b0719fc</spirit:value>
+            <spirit:value>373b639e</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2088,7 +2088,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>72ca1f06</spirit:value>
+            <spirit:value>3d6739fa</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -2107,7 +2107,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>335cbced</spirit:value>
+            <spirit:value>02883248</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -5187,11 +5187,11 @@
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/verilog/gemm_gemm_Pipeline_VITIS_LOOP_42_3.v</spirit:name>
+        <spirit:name>hdl/verilog/gemm_gemm_Pipeline_j_loop.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/verilog/gemm_gemm_Pipeline_VITIS_LOOP_47_4.v</spirit:name>
+        <spirit:name>hdl/verilog/gemm_gemm_Pipeline_wb_loop.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -5266,12 +5266,12 @@
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/verilog/gemm_gemm_Pipeline_VITIS_LOOP_42_3.v</spirit:name>
+        <spirit:name>hdl/verilog/gemm_gemm_Pipeline_j_loop.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/verilog/gemm_gemm_Pipeline_VITIS_LOOP_47_4.v</spirit:name>
+        <spirit:name>hdl/verilog/gemm_gemm_Pipeline_wb_loop.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -5351,11 +5351,11 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vhdl/gemm_gemm_Pipeline_VITIS_LOOP_42_3.vhd</spirit:name>
+        <spirit:name>hdl/vhdl/gemm_gemm_Pipeline_j_loop.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vhdl/gemm_gemm_Pipeline_VITIS_LOOP_47_4.vhd</spirit:name>
+        <spirit:name>hdl/vhdl/gemm_gemm_Pipeline_wb_loop.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
@@ -5377,7 +5377,7 @@
       <spirit:file>
         <spirit:name>hdl/vhdl/gemm.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_181b985d</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_d872a499</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -5431,12 +5431,12 @@
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vhdl/gemm_gemm_Pipeline_VITIS_LOOP_42_3.vhd</spirit:name>
+        <spirit:name>hdl/vhdl/gemm_gemm_Pipeline_j_loop.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>hdl/vhdl/gemm_gemm_Pipeline_VITIS_LOOP_47_4.vhd</spirit:name>
+        <spirit:name>hdl/vhdl/gemm_gemm_Pipeline_wb_loop.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
@@ -5915,8 +5915,8 @@
       </xilinx:taxonomies>
       <xilinx:displayName>Gemm</xilinx:displayName>
       <xilinx:definitionSource>HLS</xilinx:definitionSource>
-      <xilinx:coreRevision>2114806156</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2026-09-28T13:46:52Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>2114806166</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2026-09-28T13:56:33Z</xilinx:coreCreationDateTime>
       <xilinx:sdxKernelAttributes>
         <xilinx:sdx_kernel>true</xilinx:sdx_kernel>
         <xilinx:sdx_kernel_type>hls</xilinx:sdx_kernel_type>
@@ -5927,7 +5927,7 @@
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="81a4bf8f"/>
       <xilinx:checksum xilinx:scope="addressSpaces" xilinx:value="d37294b6"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="a13dbbfb"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="4148138d"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="2b75a2ff"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="c580f756"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="5bfb73f0"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="3449003e"/>

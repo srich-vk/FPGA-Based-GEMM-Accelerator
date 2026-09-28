@@ -29,11 +29,11 @@
     <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/kernel.cpp:48:9" msg_body="HLS pragma dump">
         <args ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
     </msg>
-    <msg msg_groups="AUTOMATION PRAGMA_MISC" msg_id="214-437" msg_severity="INFO" msg_loc="../src/kernel.cpp:40:26" msg_body="Automatically disabling loop flattening for loop 'VITIS_LOOP_40_2'.">
-        <args LoopName="VITIS_LOOP_40_2"/>
+    <msg msg_groups="AUTOMATION PRAGMA_MISC" msg_id="214-437" msg_severity="INFO" msg_loc="../src/kernel.cpp:40:17" msg_body="Automatically disabling loop flattening for loop 'k_loop'.">
+        <args LoopName="k_loop"/>
     </msg>
-    <msg msg_groups="AUTOMATION_VERBOSE_PASSED" msg_id="214-335" msg_severity="INFO" msg_loc="../src/kernel.cpp:40:26" msg_body="loop_flatten 0 1 gemm ../src/kernel.cpp:40:26VITIS_LOOP_40_2 ../src/kernel.cpp:40:26">
-        <args LoopLoc="../src/kernel.cpp:40:26" LoopLoc-DebugLoc="File ../src/kernel.cpp Line 40 Column 26" LoopName="VITIS_LOOP_40_2" PragmaFunction="gemm" PragmaIsAuto="1" PragmaOptions="0" PragmaSrcLoc="../src/kernel.cpp:40:26" PragmaSrcLoc-DebugLoc="File ../src/kernel.cpp Line 40 Column 26" PragmaType="loop_flatten"/>
+    <msg msg_groups="AUTOMATION_VERBOSE_PASSED" msg_id="214-335" msg_severity="INFO" msg_loc="../src/kernel.cpp:40:17" msg_body="loop_flatten 0 1 gemm ../src/kernel.cpp:40:17k_loop ../src/kernel.cpp:40:17">
+        <args LoopLoc="../src/kernel.cpp:40:17" LoopLoc-DebugLoc="File ../src/kernel.cpp Line 40 Column 17" LoopName="k_loop" PragmaFunction="gemm" PragmaIsAuto="1" PragmaOptions="0" PragmaSrcLoc="../src/kernel.cpp:40:17" PragmaSrcLoc-DebugLoc="File ../src/kernel.cpp Line 40 Column 17" PragmaType="loop_flatten"/>
     </msg>
 </xilinx:hls_fe_msgs>
 

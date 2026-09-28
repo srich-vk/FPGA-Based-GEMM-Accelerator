@@ -908,7 +908,7 @@
 				<Obj>
 					<type>3</type>
 					<id>20</id>
-					<name>VITIS_LOOP_39_1.exitStub</name>
+					<name>i_loop.exitStub</name>
 					<fileName></fileName>
 					<fileDirectory></fileDirectory>
 					<lineNumber>0</lineNumber>

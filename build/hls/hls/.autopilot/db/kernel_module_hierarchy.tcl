@@ -5,15 +5,15 @@ set ModuleHierarchy {[{
 		"SubLoops" : [
 		{"Name" : "Loop 1","RefName" : "Loop 1","ID" : "2","Type" : "pipeline"},]},],
 "SubLoops" : [
-	{"Name" : "VITIS_LOOP_39_1","RefName" : "VITIS_LOOP_39_1","ID" : "3","Type" : "no",
+	{"Name" : "i_loop","RefName" : "i_loop","ID" : "3","Type" : "no",
 	"SubInsts" : [
-	{"Name" : "grp_gemm_Pipeline_VITIS_LOOP_47_4_fu_205", "RefName" : "gemm_Pipeline_VITIS_LOOP_47_4","ID" : "4","Type" : "sequential",
+	{"Name" : "grp_gemm_Pipeline_wb_loop_fu_205", "RefName" : "gemm_Pipeline_wb_loop","ID" : "4","Type" : "sequential",
 			"SubLoops" : [
-			{"Name" : "VITIS_LOOP_47_4","RefName" : "VITIS_LOOP_47_4","ID" : "5","Type" : "pipeline"},]},],
+			{"Name" : "wb_loop","RefName" : "wb_loop","ID" : "5","Type" : "pipeline"},]},],
 	"SubLoops" : [
-	{"Name" : "VITIS_LOOP_40_2","RefName" : "VITIS_LOOP_40_2","ID" : "6","Type" : "no",
+	{"Name" : "k_loop","RefName" : "k_loop","ID" : "6","Type" : "no",
 		"SubInsts" : [
-		{"Name" : "grp_gemm_Pipeline_VITIS_LOOP_42_3_fu_214", "RefName" : "gemm_Pipeline_VITIS_LOOP_42_3","ID" : "7","Type" : "sequential",
+		{"Name" : "grp_gemm_Pipeline_j_loop_fu_214", "RefName" : "gemm_Pipeline_j_loop","ID" : "7","Type" : "sequential",
 				"SubLoops" : [
-				{"Name" : "VITIS_LOOP_42_3","RefName" : "VITIS_LOOP_42_3","ID" : "8","Type" : "pipeline"},]},]},]},]
+				{"Name" : "j_loop","RefName" : "j_loop","ID" : "8","Type" : "pipeline"},]},]},]},]
 }]}

@@ -4,7 +4,7 @@
 == Synthesis Summary Report of 'gemm'
 ================================================================
 + General Information: 
-    * Date:           Mon Sep 28 19:16:39 2026
+    * Date:           Mon Sep 28 19:26:21 2026
     * Version:        2025.1 (Build 6135595 on May 21 2025)
     * Project:        hls
     * Solution:       hls (Vitis Kernel Flow Target)
@@ -15,20 +15,20 @@
 + Performance & Resource Estimates: 
     
     PS: '+' for module; 'o' for loop; '*' for dataflow
-    +------------------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
-    |               Modules              |  Issue  |       |       Latency       | Iteration|         | Trip |          |         |          |            |            |     |
-    |               & Loops              |   Type  | Slack | (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined|  BRAM   |    DSP   |     FF     |     LUT    | URAM|
-    +------------------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
-    |+ gemm                              |   Timing|  -0.00|        -|          -|         -|        -|     -|        no|  4 (~0%)|  17 (~0%)|  4486 (~0%)|  5441 (~0%)|    -|
-    | + gemm_Pipeline_1                  |        -|   0.12|      770|  2.564e+03|         -|      769|     -|    rewind|        -|         -|    12 (~0%)|    61 (~0%)|    -|
-    |  o Loop 1                          |        -|   2.43|      768|  2.557e+03|         1|        1|   768|       yes|        -|         -|           -|           -|    -|
-    | o VITIS_LOOP_39_1                  |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
-    |  + gemm_Pipeline_VITIS_LOOP_47_4   |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|         -|    57 (~0%)|   105 (~0%)|    -|
-    |   o VITIS_LOOP_47_4                |        -|   2.43|        -|          -|         3|        1|     -|       yes|        -|         -|           -|           -|    -|
-    |  o VITIS_LOOP_40_2                 |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
-    |   + gemm_Pipeline_VITIS_LOOP_42_3  |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|   5 (~0%)|   627 (~0%)|   466 (~0%)|    -|
-    |    o VITIS_LOOP_42_3               |        -|   2.43|        -|          -|        14|       13|     -|       yes|        -|         -|           -|           -|    -|
-    +------------------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
+    +---------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
+    |          Modules          |  Issue  |       |       Latency       | Iteration|         | Trip |          |         |          |            |            |     |
+    |          & Loops          |   Type  | Slack | (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined|  BRAM   |    DSP   |     FF     |     LUT    | URAM|
+    +---------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
+    |+ gemm                     |   Timing|  -0.00|        -|          -|         -|        -|     -|        no|  4 (~0%)|  17 (~0%)|  4486 (~0%)|  5441 (~0%)|    -|
+    | + gemm_Pipeline_1         |        -|   0.12|      770|  2.564e+03|         -|      769|     -|    rewind|        -|         -|    12 (~0%)|    61 (~0%)|    -|
+    |  o Loop 1                 |        -|   2.43|      768|  2.557e+03|         1|        1|   768|       yes|        -|         -|           -|           -|    -|
+    | o i_loop                  |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
+    |  + gemm_Pipeline_wb_loop  |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|         -|    57 (~0%)|   105 (~0%)|    -|
+    |   o wb_loop               |        -|   2.43|        -|          -|         3|        1|     -|       yes|        -|         -|           -|           -|    -|
+    |  o k_loop                 |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
+    |   + gemm_Pipeline_j_loop  |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|   5 (~0%)|   627 (~0%)|   466 (~0%)|    -|
+    |    o j_loop               |        -|   2.43|        -|          -|        14|       13|     -|       yes|        -|         -|           -|           -|    -|
+    +---------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
 
 
 ================================================================
@@ -130,20 +130,20 @@
 +--------------+-----------+----------+-------+
 
 * All M_AXI Variable Accesses
-+--------------+----------+-------------------------+-----------+--------------+----------+-----------------+-------------------------+------------+------------------------------------------------+
-| HW Interface | Variable | Access Location         | Direction | Burst Status | Length   | Loop            | Loop Location           | Resolution | Problem                                        |
-+--------------+----------+-------------------------+-----------+--------------+----------+-----------------+-------------------------+------------+------------------------------------------------+
-| m_axi_gmem0  | A        | ../src/kernel.cpp:41:26 | read      | Widen Fail   |          | VITIS_LOOP_40_2 | ../src/kernel.cpp:40:26 | 214-235    | Start index of the access is unaligned         |
-| m_axi_gmem0  | A        | ../src/kernel.cpp:41:26 | read      | Widen Fail   |          | VITIS_LOOP_40_2 | ../src/kernel.cpp:40:26 | 214-234    | Sequential access length is not divisible by 2 |
-| m_axi_gmem0  | A        | ../src/kernel.cpp:41:26 | read      | Inferred     | variable | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:22 |            |                                                |
-| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Widen Fail   |          | VITIS_LOOP_42_3 | ../src/kernel.cpp:42:30 | 214-235    | Start index of the access is unaligned         |
-| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Widen Fail   |          | VITIS_LOOP_42_3 | ../src/kernel.cpp:42:30 | 214-234    | Sequential access length is not divisible by 2 |
-| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Fail         |          | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:22 | 214-229    | Could not analyze pattern                      |
-| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Inferred     | variable | VITIS_LOOP_40_2 | ../src/kernel.cpp:40:26 |            |                                                |
-| m_axi_gmem2  | C        | ../src/kernel.cpp:49:21 | write     | Widen Fail   |          | VITIS_LOOP_47_4 | ../src/kernel.cpp:47:26 | 214-235    | Start index of the access is unaligned         |
-| m_axi_gmem2  | C        | ../src/kernel.cpp:49:21 | write     | Widen Fail   |          | VITIS_LOOP_47_4 | ../src/kernel.cpp:47:26 | 214-234    | Sequential access length is not divisible by 2 |
-| m_axi_gmem2  | C        | ../src/kernel.cpp:49:21 | write     | Inferred     | variable | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:22 |            |                                                |
-+--------------+----------+-------------------------+-----------+--------------+----------+-----------------+-------------------------+------------+------------------------------------------------+
++--------------+----------+-------------------------+-----------+--------------+----------+---------+-------------------------+------------+------------------------------------------------+
+| HW Interface | Variable | Access Location         | Direction | Burst Status | Length   | Loop    | Loop Location           | Resolution | Problem                                        |
++--------------+----------+-------------------------+-----------+--------------+----------+---------+-------------------------+------------+------------------------------------------------+
+| m_axi_gmem0  | A        | ../src/kernel.cpp:41:26 | read      | Widen Fail   |          | k_loop  | ../src/kernel.cpp:40:17 | 214-235    | Start index of the access is unaligned         |
+| m_axi_gmem0  | A        | ../src/kernel.cpp:41:26 | read      | Widen Fail   |          | k_loop  | ../src/kernel.cpp:40:17 | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem0  | A        | ../src/kernel.cpp:41:26 | read      | Inferred     | variable | i_loop  | ../src/kernel.cpp:39:13 |            |                                                |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Widen Fail   |          | j_loop  | ../src/kernel.cpp:42:21 | 214-235    | Start index of the access is unaligned         |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Widen Fail   |          | j_loop  | ../src/kernel.cpp:42:21 | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Fail         |          | i_loop  | ../src/kernel.cpp:39:13 | 214-229    | Could not analyze pattern                      |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:44:20 | read      | Inferred     | variable | k_loop  | ../src/kernel.cpp:40:17 |            |                                                |
+| m_axi_gmem2  | C        | ../src/kernel.cpp:49:21 | write     | Widen Fail   |          | wb_loop | ../src/kernel.cpp:47:18 | 214-235    | Start index of the access is unaligned         |
+| m_axi_gmem2  | C        | ../src/kernel.cpp:49:21 | write     | Widen Fail   |          | wb_loop | ../src/kernel.cpp:47:18 | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem2  | C        | ../src/kernel.cpp:49:21 | write     | Inferred     | variable | i_loop  | ../src/kernel.cpp:39:13 |            |                                                |
++--------------+----------+-------------------------+-----------+--------------+----------+---------+-------------------------+------------+------------------------------------------------+
 
     * Resolution URL: docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=XXX-YYY.html (replace XXX-YYY with column value)
 
@@ -173,10 +173,10 @@
 |  + gemm_Pipeline_1                   | 0   |        |               |        |          |         |
 |    exitcond213_fu_52_p2              |     |        | exitcond213   | seteq  | auto     | 0       |
 |    empty_27_fu_58_p2                 |     |        | empty_27      | add    | fabric   | 0       |
-|  + gemm_Pipeline_VITIS_LOOP_47_4     | 0   |        |               |        |          |         |
+|  + gemm_Pipeline_wb_loop             | 0   |        |               |        |          |         |
 |    icmp_ln47_fu_112_p2               |     |        | icmp_ln47     | setlt  | auto     | 0       |
 |    add_ln47_fu_118_p2                |     |        | add_ln47      | add    | fabric   | 0       |
-|  + gemm_Pipeline_VITIS_LOOP_42_3     | 5   |        |               |        |          |         |
+|  + gemm_Pipeline_j_loop              | 5   |        |               |        |          |         |
 |    icmp_ln42_fu_124_p2               |     |        | icmp_ln42     | setlt  | auto     | 0       |
 |    add_ln42_fu_130_p2                |     |        | add_ln42      | add    | fabric   | 0       |
 |    fmul_32ns_32ns_32_4_max_dsp_1_U3  | 3   |        | mul           | fmul   | maxdsp   | 3       |
@@ -204,11 +204,11 @@
 == Pragma Report
 ================================================================
 * Inferred Pragmas
-+--------------+---------+-----------------------------------------------------------------------------+----------------------------------+
-| Type         | Options | Location                                                                    | Inferred From                    |
-+--------------+---------+-----------------------------------------------------------------------------+----------------------------------+
-| LOOP_FLATTEN | 0       | loop VITIS_LOOP_40_2 (../src/kernel.cpp:40:26) in gemm ../src/kernel.cpp:40 | performance ../src/kernel.cpp:40 |
-+--------------+---------+-----------------------------------------------------------------------------+----------------------------------+
++--------------+---------+--------------------------------------------------------------------+----------------------------------+
+| Type         | Options | Location                                                           | Inferred From                    |
++--------------+---------+--------------------------------------------------------------------+----------------------------------+
+| LOOP_FLATTEN | 0       | loop k_loop (../src/kernel.cpp:40:17) in gemm ../src/kernel.cpp:40 | performance ../src/kernel.cpp:40 |
++--------------+---------+--------------------------------------------------------------------+----------------------------------+
 
 * Valid Pragma Syntax
 +-----------+----------------------------------------------------+--------------------------------------+

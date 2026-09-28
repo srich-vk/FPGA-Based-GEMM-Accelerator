@@ -10,6 +10,6 @@ gemm_gmem1_m_axi
 gemm_gmem2_m_axi
 gemm_control_s_axi
 gemm_Pipeline_1
-gemm_Pipeline_VITIS_LOOP_42_3
-gemm_Pipeline_VITIS_LOOP_47_4
+gemm_Pipeline_j_loop
+gemm_Pipeline_wb_loop
 gemm

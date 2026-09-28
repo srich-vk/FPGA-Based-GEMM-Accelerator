@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'gemm'" level="0">
-<item name = "Date">Mon Sep 28 19:16:39 2026
+<item name = "Date">Mon Sep 28 19:26:21 2026
 </item>
 <item name = "Version">2025.1 (Build 6135595 on May 21 2025)</item>
 <item name = "Project">hls</item>
@@ -32,14 +32,14 @@
 <item name = "Instance"><table name="" hasTotal="0">
 <keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
 <column name="grp_gemm_Pipeline_1_fu_199">gemm_Pipeline_1, 770, 770, 2.564 us, 2.564 us, 769, 769, loop auto-rewind stp (delay=0 clock cycles(s))</column>
-<column name="grp_gemm_Pipeline_VITIS_LOOP_47_4_fu_205">gemm_Pipeline_VITIS_LOOP_47_4, ?, ?, ?, ?, 0, 0, loop auto-rewind stp (delay=0 clock cycles(s))</column>
-<column name="grp_gemm_Pipeline_VITIS_LOOP_42_3_fu_214">gemm_Pipeline_VITIS_LOOP_42_3, ?, ?, ?, ?, 0, 0, loop auto-rewind stp (delay=0 clock cycles(s))</column>
+<column name="grp_gemm_Pipeline_wb_loop_fu_205">gemm_Pipeline_wb_loop, ?, ?, ?, ?, 0, 0, loop auto-rewind stp (delay=0 clock cycles(s))</column>
+<column name="grp_gemm_Pipeline_j_loop_fu_214">gemm_Pipeline_j_loop, ?, ?, ?, ?, 0, 0, loop auto-rewind stp (delay=0 clock cycles(s))</column>
 </table>
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
-<column name="- VITIS_LOOP_39_1">?, ?, ?, -, -, ?, no</column>
-<column name=" + VITIS_LOOP_40_2">?, ?, ?, -, -, ?, no</column>
+<column name="- i_loop">?, ?, ?, -, -, ?, no</column>
+<column name=" + k_loop">?, ?, ?, -, -, ?, no</column>
 </table>
 </item>
 </section>
@@ -70,8 +70,8 @@
 <keys size="7">Instance, Module, BRAM_18K, DSP, FF, LUT, URAM</keys>
 <column name="control_s_axi_U">control_s_axi, 0, 0, 360, 616, 0</column>
 <column name="grp_gemm_Pipeline_1_fu_199">gemm_Pipeline_1, 0, 0, 12, 61, 0</column>
-<column name="grp_gemm_Pipeline_VITIS_LOOP_42_3_fu_214">gemm_Pipeline_VITIS_LOOP_42_3, 0, 5, 627, 466, 0</column>
-<column name="grp_gemm_Pipeline_VITIS_LOOP_47_4_fu_205">gemm_Pipeline_VITIS_LOOP_47_4, 0, 0, 57, 105, 0</column>
+<column name="grp_gemm_Pipeline_j_loop_fu_214">gemm_Pipeline_j_loop, 0, 5, 627, 466, 0</column>
+<column name="grp_gemm_Pipeline_wb_loop_fu_205">gemm_Pipeline_wb_loop, 0, 0, 57, 105, 0</column>
 <column name="gmem0_m_axi_U">gmem0_m_axi, 1, 0, 604, 650, 0</column>
 <column name="gmem1_m_axi_U">gmem1_m_axi, 1, 0, 604, 650, 0</column>
 <column name="gmem2_m_axi_U">gmem2_m_axi, 0, 0, 520, 630, 0</column>
@@ -162,8 +162,8 @@
 <column name="gmem0_addr_reg_501">64, 0, 64, 0</column>
 <column name="gmem1_addr_reg_544">64, 0, 64, 0</column>
 <column name="grp_gemm_Pipeline_1_fu_199_ap_start_reg">1, 0, 1, 0</column>
-<column name="grp_gemm_Pipeline_VITIS_LOOP_42_3_fu_214_ap_start_reg">1, 0, 1, 0</column>
-<column name="grp_gemm_Pipeline_VITIS_LOOP_47_4_fu_205_ap_start_reg">1, 0, 1, 0</column>
+<column name="grp_gemm_Pipeline_j_loop_fu_214_ap_start_reg">1, 0, 1, 0</column>
+<column name="grp_gemm_Pipeline_wb_loop_fu_205_ap_start_reg">1, 0, 1, 0</column>
 <column name="i_fu_116">31, 0, 31, 0</column>
 <column name="icmp_ln39_reg_450">1, 0, 1, 0</column>
 <column name="k_reg_188">31, 0, 31, 0</column>

@@ -3893,7 +3893,7 @@
 					<Obj>
 						<type>2</type>
 						<id>225</id>
-						<name>gemm_Pipeline_VITIS_LOOP_47_4</name>
+						<name>gemm_Pipeline_wb_loop</name>
 						<fileName></fileName>
 						<fileDirectory></fileDirectory>
 						<lineNumber>0</lineNumber>
@@ -3917,14 +3917,14 @@
 					<bitwidth>0</bitwidth>
 				</Value>
 				<const_type>6</const_type>
-				<content>&lt;constant:gemm_Pipeline_VITIS_LOOP_47_4&gt;</content>
+				<content>&lt;constant:gemm_Pipeline_wb_loop&gt;</content>
 			</item>
 			<item class_id_reference="16" object_id="_81">
 				<Value>
 					<Obj>
 						<type>2</type>
 						<id>238</id>
-						<name>gemm_Pipeline_VITIS_LOOP_42_3</name>
+						<name>gemm_Pipeline_j_loop</name>
 						<fileName></fileName>
 						<fileDirectory></fileDirectory>
 						<lineNumber>0</lineNumber>
@@ -3948,7 +3948,7 @@
 					<bitwidth>0</bitwidth>
 				</Value>
 				<const_type>6</const_type>
-				<content>&lt;constant:gemm_Pipeline_VITIS_LOOP_42_3&gt;</content>
+				<content>&lt;constant:gemm_Pipeline_j_loop&gt;</content>
 			</item>
 		</consts>
 		<blocks class_id="17" tracking_level="0" version="0">
@@ -4028,7 +4028,7 @@
 				<Obj>
 					<type>3</type>
 					<id>80</id>
-					<name>VITIS_LOOP_40_2</name>
+					<name>k_loop</name>
 					<fileName></fileName>
 					<fileDirectory></fileDirectory>
 					<lineNumber>0</lineNumber>
@@ -4063,7 +4063,7 @@
 				<Obj>
 					<type>3</type>
 					<id>84</id>
-					<name>VITIS_LOOP_40_2.split</name>
+					<name>k_loop.split</name>
 					<fileName></fileName>
 					<fileDirectory></fileDirectory>
 					<lineNumber>0</lineNumber>
@@ -4095,7 +4095,7 @@
 				<Obj>
 					<type>3</type>
 					<id>90</id>
-					<name>VITIS_LOOP_42_3</name>
+					<name>j_loop</name>
 					<fileName></fileName>
 					<fileDirectory></fileDirectory>
 					<lineNumber>0</lineNumber>
@@ -4130,7 +4130,7 @@
 				<Obj>
 					<type>3</type>
 					<id>96</id>
-					<name>VITIS_LOOP_42_3.split</name>
+					<name>j_loop.split</name>
 					<fileName></fileName>
 					<fileDirectory></fileDirectory>
 					<lineNumber>0</lineNumber>
@@ -5187,8 +5187,8 @@
 		</item>
 		<item class_id_reference="22" object_id="_220">
 			<mId>3</mId>
-			<mTag>VITIS_LOOP_39_1</mTag>
-			<mNormTag>VITIS_LOOP_39_1</mNormTag>
+			<mTag>i_loop</mTag>
+			<mNormTag>i_loop</mNormTag>
 			<mType>1</mType>
 			<sub_regions>
 				<count>3</count>
@@ -5236,8 +5236,8 @@
 		</item>
 		<item class_id_reference="22" object_id="_222">
 			<mId>5</mId>
-			<mTag>VITIS_LOOP_40_2</mTag>
-			<mNormTag>VITIS_LOOP_40_2</mNormTag>
+			<mTag>k_loop</mTag>
+			<mNormTag>k_loop</mNormTag>
 			<mType>1</mType>
 			<sub_regions>
 				<count>0</count>

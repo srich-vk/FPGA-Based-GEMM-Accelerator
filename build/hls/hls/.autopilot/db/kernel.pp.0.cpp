@@ -170,15 +170,15 @@ extern "C" __attribute__((sdx_kernel("gemm", 0))) void gemm(const float *A, cons
 #pragma HLS INTERFACE s_axilite port=return
 # 38 "../src/kernel.cpp"
  float crow[768] = {0};
-    VITIS_LOOP_39_1: for(int i = 0; i < M; i++){
-        VITIS_LOOP_40_2: for(int k = 0; k < K; k++){
+    i_loop: for(int i = 0; i < M; i++){
+        k_loop: for(int k = 0; k < K; k++){
             float a_ik = A[(long)i * K + k];
-            VITIS_LOOP_42_3: for(int j = 0; j < N; j++){
+            j_loop: for(int j = 0; j < N; j++){
 #pragma HLS PIPELINE II=13
  crow[j] += a_ik * B[(long)k * N + j];
             }
         }
-        VITIS_LOOP_47_4: for(int j = 0; j < N; j++){
+        wb_loop: for(int j = 0; j < N; j++){
 #pragma HLS PIPELINE II=1
  C[(long)i * N + j] = crow[j];
             crow[j] = 0;
