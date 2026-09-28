@@ -1,0 +1,39 @@
+<xilinx:hls_fe_msgs>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="directive:1:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaContext="directive" ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="name=gemm" ARG_PragmaType="top" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/kernel.cpp:22:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="m_axi port=A offset=slave bundle=gmem0 depth=6144" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/kernel.cpp:23:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="m_axi port=B offset=slave bundle=gmem1 depth=11520" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/kernel.cpp:24:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="m_axi port=C offset=slave bundle=gmem2 depth=256" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/kernel.cpp:25:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=M" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/kernel.cpp:26:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=K" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/kernel.cpp:27:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=N" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/kernel.cpp:28:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="s_axilite port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/kernel.cpp:44:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="../src/kernel.cpp:49:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="gemm" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=1" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="AUTOMATION PRAGMA_MISC" msg_id="214-437" msg_severity="INFO" msg_loc="../src/kernel.cpp:41:26" msg_body="Automatically disabling loop flattening for loop 'VITIS_LOOP_41_2'.">
+        <args LoopName="VITIS_LOOP_41_2"/>
+    </msg>
+    <msg msg_groups="AUTOMATION_VERBOSE_PASSED" msg_id="214-335" msg_severity="INFO" msg_loc="../src/kernel.cpp:41:26" msg_body="loop_flatten 0 1 gemm ../src/kernel.cpp:41:26VITIS_LOOP_41_2 ../src/kernel.cpp:41:26">
+        <args LoopLoc="../src/kernel.cpp:41:26" LoopLoc-DebugLoc="File ../src/kernel.cpp Line 41 Column 26" LoopName="VITIS_LOOP_41_2" PragmaFunction="gemm" PragmaIsAuto="1" PragmaOptions="0" PragmaSrcLoc="../src/kernel.cpp:41:26" PragmaSrcLoc-DebugLoc="File ../src/kernel.cpp Line 41 Column 26" PragmaType="loop_flatten"/>
+    </msg>
+</xilinx:hls_fe_msgs>
+

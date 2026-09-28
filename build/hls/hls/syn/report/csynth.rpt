@@ -1,0 +1,228 @@
+
+
+================================================================
+== Synthesis Summary Report of 'gemm'
+================================================================
++ General Information: 
+    * Date:           Mon Sep 28 18:27:05 2026
+    * Version:        2025.1 (Build 6135595 on May 21 2025)
+    * Project:        hls
+    * Solution:       hls (Vitis Kernel Flow Target)
+    * Product family: virtexuplusHBM
+    * Target device:  xcu50-fsvh2104-2-e
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +------------------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
+    |               Modules              |  Issue  |       |       Latency       | Iteration|         | Trip |          |         |          |            |            |     |
+    |               & Loops              |   Type  | Slack | (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined|  BRAM   |    DSP   |     FF     |     LUT    | URAM|
+    +------------------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
+    |+ gemm                              |   Timing|  -0.00|        -|          -|         -|        -|     -|        no|  4 (~0%)|  17 (~0%)|  4646 (~0%)|  5415 (~0%)|    -|
+    | o VITIS_LOOP_39_1                  |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
+    |  + gemm_Pipeline_1                 |        -|   0.12|      770|  2.564e+03|         -|      769|     -|    rewind|        -|         -|    12 (~0%)|    61 (~0%)|    -|
+    |   o Loop 1                         |        -|   2.43|      768|  2.557e+03|         1|        1|   768|       yes|        -|         -|           -|           -|    -|
+    |  + gemm_Pipeline_VITIS_LOOP_48_4   |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|         -|    68 (~0%)|   126 (~0%)|    -|
+    |   o VITIS_LOOP_48_4                |        -|   2.43|        -|          -|         3|        1|     -|       yes|        -|         -|           -|           -|    -|
+    |  o VITIS_LOOP_41_2                 |        -|   2.43|        -|          -|         -|        -|     -|        no|        -|         -|           -|           -|    -|
+    |   + gemm_Pipeline_VITIS_LOOP_43_3  |   Timing|  -0.00|        -|          -|         -|        0|     -|    rewind|        -|   5 (~0%)|   775 (~0%)|   445 (~0%)|    -|
+    |    o VITIS_LOOP_43_3               |        -|   2.43|        -|          -|        14|        1|     -|       yes|        -|         -|           -|           -|    -|
+    +------------------------------------+---------+-------+---------+-----------+----------+---------+------+----------+---------+----------+------------+------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* M_AXI
++-------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+| Interface   | Read/Write | Data Width | Address Width | Latency | Offset | Register | Max Widen | Max Read     | Max Write    | Num Read    | Num Write   | Resource Estimate |
+|             |            | (SW->HW)   |               |         |        |          | Bitwidth  | Burst Length | Burst Length | Outstanding | Outstanding |                   |
++-------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+| m_axi_gmem0 | READ_ONLY  | 32 -> 32   | 64            | 64      | slave  | 0        | 512       | 16           | 16           | 16          | 16          | BRAM=1            |
+| m_axi_gmem1 | READ_ONLY  | 32 -> 32   | 64            | 64      | slave  | 0        | 512       | 16           | 16           | 16          | 16          | BRAM=1            |
+| m_axi_gmem2 | WRITE_ONLY | 32 -> 32   | 64            | 64      | slave  | 0        | 512       | 16           | 16           | 16          | 16          |                   |
++-------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+
+* S_AXILITE Interfaces
++---------------+------------+---------------+--------+----------+
+| Interface     | Data Width | Address Width | Offset | Register |
++---------------+------------+---------------+--------+----------+
+| s_axi_control | 32         | 7             | 16     | 0        |
++---------------+------------+---------------+--------+----------+
+
+* S_AXILITE Registers
++---------------+----------+--------+-------+--------+----------------------------------+------------------------------------------------------------------------------------+
+| Interface     | Register | Offset | Width | Access | Description                      | Bit Fields                                                                         |
++---------------+----------+--------+-------+--------+----------------------------------+------------------------------------------------------------------------------------+
+| s_axi_control | CTRL     | 0x00   | 32    | RW     | Control signals                  | 0=AP_START 1=AP_DONE 2=AP_IDLE 3=AP_READY 4=AP_CONTINUE 7=AUTO_RESTART 9=INTERRUPT |
+| s_axi_control | GIER     | 0x04   | 32    | RW     | Global Interrupt Enable Register | 0=Enable                                                                           |
+| s_axi_control | IP_IER   | 0x08   | 32    | RW     | IP Interrupt Enable Register     | 0=CHAN0_INT_EN 1=CHAN1_INT_EN                                                      |
+| s_axi_control | IP_ISR   | 0x0c   | 32    | RW     | IP Interrupt Status Register     | 0=CHAN0_INT_ST 1=CHAN1_INT_ST                                                      |
+| s_axi_control | A_1      | 0x10   | 32    | W      | Data signal of A                 |                                                                                    |
+| s_axi_control | A_2      | 0x14   | 32    | W      | Data signal of A                 |                                                                                    |
+| s_axi_control | B_1      | 0x1c   | 32    | W      | Data signal of B                 |                                                                                    |
+| s_axi_control | B_2      | 0x20   | 32    | W      | Data signal of B                 |                                                                                    |
+| s_axi_control | C_1      | 0x28   | 32    | W      | Data signal of C                 |                                                                                    |
+| s_axi_control | C_2      | 0x2c   | 32    | W      | Data signal of C                 |                                                                                    |
+| s_axi_control | M        | 0x34   | 32    | W      | Data signal of M                 |                                                                                    |
+| s_axi_control | K        | 0x3c   | 32    | W      | Data signal of K                 |                                                                                    |
+| s_axi_control | N        | 0x44   | 32    | W      | Data signal of N                 |                                                                                    |
++---------------+----------+--------+-------+--------+----------------------------------+------------------------------------------------------------------------------------+
+
+* TOP LEVEL CONTROL
++-----------+---------------+-----------+
+| Interface | Type          | Ports     |
++-----------+---------------+-----------+
+| ap_clk    | clock         | ap_clk    |
+| ap_rst_n  | reset         | ap_rst_n  |
+| interrupt | interrupt     | interrupt |
+| ap_ctrl   | ap_ctrl_chain |           |
++-----------+---------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+---------------+
+| Argument | Direction | Datatype      |
++----------+-----------+---------------+
+| A        | in        | float const * |
+| B        | in        | float const * |
+| C        | out       | float*        |
+| M        | in        | int           |
+| K        | in        | int           |
+| N        | in        | int           |
++----------+-----------+---------------+
+
+* SW-to-HW Mapping
++----------+---------------+-----------+----------+-------------------------------+
+| Argument | HW Interface  | HW Type   | HW Usage | HW Info                       |
++----------+---------------+-----------+----------+-------------------------------+
+| A        | m_axi_gmem0   | interface |          | channel=0                     |
+| A        | s_axi_control | register  | offset   | name=A_1 offset=0x10 range=32 |
+| A        | s_axi_control | register  | offset   | name=A_2 offset=0x14 range=32 |
+| B        | m_axi_gmem1   | interface |          | channel=0                     |
+| B        | s_axi_control | register  | offset   | name=B_1 offset=0x1c range=32 |
+| B        | s_axi_control | register  | offset   | name=B_2 offset=0x20 range=32 |
+| C        | m_axi_gmem2   | interface |          | channel=0                     |
+| C        | s_axi_control | register  | offset   | name=C_1 offset=0x28 range=32 |
+| C        | s_axi_control | register  | offset   | name=C_2 offset=0x2c range=32 |
+| M        | s_axi_control | register  |          | name=M offset=0x34 range=32   |
+| K        | s_axi_control | register  |          | name=K offset=0x3c range=32   |
+| N        | s_axi_control | register  |          | name=N offset=0x44 range=32   |
++----------+---------------+-----------+----------+-------------------------------+
+
+
+================================================================
+== M_AXI Burst Information
+================================================================
+ Note: All burst requests might be further partitioned into multiple requests during RTL generation based on max_read_burst_length or max_write_burst_length settings.
+
+* Inferred Burst Summary
++--------------+-----------+----------+-------+
+| HW Interface | Direction | Length   | Width |
++--------------+-----------+----------+-------+
+| m_axi_gmem0  | read      | variable | 32    |
+| m_axi_gmem1  | read      | variable | 32    |
+| m_axi_gmem2  | write     | variable | 32    |
++--------------+-----------+----------+-------+
+
+* All M_AXI Variable Accesses
++--------------+----------+-------------------------+-----------+--------------+----------+-----------------+-------------------------+------------+------------------------------------------------+
+| HW Interface | Variable | Access Location         | Direction | Burst Status | Length   | Loop            | Loop Location           | Resolution | Problem                                        |
++--------------+----------+-------------------------+-----------+--------------+----------+-----------------+-------------------------+------------+------------------------------------------------+
+| m_axi_gmem0  | A        | ../src/kernel.cpp:42:26 | read      | Widen Fail   |          | VITIS_LOOP_41_2 | ../src/kernel.cpp:41:26 | 214-235    | Start index of the access is unaligned         |
+| m_axi_gmem0  | A        | ../src/kernel.cpp:42:26 | read      | Widen Fail   |          | VITIS_LOOP_41_2 | ../src/kernel.cpp:41:26 | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem0  | A        | ../src/kernel.cpp:42:26 | read      | Inferred     | variable | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:19 |            |                                                |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:45:20 | read      | Widen Fail   |          | VITIS_LOOP_43_3 | ../src/kernel.cpp:43:30 | 214-235    | Start index of the access is unaligned         |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:45:20 | read      | Widen Fail   |          | VITIS_LOOP_43_3 | ../src/kernel.cpp:43:30 | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:45:20 | read      | Fail         |          | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:19 | 214-229    | Could not analyze pattern                      |
+| m_axi_gmem1  | B        | ../src/kernel.cpp:45:20 | read      | Inferred     | variable | VITIS_LOOP_41_2 | ../src/kernel.cpp:41:26 |            |                                                |
+| m_axi_gmem2  | C        | ../src/kernel.cpp:50:21 | write     | Widen Fail   |          | VITIS_LOOP_48_4 | ../src/kernel.cpp:48:26 | 214-235    | Start index of the access is unaligned         |
+| m_axi_gmem2  | C        | ../src/kernel.cpp:50:21 | write     | Widen Fail   |          | VITIS_LOOP_48_4 | ../src/kernel.cpp:48:26 | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem2  | C        | ../src/kernel.cpp:50:21 | write     | Inferred     | variable | VITIS_LOOP_39_1 | ../src/kernel.cpp:39:19 |            |                                                |
++--------------+----------+-------------------------+-----------+--------------+----------+-----------------+-------------------------+------------+------------------------------------------------+
+
+    * Resolution URL: docs.xilinx.com/access/sources/dita/topic?Doc_Version=2025.1%20English&url=ug1448-hls-guidance&resourceid=XXX-YYY.html (replace XXX-YYY with column value)
+
+================================================================
+== Bind Op Report
+================================================================
++--------------------------------------+-----+--------+---------------+--------+----------+---------+
+| Name                                 | DSP | Pragma | Variable      | Op     | Impl     | Latency |
++--------------------------------------+-----+--------+---------------+--------+----------+---------+
+| + gemm                               | 17  |        |               |        |          |         |
+|   icmp_ln39_fu_235_p2                |     |        | icmp_ln39     | setgt  | auto     | 0       |
+|   cmp23_fu_241_p2                    |     |        | cmp23         | setgt  | auto     | 0       |
+|   cmp255_fu_247_p2                   |     |        | cmp255        | setgt  | auto     | 0       |
+|   mul_32ns_32ns_63_2_1_U15           | 4   |        | mul_ln39      | mul    | auto     | 1       |
+|   mul_32ns_32ns_63_2_1_U16           | 4   |        | mul_ln39_1    | mul    | auto     | 1       |
+|   select_ln39_fu_273_p3              |     |        | select_ln39   | select | auto_sel | 0       |
+|   empty_fu_299_p3                    |     |        | empty         | select | auto_sel | 0       |
+|   mul_32ns_32ns_63_2_1_U17           | 4   |        | mul_ln39_2    | mul    | auto     | 1       |
+|   select_ln39_1_fu_306_p3            |     |        | select_ln39_1 | select | auto_sel | 0       |
+|   empty_29_fu_322_p3                 |     |        | empty_29      | select | auto_sel | 0       |
+|   empty_31_fu_329_p3                 |     |        | empty_31      | select | auto_sel | 0       |
+|   empty_32_fu_345_p3                 |     |        | empty_32      | select | auto_sel | 0       |
+|   icmp_ln39_1_fu_389_p2              |     |        | icmp_ln39_1   | setlt  | auto     | 0       |
+|   add_ln39_fu_394_p2                 |     |        | add_ln39      | add    | fabric   | 0       |
+|   icmp_ln41_fu_404_p2                |     |        | icmp_ln41     | setlt  | auto     | 0       |
+|   add_ln41_fu_409_p2                 |     |        | add_ln41      | add    | fabric   | 0       |
+|  + gemm_Pipeline_1                   | 0   |        |               |        |          |         |
+|    exitcond3_fu_52_p2                |     |        | exitcond3     | seteq  | auto     | 0       |
+|    empty_27_fu_58_p2                 |     |        | empty_27      | add    | fabric   | 0       |
+|  + gemm_Pipeline_VITIS_LOOP_48_4     | 0   |        |               |        |          |         |
+|    icmp_ln48_fu_105_p2               |     |        | icmp_ln48     | setlt  | auto     | 0       |
+|    add_ln48_fu_111_p2                |     |        | add_ln48      | add    | fabric   | 0       |
+|  + gemm_Pipeline_VITIS_LOOP_43_3     | 5   |        |               |        |          |         |
+|    icmp_ln43_fu_122_p2               |     |        | icmp_ln43     | setlt  | auto     | 0       |
+|    add_ln43_fu_128_p2                |     |        | add_ln43      | add    | fabric   | 0       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U3  | 3   |        | mul           | fmul   | maxdsp   | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U2 | 2   |        | add           | fadd   | fulldsp  | 6       |
++--------------------------------------+-----+--------+---------------+--------+----------+---------+
+
+
+================================================================
+== Storage Report
+================================================================
++-------------------+--------------+-----------+------+------+--------+----------+------+---------+------------------+
+| Name              | Usage        | Type      | BRAM | URAM | Pragma | Variable | Impl | Latency | Bitwidth, Depth, |
+|                   |              |           |      |      |        |          |      |         | Banks            |
++-------------------+--------------+-----------+------+------+--------+----------+------+---------+------------------+
+| + gemm            |              |           | 4    | 0    |        |          |      |         |                  |
+|   control_s_axi_U | interface    | s_axilite |      |      |        |          |      |         |                  |
+|   gmem0_m_axi_U   | interface    | m_axi     | 1    |      |        |          |      |         |                  |
+|   gmem1_m_axi_U   | interface    | m_axi     | 1    |      |        |          |      |         |                  |
+|   gmem2_m_axi_U   | interface    | m_axi     |      |      |        |          |      |         |                  |
+|   crow_U          | ram_2p array |           | 2    |      |        | crow     | auto | 1       | 32, 768, 1       |
++-------------------+--------------+-----------+------+------+--------+----------+------+---------+------------------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Inferred Pragmas
++--------------+---------+-----------------------------------------------------------------------------+----------------------------------+
+| Type         | Options | Location                                                                    | Inferred From                    |
++--------------+---------+-----------------------------------------------------------------------------+----------------------------------+
+| LOOP_FLATTEN | 0       | loop VITIS_LOOP_41_2 (../src/kernel.cpp:41:26) in gemm ../src/kernel.cpp:41 | performance ../src/kernel.cpp:41 |
++--------------+---------+-----------------------------------------------------------------------------+----------------------------------+
+
+* Valid Pragma Syntax
++-----------+----------------------------------------------------+--------------------------------------+
+| Type      | Options                                            | Location                             |
++-----------+----------------------------------------------------+--------------------------------------+
+| INTERFACE | m_axi port=A offset=slave bundle=gmem0 depth=6144  | ../src/kernel.cpp:22 in gemm, A      |
+| INTERFACE | m_axi port=B offset=slave bundle=gmem1 depth=11520 | ../src/kernel.cpp:23 in gemm, B      |
+| INTERFACE | m_axi port=C offset=slave bundle=gmem2 depth=256   | ../src/kernel.cpp:24 in gemm, C      |
+| INTERFACE | s_axilite port=M                                   | ../src/kernel.cpp:25 in gemm, M      |
+| INTERFACE | s_axilite port=K                                   | ../src/kernel.cpp:26 in gemm, K      |
+| INTERFACE | s_axilite port=N                                   | ../src/kernel.cpp:27 in gemm, N      |
+| INTERFACE | s_axilite port=return                              | ../src/kernel.cpp:28 in gemm, return |
+| PIPELINE  | ii=1                                               | ../src/kernel.cpp:44 in gemm         |
+| PIPELINE  | ii=1                                               | ../src/kernel.cpp:49 in gemm         |
++-----------+----------------------------------------------------+--------------------------------------+
+
+

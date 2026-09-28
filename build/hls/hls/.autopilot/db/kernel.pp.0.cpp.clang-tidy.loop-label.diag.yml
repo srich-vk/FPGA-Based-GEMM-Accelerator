@@ -1,0 +1,40 @@
+---
+MainSourceFile:  /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp
+Diagnostics:     
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_39_1:  '
+    FileOffset:      39
+    FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/src/kernel.cpp
+    Replacements:    
+      - FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp
+        Offset:          10090
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_39_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_41_2:  '
+    FileOffset:      41
+    FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/src/kernel.cpp
+    Replacements:    
+      - FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp
+        Offset:          10157
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_41_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_43_3:  '
+    FileOffset:      43
+    FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/src/kernel.cpp
+    Replacements:    
+      - FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp
+        Offset:          10242
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_43_3: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_48_4:  '
+    FileOffset:      48
+    FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/src/kernel.cpp
+    Replacements:    
+      - FilePath:        /home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp
+        Offset:          10367
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_48_4: '
+...
