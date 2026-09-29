@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'gemm'" level="0">
-<item name = "Date">Mon Sep 28 22:00:08 2026
+<item name = "Date">Tue Sep 29 05:31:13 2026
 </item>
 <item name = "Version">2025.1 (Build 6135595 on May 21 2025)</item>
 <item name = "Project">hls</item>
@@ -31,15 +31,15 @@
 <section name = "" level="1">
 <item name = "Instance"><table name="" hasTotal="0">
 <keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
-<column name="grp_gemm_Pipeline_1_fu_199">gemm_Pipeline_1, 770, 770, 2.564 us, 2.564 us, 769, 769, loop auto-rewind stp (delay=0 clock cycles(s))</column>
-<column name="grp_gemm_Pipeline_wb_loop_fu_205">gemm_Pipeline_wb_loop, ?, ?, ?, ?, 0, 0, loop auto-rewind stp (delay=0 clock cycles(s))</column>
-<column name="grp_gemm_Pipeline_j_loop_fu_214">gemm_Pipeline_j_loop, ?, ?, ?, ?, 0, 0, loop auto-rewind stp (delay=0 clock cycles(s))</column>
+<column name="grp_gemm_Pipeline_zero_init_top_loop_zero_init_in_loop_fu_253">gemm_Pipeline_zero_init_top_loop_zero_init_in_loop, 19, 19, 63.270 ns, 63.270 ns, 17, 17, loop auto-rewind stp (delay=0 clock cycles(s))</column>
+<column name="grp_gemm_Pipeline_arow_loop_fu_276">gemm_Pipeline_arow_loop, ?, ?, ?, ?, 0, 0, loop auto-rewind stp (delay=0 clock cycles(s))</column>
+<column name="grp_gemm_Pipeline_kj_loop_fu_285">gemm_Pipeline_kj_loop, 16, 16, 53.280 ns, 53.280 ns, 2, 2, loop auto-rewind stp (delay=0 clock cycles(s))</column>
+<column name="grp_gemm_Pipeline_wb_loop_fu_311">gemm_Pipeline_wb_loop, 116, 116, 0.386 us, 0.386 us, 2, 2, loop auto-rewind stp (delay=0 clock cycles(s))</column>
 </table>
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
-<column name="- i_loop">?, ?, ?, -, -, ?, no</column>
-<column name=" + k_loop">?, ?, ?, -, -, ?, no</column>
+<column name="- i_loop">?, ?, ?, -, -, 1, no</column>
 </table>
 </item>
 </section>

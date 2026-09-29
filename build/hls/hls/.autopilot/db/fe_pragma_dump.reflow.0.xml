@@ -1,6 +1,14 @@
 <pragmas>
-<pragma file="../src/kernel.cpp" line="48" pragmaType="pipeline" parentfunction="gemm" off="0" ii="1" rewind="0" style=""/>
-<pragma file="../src/kernel.cpp" line="43" pragmaType="pipeline" parentfunction="gemm" off="0" ii="1" rewind="0" style=""/>
+<pragma file="../src/kernel.cpp" line="52" pragmaType="loop_tripcount" parentfunction="gemm" min="1" max="1" avg="1"/>
+<pragma file="../src/kernel.cpp" line="55" pragmaType="pipeline" parentfunction="gemm" off="0" ii="1" rewind="0" style=""/>
+<pragma file="../src/kernel.cpp" line="62" pragmaType="pipeline" parentfunction="gemm" off="0" ii="1" rewind="0" style=""/>
+<pragma file="../src/kernel.cpp" line="61" pragmaType="loop_tripcount" parentfunction="gemm" min="1" max="1" avg="1"/>
+<pragma file="../src/kernel.cpp" line="76" pragmaType="pipeline" parentfunction="gemm" off="0" ii="1" rewind="0" style=""/>
+<pragma file="../src/kernel.cpp" line="75" pragmaType="loop_tripcount" parentfunction="gemm" min="1" max="1" avg="1"/>
+<pragma file="../src/kernel.cpp" line="80" pragmaType="unroll" parentfunction="gemm" factor="-1" skip_exit_check="0"/>
+<pragma file="../src/kernel.cpp" line="79" pragmaType="loop_tripcount" parentfunction="gemm" min="1" max="1" avg="1"/>
+<pragma file="../src/kernel.cpp" line="47" pragmaType="pipeline" parentfunction="gemm" off="0" ii="1" rewind="0" style=""/>
+<pragma file="../src/kernel.cpp" line="46" pragmaType="loop_tripcount" parentfunction="gemm" min="1" max="1" avg="1"/>
 <pragma file="../src/kernel.cpp" line="22" pragmaType="interface" parentfunction="gemm" mode="m_axi" port="A" bundle="gmem0" offset="slave" name="" depth="6144" num_read_outstanding="-1" num_write_outstanding="-1" max_burst_read_length="-1" max_burst_write_length="-1" latency="-1" max_widen_bitwidth="-1" channel=""/>
 <pragma file="../src/kernel.cpp" line="23" pragmaType="interface" parentfunction="gemm" mode="m_axi" port="B" bundle="gmem1" offset="slave" name="" depth="11520" num_read_outstanding="-1" num_write_outstanding="-1" max_burst_read_length="-1" max_burst_write_length="-1" latency="-1" max_widen_bitwidth="-1" channel=""/>
 <pragma file="../src/kernel.cpp" line="24" pragmaType="interface" parentfunction="gemm" mode="m_axi" port="C" bundle="gmem2" offset="slave" name="" depth="256" num_read_outstanding="-1" num_write_outstanding="-1" max_burst_read_length="-1" max_burst_write_length="-1" latency="-1" max_widen_bitwidth="-1" channel=""/>
@@ -8,4 +16,7 @@
 <pragma file="../src/kernel.cpp" line="26" pragmaType="interface" parentfunction="gemm" mode="s_axilite" port="K" bundle="" offset="-1" name="" clock="" impl="" register="0"/>
 <pragma file="../src/kernel.cpp" line="27" pragmaType="interface" parentfunction="gemm" mode="s_axilite" port="N" bundle="" offset="-1" name="" clock="" impl="" register="0"/>
 <pragma file="../src/kernel.cpp" line="28" pragmaType="interface" parentfunction="gemm" mode="s_axilite" port="" bundle="" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="../src/kernel.cpp" line="41" pragmaType="array_partition" parentfunction="gemm" dim="1" factor="0" mode="complete" dynamic="0" variable="crow"/>
+<pragma file="../src/kernel.cpp" line="63" pragmaType="dependence" parentfunction="gemm" class="" direction="NODIR" type="inter" distance="0" variable="crow"/>
+<pragma file="../src/kernel.cpp" line="64" pragmaType="array_reshape" parentfunction="gemm" dim="1" factor="16" mode="cyclic" variable="arow"/>
 </pragmas>

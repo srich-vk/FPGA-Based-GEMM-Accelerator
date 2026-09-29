@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'gemm_Pipeline_wb_loop'" level="0">
-<item name = "Date">Mon Sep 28 22:00:08 2026
+<item name = "Date">Tue Sep 29 05:31:12 2026
 </item>
 <item name = "Version">2025.1 (Build 6135595 on May 21 2025)</item>
 <item name = "Project">hls</item>
@@ -24,7 +24,7 @@
 <section name = "" level="1">
 <item name = "Summary"><table name="" hasTotal="0">
 <keys size="8">, min, max, min, max, min, max, Type</keys>
-<column name="">?, ?, ?, ?, 0, 0, loop auto-rewind stp (delay=0 clock cycles(s))</column>
+<column name="">116, 116, 0.386 us, 0.386 us, 2, 2, loop auto-rewind stp (delay=0 clock cycles(s))</column>
 </table>
 </item>
 <item name = "Detail">
@@ -35,7 +35,7 @@
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
-<column name="- wb_loop">?, ?, 3, 1, 1, ?, yes</column>
+<column name="- wb_loop">114, 114, 115, 1, 1, 1, yes</column>
 </table>
 </item>
 </section>

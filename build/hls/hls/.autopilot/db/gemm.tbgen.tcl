@@ -14,7 +14,7 @@ set hasInterrupt 0
 set DLRegFirstOffset 0
 set DLRegItemOffset 0
 set svuvm_can_support 1
-set cdfgNum 6
+set cdfgNum 7
 set C_modelName {gemm}
 set C_modelType { void 0 }
 set ap_memory_interface_dict [dict create]
@@ -360,28 +360,81 @@ set NewPortList {[
 
 set ArgLastReadFirstWriteLatency {
 	gemm {
-		gmem0 {Type I LastRead 148 FirstWrite -1}
+		gmem0 {Type I LastRead 4 FirstWrite -1}
 		gmem1 {Type I LastRead 76 FirstWrite -1}
-		gmem2 {Type O LastRead 76 FirstWrite 2}
+		gmem2 {Type O LastRead 76 FirstWrite 114}
 		A {Type I LastRead 3 FirstWrite -1}
 		B {Type I LastRead 3 FirstWrite -1}
 		C {Type I LastRead 3 FirstWrite -1}
 		M {Type I LastRead 0 FirstWrite -1}
 		K {Type I LastRead 0 FirstWrite -1}
-		N {Type I LastRead 0 FirstWrite -1}}
-	gemm_Pipeline_1 {
-		crow {Type O LastRead -1 FirstWrite 0}}
-	gemm_Pipeline_wb_loop {
-		gmem2 {Type O LastRead -1 FirstWrite 2}
+		N {Type I LastRead 70 FirstWrite -1}}
+	gemm_Pipeline_zero_init_top_loop_zero_init_in_loop {
+		tmp_3 {Type I LastRead 0 FirstWrite -1}
 		N {Type I LastRead 0 FirstWrite -1}
-		sext_ln39_1 {Type I LastRead 0 FirstWrite -1}
-		crow {Type IO LastRead 0 FirstWrite 1}}
-	gemm_Pipeline_j_loop {
-		gmem1 {Type I LastRead 1 FirstWrite -1}
+		crow_15 {Type O LastRead -1 FirstWrite 3}
+		crow_14 {Type O LastRead -1 FirstWrite 3}
+		crow_13 {Type O LastRead -1 FirstWrite 3}
+		crow_12 {Type O LastRead -1 FirstWrite 3}
+		crow_11 {Type O LastRead -1 FirstWrite 3}
+		crow_10 {Type O LastRead -1 FirstWrite 3}
+		crow_9 {Type O LastRead -1 FirstWrite 3}
+		crow_8 {Type O LastRead -1 FirstWrite 3}
+		crow_7 {Type O LastRead -1 FirstWrite 3}
+		crow_6 {Type O LastRead -1 FirstWrite 3}
+		crow_5 {Type O LastRead -1 FirstWrite 3}
+		crow_4 {Type O LastRead -1 FirstWrite 3}
+		crow_3 {Type O LastRead -1 FirstWrite 3}
+		crow_2 {Type O LastRead -1 FirstWrite 3}
+		crow_1 {Type O LastRead -1 FirstWrite 3}
+		crow {Type O LastRead -1 FirstWrite 3}}
+	gemm_Pipeline_arow_loop {
+		gmem0 {Type I LastRead 1 FirstWrite -1}
+		K {Type I LastRead 0 FirstWrite -1}
+		sext_ln51 {Type I LastRead 0 FirstWrite -1}
+		arow {Type O LastRead -1 FirstWrite 2}}
+	gemm_Pipeline_kj_loop {
+		gmem1 {Type I LastRead 2 FirstWrite -1}
+		mul29 {Type I LastRead 0 FirstWrite -1}
 		N {Type I LastRead 0 FirstWrite -1}
 		p_cast_cast {Type I LastRead 0 FirstWrite -1}
-		a_ik {Type I LastRead 0 FirstWrite -1}
-		crow {Type IO LastRead 4 FirstWrite 13}}}
+		crow_15 {Type IO LastRead 5 FirstWrite 14}
+		crow_14 {Type IO LastRead 5 FirstWrite 14}
+		crow_13 {Type IO LastRead 5 FirstWrite 14}
+		crow_12 {Type IO LastRead 5 FirstWrite 14}
+		crow_11 {Type IO LastRead 5 FirstWrite 14}
+		crow_10 {Type IO LastRead 5 FirstWrite 14}
+		crow_9 {Type IO LastRead 5 FirstWrite 14}
+		crow_8 {Type IO LastRead 5 FirstWrite 14}
+		crow_7 {Type IO LastRead 5 FirstWrite 14}
+		crow_6 {Type IO LastRead 5 FirstWrite 14}
+		crow_5 {Type IO LastRead 5 FirstWrite 14}
+		crow_4 {Type IO LastRead 5 FirstWrite 14}
+		crow_3 {Type IO LastRead 5 FirstWrite 14}
+		crow_2 {Type IO LastRead 5 FirstWrite 14}
+		crow_1 {Type IO LastRead 5 FirstWrite 14}
+		crow {Type IO LastRead 5 FirstWrite 14}
+		arow {Type I LastRead 1 FirstWrite -1}}
+	gemm_Pipeline_wb_loop {
+		gmem2 {Type O LastRead -1 FirstWrite 114}
+		N {Type I LastRead 0 FirstWrite -1}
+		sext_ln51_1 {Type I LastRead 0 FirstWrite -1}
+		crow_15 {Type IO LastRead 1 FirstWrite 1}
+		crow_14 {Type IO LastRead 1 FirstWrite 1}
+		crow_13 {Type IO LastRead 1 FirstWrite 1}
+		crow_12 {Type IO LastRead 1 FirstWrite 1}
+		crow_11 {Type IO LastRead 1 FirstWrite 1}
+		crow_10 {Type IO LastRead 1 FirstWrite 1}
+		crow_9 {Type IO LastRead 1 FirstWrite 1}
+		crow_8 {Type IO LastRead 1 FirstWrite 1}
+		crow_7 {Type IO LastRead 1 FirstWrite 1}
+		crow_6 {Type IO LastRead 1 FirstWrite 1}
+		crow_5 {Type IO LastRead 1 FirstWrite 1}
+		crow_4 {Type IO LastRead 1 FirstWrite 1}
+		crow_3 {Type IO LastRead 1 FirstWrite 1}
+		crow_2 {Type IO LastRead 1 FirstWrite 1}
+		crow_1 {Type IO LastRead 1 FirstWrite 1}
+		crow {Type IO LastRead 0 FirstWrite 1}}}
 
 set hasDtUnsupportedChannel 0
 

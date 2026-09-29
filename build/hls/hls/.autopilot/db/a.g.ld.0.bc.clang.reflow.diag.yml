@@ -1,3 +1,71 @@
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: ../src/kernel.cpp, Line: 78, Column: 30 }
+Function:        gemm
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_78_1
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Missed
+Pass:            reflow-infer-loop-tripcount
+Name:            UpdateLoopBound
+DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
+Function:        gemm
+Args:            
+  - String:          'Updating loop '
+  - String:          lower
+  - String:          ' bound from '
+  - OldBound:        '1'
+  - String:          ' to '
+  - NewBound:        '16'
+  - String:          ' for loop '''
+  - LoopName:        VITIS_LOOP_78_1
+  - String:          ''' ('
+  - LoopLoc:         '../src/kernel.cpp:78:30'
+  - String:          ')'
+  - String:          ' in function '''
+  - String:          gemm
+  - String:          '''.'
+...
+--- !Missed
+Pass:            reflow-infer-loop-tripcount
+Name:            UpdateLoopBound
+DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
+Function:        gemm
+Args:            
+  - String:          'Updating loop '
+  - String:          upper
+  - String:          ' bound from '
+  - OldBound:        '1'
+  - String:          ' to '
+  - NewBound:        '16'
+  - String:          ' for loop '''
+  - LoopName:        VITIS_LOOP_78_1
+  - String:          ''' ('
+  - LoopLoc:         '../src/kernel.cpp:78:30'
+  - String:          ')'
+  - String:          ' in function '''
+  - String:          gemm
+  - String:          '''.'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
+Function:        gemm
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_78_1
+  - String:          ''' ('
+  - LoopLoc:         '../src/kernel.cpp:78:30'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          gemm
+  - String:          ''' completely with a factor of '
+  - Factor:          '16'
+...
 --- !Missed
 Pass:            inline
 Name:            NeverInline
@@ -10,40 +78,47 @@ Args:
   - String:          ' because it should never be inlined (cost=never)'
 ...
 --- !Passed
-Pass:            reflow-burst-inference
-Name:            BurstInferred
-DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
+Pass:            reflow-array-partition
+Name:            ArrayXform
+DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 11 }
 Function:        gemm
 Args:            
-  - String:          'Sequential '
-  - Direction:       read
-  - String:          ' of '
-  - Length:          variable
-  - String:          ' length'
-  - String:          ' has been inferred'
-  - String:          ' _XLX_SEP_ '
-  - AccessID:        B4seq
-  - ArrayName:       B
+  - String:          'Applying '
+  - String:          array_partition
+  - String:          ' to '''
+  - UOName:          crow
+  - String:          ''':'
   - String:          ' '
-  - BundleName:      gmem1
+  - Mode:            Complete
+  - String:          ' partitioning'
+  - String:          ' on dimension '
+  - Dim:             '1'
+  - String:          .
+...
+--- !Passed
+Pass:            reflow-array-reshape
+Name:            ArrayXform
+DebugLoc:        { File: ../src/kernel.cpp, Line: 42, Column: 8 }
+Function:        gemm
+Args:            
+  - String:          'Applying '
+  - String:          array_reshape
+  - String:          ' to '''
+  - UOName:          arow
+  - String:          ''':'
   - String:          ' '
-  - LoopName:        k_loop
-  - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:40:17'
-  - String:          ' '
-  - Function:        gemm
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
-  - String:          ' '
-  - String:          ' _XLX_SEP_ '
-  - OrigAccess:      load
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 44, Column: 20 }
-  - OrigDirection:   read
-  - OrigID:          for.inc.load.8
+  - Mode:            Cyclic
+  - String:          ' reshaping'
+  - String:          ' with factor '
+  - Factor:          '16'
+  - String:          ' on dimension '
+  - Dim:             '1'
+  - String:          .
 ...
 --- !Passed
 Pass:            reflow-burst-inference
 Name:            BurstInferred
-DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
 Function:        gemm
 Args:            
   - String:          'Sequential '
@@ -53,28 +128,59 @@ Args:
   - String:          ' length'
   - String:          ' has been inferred'
   - String:          ' _XLX_SEP_ '
-  - AccessID:        A5seq
+  - AccessID:        A7seq
   - ArrayName:       A
   - String:          ' '
   - BundleName:      gmem0
   - String:          ' '
   - LoopName:        i_loop
   - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:39:13'
+  - LoopLoc:         '../src/kernel.cpp:51:13'
   - String:          ' '
   - Function:        gemm
     DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
   - String:          ' '
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      load
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 41, Column: 26 }
+    DebugLoc:        { File: ../src/kernel.cpp, Line: 56, Column: 12 }
   - OrigDirection:   read
-  - OrigID:          j_loop.load.9
+  - OrigID:          for.inc23.load.10
 ...
 --- !Passed
 Pass:            reflow-burst-inference
 Name:            BurstInferred
-DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 60, Column: 18 }
+Function:        gemm
+Args:            
+  - String:          'Sequential '
+  - Direction:       read
+  - String:          ' of '
+  - Length:          variable
+  - String:          ' length'
+  - String:          ' has been inferred'
+  - String:          ' _XLX_SEP_ '
+  - AccessID:        B8seq
+  - ArrayName:       B
+  - String:          ' '
+  - BundleName:      gmem1
+  - String:          ' '
+  - LoopName:        kj_loop
+  - String:          ' '
+  - LoopLoc:         '../src/kernel.cpp:60:18'
+  - String:          ' '
+  - Function:        gemm
+    DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
+  - String:          ' '
+  - String:          ' _XLX_SEP_ '
+  - OrigAccess:      load
+    DebugLoc:        { File: ../src/kernel.cpp, Line: 65, Column: 30 }
+  - OrigDirection:   read
+  - OrigID:          for.body32.load.35
+...
+--- !Passed
+Pass:            reflow-burst-inference
+Name:            BurstInferred
+DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
 Function:        gemm
 Args:            
   - String:          'Sequential '
@@ -84,43 +190,43 @@ Args:
   - String:          ' length'
   - String:          ' has been inferred'
   - String:          ' _XLX_SEP_ '
-  - AccessID:        C6seq
+  - AccessID:        C9seq
   - ArrayName:       C
   - String:          ' '
   - BundleName:      gmem2
   - String:          ' '
   - LoopName:        i_loop
   - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:39:13'
+  - LoopLoc:         '../src/kernel.cpp:51:13'
   - String:          ' '
   - Function:        gemm
     DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
   - String:          ' '
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      store
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 49, Column: 21 }
+    DebugLoc:        { File: ../src/kernel.cpp, Line: 84, Column: 32 }
   - OrigDirection:   write
-  - OrigID:          for.inc38.store.10
+  - OrigID:          VITIS_LOOP_78_1.store.119
 ...
 --- !Missed
 Pass:            reflow-burst-inference
 Name:            CouldNotAnalyzePattern
-DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 60, Column: 18 }
 Function:        gemm
 Args:            
   - String:          Could not analyze pattern
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      call
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
+    DebugLoc:        { File: ../src/kernel.cpp, Line: 60, Column: 18 }
   - OrigDirection:   read
-  - OrigID:          B4seq
+  - OrigID:          B8seq
   - ArrayName:       B
   - String:          ' '
   - BundleName:      gmem1
   - String:          ' '
   - LoopName:        i_loop
   - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:39:13'
+  - LoopLoc:         '../src/kernel.cpp:51:13'
   - String:          ' '
   - Function:        gemm
     DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
@@ -129,22 +235,22 @@ Args:
 --- !Missed
 Pass:            reflow-burst-widen
 Name:            BadAccessLen
-DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
 Function:        gemm
 Args:            
   - String:          Sequential access length is not divisible by 2
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      call
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+    DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
   - OrigDirection:   write
-  - OrigID:          C6seq
+  - OrigID:          C9seq
   - ArrayName:       C
   - String:          ' '
   - BundleName:      gmem2
   - String:          ' '
   - LoopName:        wb_loop
   - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:47:18'
+  - LoopLoc:         '../src/kernel.cpp:74:18'
   - String:          ' '
   - Function:        gemm
     DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
@@ -153,22 +259,22 @@ Args:
 --- !Missed
 Pass:            reflow-burst-widen
 Name:            BadStartIndexAlignment
-DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
 Function:        gemm
 Args:            
   - String:          Start index of the access is unaligned
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      call
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+    DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
   - OrigDirection:   write
-  - OrigID:          C6seq
+  - OrigID:          C9seq
   - ArrayName:       C
   - String:          ' '
   - BundleName:      gmem2
   - String:          ' '
   - LoopName:        wb_loop
   - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:47:18'
+  - LoopLoc:         '../src/kernel.cpp:74:18'
   - String:          ' '
   - Function:        gemm
     DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
@@ -177,46 +283,22 @@ Args:
 --- !Missed
 Pass:            reflow-burst-widen
 Name:            BadAccessLen
-DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 60, Column: 18 }
 Function:        gemm
 Args:            
   - String:          Sequential access length is not divisible by 2
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      call
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
+    DebugLoc:        { File: ../src/kernel.cpp, Line: 60, Column: 18 }
   - OrigDirection:   read
-  - OrigID:          B4seq
+  - OrigID:          B8seq
   - ArrayName:       B
   - String:          ' '
   - BundleName:      gmem1
   - String:          ' '
-  - LoopName:        j_loop
+  - LoopName:        kj_loop
   - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:42:21'
-  - String:          ' '
-  - Function:        gemm
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
-  - String:          ' '
-...
---- !Missed
-Pass:            reflow-burst-widen
-Name:            BadStartIndexAlignment
-DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
-Function:        gemm
-Args:            
-  - String:          Start index of the access is unaligned
-  - String:          ' _XLX_SEP_ '
-  - OrigAccess:      call
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
-  - OrigDirection:   read
-  - OrigID:          B4seq
-  - ArrayName:       B
-  - String:          ' '
-  - BundleName:      gmem1
-  - String:          ' '
-  - LoopName:        j_loop
-  - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:42:21'
+  - LoopLoc:         '../src/kernel.cpp:60:18'
   - String:          ' '
   - Function:        gemm
     DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
@@ -225,22 +307,22 @@ Args:
 --- !Missed
 Pass:            reflow-burst-widen
 Name:            BadAccessLen
-DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
 Function:        gemm
 Args:            
   - String:          Sequential access length is not divisible by 2
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      call
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+    DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
   - OrigDirection:   read
-  - OrigID:          A5seq
+  - OrigID:          A7seq
   - ArrayName:       A
   - String:          ' '
   - BundleName:      gmem0
   - String:          ' '
-  - LoopName:        k_loop
+  - LoopName:        arow_loop
   - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:40:17'
+  - LoopLoc:         '../src/kernel.cpp:54:13'
   - String:          ' '
   - Function:        gemm
     DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
@@ -249,73 +331,31 @@ Args:
 --- !Missed
 Pass:            reflow-burst-widen
 Name:            BadStartIndexAlignment
-DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
 Function:        gemm
 Args:            
   - String:          Start index of the access is unaligned
   - String:          ' _XLX_SEP_ '
   - OrigAccess:      call
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+    DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
   - OrigDirection:   read
-  - OrigID:          A5seq
+  - OrigID:          A7seq
   - ArrayName:       A
   - String:          ' '
   - BundleName:      gmem0
   - String:          ' '
-  - LoopName:        k_loop
+  - LoopName:        arow_loop
   - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:40:17'
+  - LoopLoc:         '../src/kernel.cpp:54:13'
   - String:          ' '
   - Function:        gemm
     DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
-  - String:          ' '
-...
---- !HLSReportInfo
-Pass:            auto-loop-pipeline
-Name:            AutoLoopPipeline
-Args:            
-  - String:          'automatically set the pipeline for Loop< '
-  - LoopName:        unknown
-  - String:          '> at '
-  - LoopLoc:         ''
-  - String:          ' '
-...
---- !Passed
-Pass:            reflow-loop-flatten-cost-model
-Name:            FlattenOffInference
-DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
-Function:        gemm
-Args:            
-  - String:          'Automatically disabling loop flattening for loop '''
-  - LoopName:        k_loop
-  - String:          '''.'
-...
---- !Passed
-Pass:            reflow-loop-flatten-cost-model
-Name:            AutoParallelPerformanceDrivenVerbosePassed
-DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
-Function:        gemm
-Args:            
-  - PragmaType:      loop_flatten
-  - String:          ' '
-  - PragmaOptions:   off
-  - String:          ' '
-  - PragmaIsAuto:    '1'
-  - String:          ' '
-  - PragmaFunction:  gemm
-  - String:          ' '
-  - PragmaSrcLoc:    '../src/kernel.cpp:40:17'
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
-  - LoopName:        k_loop
-  - String:          ' '
-  - LoopLoc:         '../src/kernel.cpp:40:17'
-    DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
   - String:          ' '
 ...
 --- !Passed
 Pass:            reflow-burst-summary
 Name:            BurstInferredVerboseSummary
-DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
 Function:        gemm
 Args:            
   - String:          'Multiple burst '
@@ -339,7 +379,7 @@ Args:
 --- !Passed
 Pass:            reflow-burst-summary
 Name:            BurstInferredSummary
-DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
 Function:        gemm
 Args:            
   - String:          'Multiple burst '
@@ -356,7 +396,7 @@ Args:
 --- !Passed
 Pass:            reflow-burst-summary
 Name:            BurstInferredVerboseSummary
-DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
 Function:        gemm
 Args:            
   - String:          'Multiple burst '
@@ -380,7 +420,7 @@ Args:
 --- !Passed
 Pass:            reflow-burst-summary
 Name:            BurstInferredSummary
-DebugLoc:        { File: ../src/kernel.cpp, Line: 39, Column: 13 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 51, Column: 13 }
 Function:        gemm
 Args:            
   - String:          'Multiple burst '
@@ -397,7 +437,7 @@ Args:
 --- !Passed
 Pass:            reflow-burst-summary
 Name:            BurstInferredVerboseSummary
-DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 60, Column: 18 }
 Function:        gemm
 Args:            
   - String:          'Multiple burst '
@@ -414,6 +454,10 @@ Args:
   - String:          ' '
   - BundleName:      gmem1
   - String:          ' '
+  - LoopName:        kj_loop
+  - String:          ' '
+  - LoopLoc:         '../src/kernel.cpp:60:18'
+  - String:          ' '
   - Function:        gemm
     DebugLoc:        { File: ../src/kernel.cpp, Line: 19, Column: 0 }
   - String:          ' '
@@ -421,7 +465,7 @@ Args:
 --- !Passed
 Pass:            reflow-burst-summary
 Name:            BurstInferredSummary
-DebugLoc:        { File: ../src/kernel.cpp, Line: 40, Column: 17 }
+DebugLoc:        { File: ../src/kernel.cpp, Line: 60, Column: 18 }
 Function:        gemm
 Args:            
   - String:          'Multiple burst '
@@ -430,6 +474,11 @@ Args:
   - Length:          variable
   - String:          ' length and bit width '
   - Width:           '32'
+  - String:          ' in loop '''
+  - LoopName:        kj_loop
+  - String:          '''('
+  - LoopLoc:         '../src/kernel.cpp:60:18'
+  - String:          ')'
   - String:          ' has been inferred on bundle '''
   - BundleName:      gmem1
   - String:          '''.'

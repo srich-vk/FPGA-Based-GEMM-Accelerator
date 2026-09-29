@@ -1,0 +1,226 @@
+<ENTRY>
+{
+ "thisFile": "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls.hlsrun_cosim_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Tue Sep 29 05:31:54 2026",
+ "timestampMillis": "1790640114798",
+ "buildStep": {
+  "cmdId": "21d1b300-db91-4508-a802-306f29886d69",
+  "name": "vitis-run",
+  "logFile": "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/logs/hls.steps.log",
+  "commandLine": "/home/Xilinx/2025.1/Vitis/bin/unwrapped/lnx64.o/vitis-run  --mode hls --cosim --config hls_config.cfg --work_dir build/hls ",
+  "args": [
+   "--mode",
+   "hls",
+   "--cosim",
+   "--config",
+   "hls_config.cfg",
+   "--work_dir",
+   "build/hls"
+  ],
+  "iniFiles": [],
+  "cwd": "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Sep 29 05:31:54 2026",
+ "timestampMillis": "1790640114799",
+ "status": {
+  "cmdId": "21d1b300-db91-4508-a802-306f29886d69",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Tue Sep 29 05:32:00 2026",
+ "timestampMillis": "1790640120328",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_RTL_COSIM",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "gemm",
+     "file": "",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/src/kernel.cpp"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2025.1"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Sep 29 05:32:00 2026",
+ "timestampMillis": "1790640120329",
+ "buildStep": {
+  "cmdId": "20f4b49a-1d51-4194-a843-8407ea94f154",
+  "name": "",
+  "logFile": "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Sep 29 05:32:00 2026",
+ "timestampMillis": "1790640120329",
+ "status": {
+  "cmdId": "20f4b49a-1d51-4194-a843-8407ea94f154",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Sep 29 05:32:00 2026",
+ "timestampMillis": "1790640120329",
+ "report": {
+  "path": "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/sim/report/gemm_cosim.rpt",
+  "name": "",
+  "fileType": "TEXT",
+  "reportType": "HLS_COSIMULATION",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Sep 29 05:32:00 2026",
+ "timestampMillis": "1790640120329",
+ "report": {
+  "path": "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_DATAFLOW",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Sep 29 05:32:00 2026",
+ "timestampMillis": "1790640120330",
+ "report": {
+  "path": "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_FUNCTION_CALL_GRAPH_COSIM",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Sep 29 05:32:00 2026",
+ "timestampMillis": "1790640120330",
+ "report": {
+  "path": "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_TIMELINE_TRACE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Sep 29 05:32:00 2026",
+ "timestampMillis": "1790640120330",
+ "report": {
+  "path": "/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls",
+  "name": "",
+  "fileType": "DIR",
+  "reportType": "HLS_WAVE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Sep 29 05:36:49 2026",
+ "timestampMillis": "1790640409257",
+ "status": {
+  "cmdId": "20f4b49a-1d51-4194-a843-8407ea94f154",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Sep 29 05:36:49 2026",
+ "timestampMillis": "1790640409377",
+ "status": {
+  "cmdId": "21d1b300-db91-4508-a802-306f29886d69",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Sep 29 05:36:49 2026",
+ "timestampMillis": "1790640409377",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Sep 29 05:36:49 2026",
+ "timestampMillis": "1790640409378",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

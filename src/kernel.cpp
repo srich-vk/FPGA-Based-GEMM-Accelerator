@@ -35,19 +35,53 @@ extern "C" void gemm(const float *A, const float *B, float *C, int M, int K, int
                 // acc += A[(long)i * K + k] * B[(long)k * N + j];
             // C[(long)i * N + j] = acc;
         // }
-    float crow[768] = {0};
+
+    constexpr int L = 16; //not 14 as 16 gives margin of 2 and is a power of 2
+    float crow[L][768];
+    #pragma HLS ARRAY_PARTITION variable=crow dim=1 type=complete
+    float arow[768];
+
+    zero_init_top_loop: for(int z = 0; z < L; z++)
+        zero_init_in_loop: for(int j = 0; j < N; j++){
+        #pragma HLS LOOP_TRIPCOUNT min=1 max=1
+        #pragma HLS PIPELINE II=1
+        crow[z][j] = 0.0f;
+    }
+
     i_loop: for(int i = 0; i < M; i++){
-        k_loop: for(int k = 0; k < K; k++){
-            float a_ik = A[(long)i * K + k];
-            j_loop: for(int j = 0; j < N; j++){
-                #pragma HLS PIPELINE II=1
-                crow[j] += a_ik * B[(long)k * N + j];
+        #pragma HLS LOOP_TRIPCOUNT min=1 max=1
+
+        arow_loop: for(int k = 0; k < K; k++){
+            #pragma HLS PIPELINE II=1
+            arow[k] = A[(long)i * K + k];
+        }
+
+        int j = 0, k = 0;
+        kj_loop: for(int t = 0; t < K * N; t++){
+            #pragma HLS LOOP_TRIPCOUNT min=1 max=1
+            #pragma HLS PIPELINE II=1
+            #pragma HLS DEPENDENCE variable=crow type=inter false
+            #pragma HLS ARRAY_RESHAPE variable=arow type=cyclic factor=16 dim=1
+            crow[k % L][j] += arow[k] * B[t];
+            j++;
+            if (j == N){
+                j = 0;
+                k++;
             }
         }
+
+
         wb_loop: for(int j = 0; j < N; j++){
+            #pragma HLS LOOP_TRIPCOUNT min=1 max=1
             #pragma HLS PIPELINE II=1
-            C[(long)i * N + j] = crow[j];
-            crow[j] = 0;
+            float s = 0.0f;
+            for(int l = 0; l < L; l++){
+                #pragma HLS LOOP_TRIPCOUNT min=1 max=1
+                #pragma HLS UNROLL
+                s += crow[l][j];
+                crow[l][j] = 0.0f;
+            }
+            C[(long)i * N + j] = s;
         }
     }
 }

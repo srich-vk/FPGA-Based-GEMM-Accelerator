@@ -1,20 +1,20 @@
 {
   "0": {
-    "basicblocks": 17,
+    "basicblocks": 54,
     "calls": "",
-    "control_depth": 0,
-    "def_use_depth": 7,
+    "control_depth": 2,
+    "def_use_depth": 18,
     "file": "kernel.cpp",
     "fileloc": 19,
-    "instructions": 112,
+    "instructions": 410,
     "loads": {
-      "L": 2
+      "L": 34
     },
-    "memory_accesses": 7,
+    "memory_accesses": 87,
     "name": "gemm",
     "stores": {
-      "L": 3
+      "L": 49
     },
-    "total_instructions": 112
+    "total_instructions": 410
   }
 }

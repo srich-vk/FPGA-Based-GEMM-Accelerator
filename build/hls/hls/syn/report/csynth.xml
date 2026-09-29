@@ -32,23 +32,13 @@
         <SummaryOfLoopLatency>
             <i_loop>
                 <Slack>2.43</Slack>
-                <TripCount>undef</TripCount>
+                <TripCount>1</TripCount>
                 <isPerfectNested>0</isPerfectNested>
                 <Latency>undef</Latency>
                 <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
                 <IterationLatency>undef</IterationLatency>
                 <PerformancePragma>-</PerformancePragma>
                 <InstanceList/>
-                <k_loop>
-                    <Slack>2.43</Slack>
-                    <TripCount>undef</TripCount>
-                    <isPerfectNested>0</isPerfectNested>
-                    <Latency>undef</Latency>
-                    <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
-                    <IterationLatency>undef</IterationLatency>
-                    <PerformancePragma>-</PerformancePragma>
-                    <InstanceList/>
-                </k_loop>
             </i_loop>
         </SummaryOfLoopLatency>
         <SummaryOfViolations>
@@ -60,23 +50,17 @@
                     <Name>i_loop</Name>
                     <IssueType>-</IssueType>
                     <ViolationType>-</ViolationType>
-                    <SourceLocation>../src/kernel.cpp:39</SourceLocation>
-                    <k_loop>
-                        <Name>k_loop</Name>
-                        <IssueType>-</IssueType>
-                        <ViolationType>-</ViolationType>
-                        <SourceLocation>../src/kernel.cpp:40</SourceLocation>
-                    </k_loop>
+                    <SourceLocation>../src/kernel.cpp:51</SourceLocation>
                 </i_loop>
             </SummaryOfLoopViolations>
         </SummaryOfViolations>
     </PerformanceEstimates>
     <AreaEstimates>
         <Resources>
-            <BRAM_18K>4</BRAM_18K>
-            <DSP>17</DSP>
-            <FF>4634</FF>
-            <LUT>5420</LUT>
+            <BRAM_18K>42</BRAM_18K>
+            <DSP>42</DSP>
+            <FF>12729</FF>
+            <LUT>12233</LUT>
             <URAM>0</URAM>
         </Resources>
         <AvailableResources>
@@ -1934,88 +1918,95 @@
             <ModuleName>gemm</ModuleName>
             <InstancesList>
                 <Instance>
-                    <InstName>grp_gemm_Pipeline_1_fu_199</InstName>
-                    <ModuleName>gemm_Pipeline_1</ModuleName>
+                    <InstName>grp_gemm_Pipeline_zero_init_top_loop_zero_init_in_loop_fu_253</InstName>
+                    <ModuleName>gemm_Pipeline_zero_init_top_loop_zero_init_in_loop</ModuleName>
                     <IsCompInst>true</IsCompInst>
-                    <ID>199</ID>
-                    <BindInstances>exitcond213_fu_52_p2 empty_27_fu_58_p2</BindInstances>
+                    <ID>253</ID>
+                    <BindInstances>icmp_ln45_fu_391_p2 icmp_ln44_fu_368_p2 add_ln44_fu_373_p2 select_ln44_fu_399_p3 add_ln44_1_fu_407_p2 select_ln44_1_fu_413_p3 add_ln45_fu_459_p2</BindInstances>
                 </Instance>
                 <Instance>
-                    <InstName>grp_gemm_Pipeline_wb_loop_fu_205</InstName>
+                    <InstName>grp_gemm_Pipeline_arow_loop_fu_276</InstName>
+                    <ModuleName>gemm_Pipeline_arow_loop</ModuleName>
+                    <IsCompInst>true</IsCompInst>
+                    <ID>276</ID>
+                    <BindInstances>icmp_ln54_fu_123_p2 add_ln54_fu_129_p2 partset_512ns_512ns_32ns_9ns_512_1_1_U19 shl_ln56_fu_192_p2</BindInstances>
+                </Instance>
+                <Instance>
+                    <InstName>grp_gemm_Pipeline_kj_loop_fu_285</InstName>
+                    <ModuleName>gemm_Pipeline_kj_loop</ModuleName>
+                    <IsCompInst>true</IsCompInst>
+                    <ID>285</ID>
+                    <BindInstances>icmp_ln60_fu_526_p2 add_ln60_fu_532_p2 partselect_32ns_512ns_9ns_32_1_1_U27 fmul_32ns_32ns_32_4_max_dsp_1_U26 sub_ln65_fu_646_p2 sub_ln65_1_fu_655_p2 select_ln65_fu_661_p3 sparsemux_33_4_32_1_1_U28 j_fu_579_p2 icmp_ln67_fu_585_p2 add_ln69_fu_590_p2 j_3_fu_596_p3 k_2_fu_604_p3</BindInstances>
+                </Instance>
+                <Instance>
+                    <InstName>grp_gemm_Pipeline_wb_loop_fu_311</InstName>
                     <ModuleName>gemm_Pipeline_wb_loop</ModuleName>
                     <IsCompInst>true</IsCompInst>
-                    <ID>205</ID>
-                    <BindInstances>icmp_ln47_fu_112_p2 add_ln47_fu_118_p2</BindInstances>
-                </Instance>
-                <Instance>
-                    <InstName>grp_gemm_Pipeline_j_loop_fu_214</InstName>
-                    <ModuleName>gemm_Pipeline_j_loop</ModuleName>
-                    <IsCompInst>true</IsCompInst>
-                    <ID>214</ID>
-                    <BindInstances>icmp_ln42_fu_122_p2 add_ln42_fu_128_p2 fmul_32ns_32ns_32_4_max_dsp_1_U3 fadd_32ns_32ns_32_7_full_dsp_1_U2</BindInstances>
+                    <ID>311</ID>
+                    <BindInstances>icmp_ln74_fu_421_p2 add_ln74_fu_427_p2 fadd_32ns_32ns_32_7_full_dsp_1_U54 fadd_32ns_32ns_32_7_full_dsp_1_U55 fadd_32ns_32ns_32_7_full_dsp_1_U56 fadd_32ns_32ns_32_7_full_dsp_1_U57 fadd_32ns_32ns_32_7_full_dsp_1_U58 fadd_32ns_32ns_32_7_full_dsp_1_U59 fadd_32ns_32ns_32_7_full_dsp_1_U60 fadd_32ns_32ns_32_7_full_dsp_1_U61 fadd_32ns_32ns_32_7_full_dsp_1_U62 fadd_32ns_32ns_32_7_full_dsp_1_U63 fadd_32ns_32ns_32_7_full_dsp_1_U64 fadd_32ns_32ns_32_7_full_dsp_1_U65 fadd_32ns_32ns_32_7_full_dsp_1_U66 fadd_32ns_32ns_32_7_full_dsp_1_U67 fadd_32ns_32ns_32_7_full_dsp_1_U68</BindInstances>
                 </Instance>
             </InstancesList>
-            <BindInstances>crow_U icmp_ln39_fu_236_p2 cmp23_fu_242_p2 cmp255_fu_248_p2 mul_32ns_32ns_63_2_1_U15 mul_32ns_32ns_63_2_1_U16 select_ln39_fu_274_p3 empty_fu_300_p3 mul_32ns_32ns_63_2_1_U17 select_ln39_1_fu_307_p3 empty_29_fu_323_p3 empty_31_fu_330_p3 empty_32_fu_346_p3 icmp_ln39_1_fu_390_p2 add_ln39_fu_395_p2 icmp_ln40_fu_405_p2 add_ln40_fu_410_p2 control_s_axi_U gmem0_m_axi_U gmem1_m_axi_U gmem2_m_axi_U</BindInstances>
+            <BindInstances>fadd_32ns_32ns_32_7_full_dsp_1_U90 crow_1_U crow_2_U crow_3_U crow_4_U crow_5_U crow_6_U crow_7_U crow_8_U crow_9_U crow_10_U crow_11_U crow_12_U crow_13_U crow_14_U crow_15_U arow_U icmp_ln45_fu_434_p2 empty_fu_440_p3 mul_32s_32s_32_2_1_U89 icmp_ln51_fu_347_p2 cmp155_fu_353_p2 cmp307_fu_479_p2 mul_32ns_32ns_63_2_1_U88 select_ln51_fu_372_p3 empty_40_fu_389_p3 mul_32ns_32ns_63_2_1_U88 select_ln51_1_fu_465_p3 empty_42_fu_472_p3 empty_44_fu_507_p3 icmp_ln51_1_fu_525_p2 add_ln51_fu_530_p2 control_s_axi_U gmem0_m_axi_U gmem1_m_axi_U gmem2_m_axi_U</BindInstances>
         </TopModule>
     </RTLDesignHierarchy>
     <ModuleInformation>
         <Module>
-            <Name>gemm_Pipeline_1</Name>
+            <Name>gemm_Pipeline_zero_init_top_loop_zero_init_in_loop</Name>
             <Loops>
-                <Loop1/>
+                <zero_init_top_loop_zero_init_in_loop/>
             </Loops>
             <PerformanceEstimates>
                 <SummaryOfTimingAnalysis>
                     <TargetClockPeriod>3.33</TargetClockPeriod>
                     <ClockUncertainty>0.90</ClockUncertainty>
-                    <EstimatedClockPeriod>2.312</EstimatedClockPeriod>
+                    <EstimatedClockPeriod>2.295</EstimatedClockPeriod>
                 </SummaryOfTimingAnalysis>
                 <SummaryOfOverallLatency>
-                    <Best-caseLatency>770</Best-caseLatency>
-                    <Average-caseLatency>770</Average-caseLatency>
-                    <Worst-caseLatency>770</Worst-caseLatency>
-                    <Best-caseRealTimeLatency>2.564 us</Best-caseRealTimeLatency>
-                    <Average-caseRealTimeLatency>2.564 us</Average-caseRealTimeLatency>
-                    <Worst-caseRealTimeLatency>2.564 us</Worst-caseRealTimeLatency>
-                    <PipelineInitiationInterval>769</PipelineInitiationInterval>
+                    <Best-caseLatency>19</Best-caseLatency>
+                    <Average-caseLatency>19</Average-caseLatency>
+                    <Worst-caseLatency>19</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>63.270 ns</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>63.270 ns</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>63.270 ns</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>17</PipelineInitiationInterval>
                     <PipelineType>loop auto-rewind stp (delay=0 clock cycles(s))</PipelineType>
                     <PerformancePragma>-</PerformancePragma>
                 </SummaryOfOverallLatency>
                 <SummaryOfLoopLatency>
-                    <Loop1>
-                        <Name>Loop 1</Name>
+                    <zero_init_top_loop_zero_init_in_loop>
+                        <Name>zero_init_top_loop_zero_init_in_loop</Name>
                         <Slack>2.43</Slack>
-                        <TripCount>768</TripCount>
+                        <TripCount>16</TripCount>
                         <isPerfectNested>0</isPerfectNested>
-                        <Latency>768</Latency>
-                        <AbsoluteTimeLatency>2.557 us</AbsoluteTimeLatency>
+                        <Latency>17</Latency>
+                        <AbsoluteTimeLatency>56.610 ns</AbsoluteTimeLatency>
                         <PipelineII>1</PipelineII>
-                        <PipelineDepth>1</PipelineDepth>
+                        <PipelineDepth>3</PipelineDepth>
                         <PipelineType>yes</PipelineType>
                         <PerformancePragma>-</PerformancePragma>
                         <InstanceList/>
-                    </Loop1>
+                    </zero_init_top_loop_zero_init_in_loop>
                 </SummaryOfLoopLatency>
                 <SummaryOfViolations>
                     <IssueType>-</IssueType>
                     <ViolationType>-</ViolationType>
-                    <SourceLocation>-</SourceLocation>
+                    <SourceLocation>../src/kernel.cpp:45</SourceLocation>
                     <SummaryOfLoopViolations>
-                        <Loop1>
-                            <Name>Loop 1</Name>
+                        <zero_init_top_loop_zero_init_in_loop>
+                            <Name>zero_init_top_loop_zero_init_in_loop</Name>
                             <IssueType>-</IssueType>
                             <ViolationType>-</ViolationType>
-                            <SourceLocation>-</SourceLocation>
-                        </Loop1>
+                            <SourceLocation>../src/kernel.cpp:45</SourceLocation>
+                        </zero_init_top_loop_zero_init_in_loop>
                     </SummaryOfLoopViolations>
                 </SummaryOfViolations>
             </PerformanceEstimates>
             <AreaEstimates>
                 <Resources>
-                    <FF>12</FF>
+                    <FF>71</FF>
                     <AVAIL_FF>1743360</AVAIL_FF>
                     <UTIL_FF>~0</UTIL_FF>
-                    <LUT>61</LUT>
+                    <LUT>223</LUT>
                     <AVAIL_LUT>871680</AVAIL_LUT>
                     <UTIL_LUT>~0</UTIL_LUT>
                     <BRAM_18K>0</BRAM_18K>
@@ -2030,14 +2021,19 @@
                 </Resources>
             </AreaEstimates>
             <BindNodes>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op seteq" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="Loop 1" OPTYPE="seteq" PRAGMA="" RTLNAME="exitcond213_fu_52_p2" SOURCE="" STORAGESUBTYPE="" URAM="0" VARIABLE="exitcond213" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="Loop 1" OPTYPE="add" PRAGMA="" RTLNAME="empty_27_fu_58_p2" SOURCE="" STORAGESUBTYPE="" URAM="0" VARIABLE="empty_27" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="zero_init_top_loop_zero_init_in_loop" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln45_fu_391_p2" SOURCE="../src/kernel.cpp:45" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln45" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op seteq" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="zero_init_top_loop_zero_init_in_loop" OPTYPE="seteq" PRAGMA="" RTLNAME="icmp_ln44_fu_368_p2" SOURCE="../src/kernel.cpp:44" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln44" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="zero_init_top_loop_zero_init_in_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln44_fu_373_p2" SOURCE="../src/kernel.cpp:44" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln44" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="zero_init_top_loop_zero_init_in_loop" OPTYPE="select" PRAGMA="" RTLNAME="select_ln44_fu_399_p3" SOURCE="../src/kernel.cpp:44" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln44" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="zero_init_top_loop_zero_init_in_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln44_1_fu_407_p2" SOURCE="../src/kernel.cpp:44" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln44_1" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="zero_init_top_loop_zero_init_in_loop" OPTYPE="select" PRAGMA="" RTLNAME="select_ln44_1_fu_413_p3" SOURCE="../src/kernel.cpp:44" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln44_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="zero_init_top_loop_zero_init_in_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln45_fu_459_p2" SOURCE="../src/kernel.cpp:45" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln45" VISIBLE="true"/>
             </BindNodes>
         </Module>
         <Module>
-            <Name>gemm_Pipeline_j_loop</Name>
+            <Name>gemm_Pipeline_arow_loop</Name>
             <Loops>
-                <j_loop/>
+                <arow_loop/>
             </Loops>
             <PerformanceEstimates>
                 <SummaryOfTimingAnalysis>
@@ -2057,43 +2053,120 @@
                     <PerformancePragma>-</PerformancePragma>
                 </SummaryOfOverallLatency>
                 <SummaryOfLoopLatency>
-                    <j_loop>
-                        <Name>j_loop</Name>
+                    <arow_loop>
+                        <Name>arow_loop</Name>
                         <Slack>2.43</Slack>
                         <TripCount>undef</TripCount>
-                        <isPerfectNested>1</isPerfectNested>
+                        <isPerfectNested>0</isPerfectNested>
                         <Latency>undef</Latency>
                         <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
                         <PipelineII>1</PipelineII>
-                        <PipelineDepth>14</PipelineDepth>
+                        <PipelineDepth>3</PipelineDepth>
                         <PipelineType>yes</PipelineType>
                         <PerformancePragma>-</PerformancePragma>
                         <InstanceList/>
-                    </j_loop>
+                    </arow_loop>
                 </SummaryOfLoopLatency>
                 <SummaryOfViolations>
                     <IssueType>-</IssueType>
                     <ViolationType>-</ViolationType>
-                    <SourceLocation>../src/kernel.cpp:42</SourceLocation>
+                    <SourceLocation>../src/kernel.cpp:54</SourceLocation>
                     <SummaryOfLoopViolations>
-                        <j_loop>
-                            <Name>j_loop</Name>
+                        <arow_loop>
+                            <Name>arow_loop</Name>
                             <IssueType>-</IssueType>
                             <ViolationType>-</ViolationType>
-                            <SourceLocation>../src/kernel.cpp:42</SourceLocation>
-                        </j_loop>
+                            <SourceLocation>../src/kernel.cpp:54</SourceLocation>
+                        </arow_loop>
                     </SummaryOfLoopViolations>
                 </SummaryOfViolations>
             </PerformanceEstimates>
             <AreaEstimates>
                 <Resources>
-                    <DSP>5</DSP>
-                    <AVAIL_DSP>5952</AVAIL_DSP>
-                    <UTIL_DSP>~0</UTIL_DSP>
-                    <FF>775</FF>
+                    <FF>89</FF>
                     <AVAIL_FF>1743360</AVAIL_FF>
                     <UTIL_FF>~0</UTIL_FF>
-                    <LUT>445</LUT>
+                    <LUT>877</LUT>
+                    <AVAIL_LUT>871680</AVAIL_LUT>
+                    <UTIL_LUT>~0</UTIL_LUT>
+                    <BRAM_18K>0</BRAM_18K>
+                    <AVAIL_BRAM>2688</AVAIL_BRAM>
+                    <UTIL_BRAM>0</UTIL_BRAM>
+                    <DSP>0</DSP>
+                    <AVAIL_DSP>5952</AVAIL_DSP>
+                    <UTIL_DSP>0</UTIL_DSP>
+                    <URAM>0</URAM>
+                    <AVAIL_URAM>640</AVAIL_URAM>
+                    <UTIL_URAM>0</UTIL_URAM>
+                </Resources>
+            </AreaEstimates>
+            <BindNodes>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="arow_loop" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln54_fu_123_p2" SOURCE="../src/kernel.cpp:54" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln54" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="arow_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln54_fu_129_p2" SOURCE="../src/kernel.cpp:54" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln54" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op partset" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="arow_loop" OPTYPE="partset" PRAGMA="" RTLNAME="partset_512ns_512ns_32ns_9ns_512_1_1_U19" SOURCE="../src/kernel.cpp:56" STORAGESUBTYPE="" URAM="0" VARIABLE="tmp" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op shl" DSP="0" ID="" IMPL="auto_pipe" LATENCY="0" LOOP="arow_loop" OPTYPE="shl" PRAGMA="" RTLNAME="shl_ln56_fu_192_p2" SOURCE="../src/kernel.cpp:56" STORAGESUBTYPE="" URAM="0" VARIABLE="shl_ln56" VISIBLE="false"/>
+            </BindNodes>
+        </Module>
+        <Module>
+            <Name>gemm_Pipeline_kj_loop</Name>
+            <Loops>
+                <kj_loop/>
+            </Loops>
+            <PerformanceEstimates>
+                <SummaryOfTimingAnalysis>
+                    <TargetClockPeriod>3.33</TargetClockPeriod>
+                    <ClockUncertainty>0.90</ClockUncertainty>
+                    <EstimatedClockPeriod>2.431</EstimatedClockPeriod>
+                </SummaryOfTimingAnalysis>
+                <SummaryOfOverallLatency>
+                    <Best-caseLatency>16</Best-caseLatency>
+                    <Average-caseLatency>16</Average-caseLatency>
+                    <Worst-caseLatency>16</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>53.280 ns</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>53.280 ns</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>53.280 ns</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>2</PipelineInitiationInterval>
+                    <PipelineType>loop auto-rewind stp (delay=0 clock cycles(s))</PipelineType>
+                    <PerformancePragma>-</PerformancePragma>
+                </SummaryOfOverallLatency>
+                <SummaryOfLoopLatency>
+                    <kj_loop>
+                        <Name>kj_loop</Name>
+                        <Slack>2.43</Slack>
+                        <TripCount>1</TripCount>
+                        <isPerfectNested>0</isPerfectNested>
+                        <Latency>14</Latency>
+                        <AbsoluteTimeLatency>46.620 ns</AbsoluteTimeLatency>
+                        <PipelineII>1</PipelineII>
+                        <PipelineDepth>15</PipelineDepth>
+                        <PipelineType>yes</PipelineType>
+                        <PerformancePragma>-</PerformancePragma>
+                        <InstanceList/>
+                    </kj_loop>
+                </SummaryOfLoopLatency>
+                <SummaryOfViolations>
+                    <IssueType>-</IssueType>
+                    <ViolationType>-</ViolationType>
+                    <SourceLocation>../src/kernel.cpp:59</SourceLocation>
+                    <SummaryOfLoopViolations>
+                        <kj_loop>
+                            <Name>kj_loop</Name>
+                            <IssueType>-</IssueType>
+                            <ViolationType>-</ViolationType>
+                            <SourceLocation>../src/kernel.cpp:69</SourceLocation>
+                        </kj_loop>
+                    </SummaryOfLoopViolations>
+                </SummaryOfViolations>
+            </PerformanceEstimates>
+            <AreaEstimates>
+                <Resources>
+                    <DSP>3</DSP>
+                    <AVAIL_DSP>5952</AVAIL_DSP>
+                    <UTIL_DSP>~0</UTIL_DSP>
+                    <FF>1867</FF>
+                    <AVAIL_FF>1743360</AVAIL_FF>
+                    <UTIL_FF>~0</UTIL_FF>
+                    <LUT>1252</LUT>
                     <AVAIL_LUT>871680</AVAIL_LUT>
                     <UTIL_LUT>~0</UTIL_LUT>
                     <BRAM_18K>0</BRAM_18K>
@@ -2105,10 +2178,19 @@
                 </Resources>
             </AreaEstimates>
             <BindNodes>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="j_loop" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln42_fu_122_p2" SOURCE="../src/kernel.cpp:42" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln42" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="j_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln42_fu_128_p2" SOURCE="../src/kernel.cpp:42" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln42" VISIBLE="true"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fmul" DSP="3" ID="" IMPL="maxdsp" LATENCY="3" LOOP="j_loop" OPTYPE="fmul" PRAGMA="" RTLNAME="fmul_32ns_32ns_32_4_max_dsp_1_U3" SOURCE="../src/kernel.cpp:44" STORAGESUBTYPE="" URAM="0" VARIABLE="mul" VISIBLE="true"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="j_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U2" SOURCE="../src/kernel.cpp:44" STORAGESUBTYPE="" URAM="0" VARIABLE="add" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="kj_loop" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln60_fu_526_p2" SOURCE="../src/kernel.cpp:60" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln60" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="kj_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln60_fu_532_p2" SOURCE="../src/kernel.cpp:60" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln60" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op partselect" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="kj_loop" OPTYPE="partselect" PRAGMA="" RTLNAME="partselect_32ns_512ns_9ns_32_1_1_U27" SOURCE="../src/kernel.cpp:65" STORAGESUBTYPE="" URAM="0" VARIABLE="tmp_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fmul" DSP="3" ID="" IMPL="maxdsp" LATENCY="3" LOOP="kj_loop" OPTYPE="fmul" PRAGMA="" RTLNAME="fmul_32ns_32ns_32_4_max_dsp_1_U26" SOURCE="../src/kernel.cpp:65" STORAGESUBTYPE="" URAM="0" VARIABLE="mul" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sub" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="kj_loop" OPTYPE="sub" PRAGMA="" RTLNAME="sub_ln65_fu_646_p2" SOURCE="../src/kernel.cpp:65" STORAGESUBTYPE="" URAM="0" VARIABLE="sub_ln65" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sub" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="kj_loop" OPTYPE="sub" PRAGMA="" RTLNAME="sub_ln65_1_fu_655_p2" SOURCE="../src/kernel.cpp:65" STORAGESUBTYPE="" URAM="0" VARIABLE="sub_ln65_1" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="kj_loop" OPTYPE="select" PRAGMA="" RTLNAME="select_ln65_fu_661_p3" SOURCE="../src/kernel.cpp:65" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln65" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op sparsemux" DSP="0" ID="" IMPL="compactencoding_dontcare" LATENCY="0" LOOP="kj_loop" OPTYPE="sparsemux" PRAGMA="" RTLNAME="sparsemux_33_4_32_1_1_U28" SOURCE="../src/kernel.cpp:65" STORAGESUBTYPE="" URAM="0" VARIABLE="tmp_2" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="kj_loop" OPTYPE="add" PRAGMA="" RTLNAME="j_fu_579_p2" SOURCE="../src/kernel.cpp:66" STORAGESUBTYPE="" URAM="0" VARIABLE="j" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op seteq" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="kj_loop" OPTYPE="seteq" PRAGMA="" RTLNAME="icmp_ln67_fu_585_p2" SOURCE="../src/kernel.cpp:67" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln67" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="kj_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln69_fu_590_p2" SOURCE="../src/kernel.cpp:69" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln69" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="kj_loop" OPTYPE="select" PRAGMA="" RTLNAME="j_3_fu_596_p3" SOURCE="../src/kernel.cpp:67" STORAGESUBTYPE="" URAM="0" VARIABLE="j_3" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="kj_loop" OPTYPE="select" PRAGMA="" RTLNAME="k_2_fu_604_p3" SOURCE="../src/kernel.cpp:67" STORAGESUBTYPE="" URAM="0" VARIABLE="k_2" VISIBLE="false"/>
             </BindNodes>
         </Module>
         <Module>
@@ -2123,13 +2205,13 @@
                     <EstimatedClockPeriod>2.431</EstimatedClockPeriod>
                 </SummaryOfTimingAnalysis>
                 <SummaryOfOverallLatency>
-                    <Best-caseLatency>undef</Best-caseLatency>
-                    <Average-caseLatency>undef</Average-caseLatency>
-                    <Worst-caseLatency>undef</Worst-caseLatency>
-                    <Best-caseRealTimeLatency>undef</Best-caseRealTimeLatency>
-                    <Average-caseRealTimeLatency>undef</Average-caseRealTimeLatency>
-                    <Worst-caseRealTimeLatency>undef</Worst-caseRealTimeLatency>
-                    <PipelineInitiationInterval>0</PipelineInitiationInterval>
+                    <Best-caseLatency>116</Best-caseLatency>
+                    <Average-caseLatency>116</Average-caseLatency>
+                    <Worst-caseLatency>116</Worst-caseLatency>
+                    <Best-caseRealTimeLatency>0.386 us</Best-caseRealTimeLatency>
+                    <Average-caseRealTimeLatency>0.386 us</Average-caseRealTimeLatency>
+                    <Worst-caseRealTimeLatency>0.386 us</Worst-caseRealTimeLatency>
+                    <PipelineInitiationInterval>2</PipelineInitiationInterval>
                     <PipelineType>loop auto-rewind stp (delay=0 clock cycles(s))</PipelineType>
                     <PerformancePragma>-</PerformancePragma>
                 </SummaryOfOverallLatency>
@@ -2137,12 +2219,12 @@
                     <wb_loop>
                         <Name>wb_loop</Name>
                         <Slack>2.43</Slack>
-                        <TripCount>undef</TripCount>
+                        <TripCount>1</TripCount>
                         <isPerfectNested>0</isPerfectNested>
-                        <Latency>undef</Latency>
-                        <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
+                        <Latency>114</Latency>
+                        <AbsoluteTimeLatency>0.380 us</AbsoluteTimeLatency>
                         <PipelineII>1</PipelineII>
-                        <PipelineDepth>3</PipelineDepth>
+                        <PipelineDepth>115</PipelineDepth>
                         <PipelineType>yes</PipelineType>
                         <PerformancePragma>-</PerformancePragma>
                         <InstanceList/>
@@ -2151,47 +2233,60 @@
                 <SummaryOfViolations>
                     <IssueType>-</IssueType>
                     <ViolationType>-</ViolationType>
-                    <SourceLocation>../src/kernel.cpp:47</SourceLocation>
+                    <SourceLocation>../src/kernel.cpp:74</SourceLocation>
                     <SummaryOfLoopViolations>
                         <wb_loop>
                             <Name>wb_loop</Name>
                             <IssueType>-</IssueType>
                             <ViolationType>-</ViolationType>
-                            <SourceLocation>../src/kernel.cpp:47</SourceLocation>
+                            <SourceLocation>../src/kernel.cpp:74</SourceLocation>
                         </wb_loop>
                     </SummaryOfLoopViolations>
                 </SummaryOfViolations>
             </PerformanceEstimates>
             <AreaEstimates>
                 <Resources>
-                    <FF>57</FF>
+                    <DSP>30</DSP>
+                    <AVAIL_DSP>5952</AVAIL_DSP>
+                    <UTIL_DSP>~0</UTIL_DSP>
+                    <FF>7013</FF>
                     <AVAIL_FF>1743360</AVAIL_FF>
                     <UTIL_FF>~0</UTIL_FF>
-                    <LUT>105</LUT>
+                    <LUT>3555</LUT>
                     <AVAIL_LUT>871680</AVAIL_LUT>
                     <UTIL_LUT>~0</UTIL_LUT>
                     <BRAM_18K>0</BRAM_18K>
                     <AVAIL_BRAM>2688</AVAIL_BRAM>
                     <UTIL_BRAM>0</UTIL_BRAM>
-                    <DSP>0</DSP>
-                    <AVAIL_DSP>5952</AVAIL_DSP>
-                    <UTIL_DSP>0</UTIL_DSP>
                     <URAM>0</URAM>
                     <AVAIL_URAM>640</AVAIL_URAM>
                     <UTIL_URAM>0</UTIL_URAM>
                 </Resources>
             </AreaEstimates>
             <BindNodes>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="wb_loop" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln47_fu_112_p2" SOURCE="../src/kernel.cpp:47" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln47" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="wb_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln47_fu_118_p2" SOURCE="../src/kernel.cpp:47" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln47" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="wb_loop" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln74_fu_421_p2" SOURCE="../src/kernel.cpp:74" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln74" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="wb_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln74_fu_427_p2" SOURCE="../src/kernel.cpp:74" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln74" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U54" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_1" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U55" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_2" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U56" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_3" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U57" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_4" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U58" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_5" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U59" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_6" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U60" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_7" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U61" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_8" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U62" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_9" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U63" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_16" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U64" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_10" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U65" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_11" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U66" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_12" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U67" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_13" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op fadd" DSP="2" ID="" IMPL="fulldsp" LATENCY="6" LOOP="wb_loop" OPTYPE="fadd" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U68" SOURCE="../src/kernel.cpp:81" STORAGESUBTYPE="" URAM="0" VARIABLE="s_14" VISIBLE="true"/>
             </BindNodes>
         </Module>
         <Module>
             <Name>gemm</Name>
             <Loops>
-                <i_loop>
-                    <k_loop/>
-                </i_loop>
+                <i_loop/>
             </Loops>
             <PerformanceEstimates>
                 <SummaryOfTimingAnalysis>
@@ -2214,7 +2309,7 @@
                     <i_loop>
                         <Name>i_loop</Name>
                         <Slack>2.43</Slack>
-                        <TripCount>undef</TripCount>
+                        <TripCount>1</TripCount>
                         <isPerfectNested>0</isPerfectNested>
                         <Latency>undef</Latency>
                         <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
@@ -2223,23 +2318,10 @@
                         <PipelineType>no</PipelineType>
                         <PerformancePragma>-</PerformancePragma>
                         <InstanceList>
-                            <Instance>grp_gemm_Pipeline_wb_loop_fu_205</Instance>
+                            <Instance>grp_gemm_Pipeline_arow_loop_fu_276</Instance>
+                            <Instance>grp_gemm_Pipeline_kj_loop_fu_285</Instance>
+                            <Instance>grp_gemm_Pipeline_wb_loop_fu_311</Instance>
                         </InstanceList>
-                        <k_loop>
-                            <Name>k_loop</Name>
-                            <Slack>2.43</Slack>
-                            <TripCount>undef</TripCount>
-                            <isPerfectNested>0</isPerfectNested>
-                            <Latency>undef</Latency>
-                            <AbsoluteTimeLatency>undef</AbsoluteTimeLatency>
-                            <IterationLatency>undef</IterationLatency>
-                            <PipelineDepth>undef</PipelineDepth>
-                            <PipelineType>no</PipelineType>
-                            <PerformancePragma>-</PerformancePragma>
-                            <InstanceList>
-                                <Instance>grp_gemm_Pipeline_j_loop_fu_214</Instance>
-                            </InstanceList>
-                        </k_loop>
                     </i_loop>
                 </SummaryOfLoopLatency>
                 <SummaryOfViolations>
@@ -2251,54 +2333,63 @@
                             <Name>i_loop</Name>
                             <IssueType>-</IssueType>
                             <ViolationType>-</ViolationType>
-                            <SourceLocation>../src/kernel.cpp:39</SourceLocation>
-                            <k_loop>
-                                <Name>k_loop</Name>
-                                <IssueType>-</IssueType>
-                                <ViolationType>-</ViolationType>
-                                <SourceLocation>../src/kernel.cpp:40</SourceLocation>
-                            </k_loop>
+                            <SourceLocation>../src/kernel.cpp:51</SourceLocation>
                         </i_loop>
                     </SummaryOfLoopViolations>
                 </SummaryOfViolations>
             </PerformanceEstimates>
             <AreaEstimates>
                 <Resources>
-                    <BRAM_18K>4</BRAM_18K>
+                    <BRAM_18K>42</BRAM_18K>
                     <AVAIL_BRAM>2688</AVAIL_BRAM>
-                    <UTIL_BRAM>~0</UTIL_BRAM>
-                    <DSP>17</DSP>
+                    <UTIL_BRAM>1</UTIL_BRAM>
+                    <DSP>42</DSP>
                     <AVAIL_DSP>5952</AVAIL_DSP>
                     <UTIL_DSP>~0</UTIL_DSP>
-                    <FF>4634</FF>
+                    <FF>12729</FF>
                     <AVAIL_FF>1743360</AVAIL_FF>
                     <UTIL_FF>~0</UTIL_FF>
-                    <LUT>5420</LUT>
+                    <LUT>12233</LUT>
                     <AVAIL_LUT>871680</AVAIL_LUT>
-                    <UTIL_LUT>~0</UTIL_LUT>
+                    <UTIL_LUT>1</UTIL_LUT>
                     <URAM>0</URAM>
                     <AVAIL_URAM>640</AVAIL_URAM>
                     <UTIL_URAM>0</UTIL_URAM>
                 </Resources>
             </AreaEstimates>
             <BindNodes>
-                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_s2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_s2p" PRAGMA="" RTLNAME="crow_U" SOURCE="../src/kernel.cpp:38" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_s2p array" URAM="0" VARIABLE="crow" VISIBLE="true"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln39_fu_236_p2" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln39" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="cmp23_fu_242_p2" SOURCE="" STORAGESUBTYPE="" URAM="0" VARIABLE="cmp23" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="cmp255_fu_248_p2" SOURCE="" STORAGESUBTYPE="" URAM="0" VARIABLE="cmp255" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op mul" DSP="4" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="mul" PRAGMA="" RTLNAME="mul_32ns_32ns_63_2_1_U15" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="mul_ln39" VISIBLE="true"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op mul" DSP="4" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="mul" PRAGMA="" RTLNAME="mul_32ns_32ns_63_2_1_U16" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="mul_ln39_1" VISIBLE="true"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln39_fu_274_p3" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln39" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="empty_fu_300_p3" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="empty" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op mul" DSP="4" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="mul" PRAGMA="" RTLNAME="mul_32ns_32ns_63_2_1_U17" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="mul_ln39_2" VISIBLE="true"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln39_1_fu_307_p3" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln39_1" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="empty_29_fu_323_p3" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="empty_29" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="empty_31_fu_330_p3" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="empty_31" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="empty_32_fu_346_p3" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="empty_32" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="i_loop" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln39_1_fu_390_p2" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln39_1" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="i_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln39_fu_395_p2" SOURCE="../src/kernel.cpp:39" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln39" VISIBLE="true"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="k_loop" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln40_fu_405_p2" SOURCE="../src/kernel.cpp:40" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln40" VISIBLE="false"/>
-                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="k_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln40_fu_410_p2" SOURCE="../src/kernel.cpp:40" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln40" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_s2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_s2p" PRAGMA="" RTLNAME="fadd_32ns_32ns_32_7_full_dsp_1_U90" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_s2p array" URAM="0" VARIABLE="crow" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_1_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_1" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_2_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_2" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_3_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_3" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_4_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_4" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_5_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_5" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_6_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_6" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_7_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_7" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_8_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_8" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_9_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_9" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_10_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_10" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_11_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_11" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_12_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_12" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_13_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_13" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_14_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_14" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="2" BUNDLEDNAME="" DISPNAME="bind_storage ram_2p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_2p" PRAGMA="" RTLNAME="crow_15_U" SOURCE="../src/kernel.cpp:40" STORAGESIZE="32 768 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_2p array" URAM="0" VARIABLE="crow_15" VISIBLE="true"/>
+                <BindNode BINDTYPE="storage" BRAM="8" BUNDLEDNAME="" DISPNAME="bind_storage ram_1p" DSP="0" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="ram_1p" PRAGMA="" RTLNAME="arow_U" SOURCE="../src/kernel.cpp:42" STORAGESIZE="512 48 1" STORAGESUBTYPE="" STORAGEUSAGE="ram_1p array" URAM="0" VARIABLE="arow" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln45_fu_434_p2" SOURCE="../src/kernel.cpp:45" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln45" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="empty_fu_440_p3" SOURCE="../src/kernel.cpp:45" STORAGESUBTYPE="" URAM="0" VARIABLE="empty" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op mul" DSP="3" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="mul" PRAGMA="" RTLNAME="mul_32s_32s_32_2_1_U89" SOURCE="../src/kernel.cpp:19" STORAGESUBTYPE="" URAM="0" VARIABLE="mul29" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="icmp_ln51_fu_347_p2" SOURCE="../src/kernel.cpp:51" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln51" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="cmp155_fu_353_p2" SOURCE="../src/kernel.cpp:19" STORAGESUBTYPE="" URAM="0" VARIABLE="cmp155" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setgt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="" OPTYPE="setgt" PRAGMA="" RTLNAME="cmp307_fu_479_p2" SOURCE="../src/kernel.cpp:19" STORAGESUBTYPE="" URAM="0" VARIABLE="cmp307" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op mul" DSP="4" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="mul" PRAGMA="" RTLNAME="mul_32ns_32ns_63_2_1_U88" SOURCE="../src/kernel.cpp:51" STORAGESUBTYPE="" URAM="0" VARIABLE="mul_ln51" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln51_fu_372_p3" SOURCE="../src/kernel.cpp:51" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln51" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="empty_40_fu_389_p3" SOURCE="../src/kernel.cpp:51" STORAGESUBTYPE="" URAM="0" VARIABLE="empty_40" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op mul" DSP="4" ID="" IMPL="auto" LATENCY="1" LOOP="" OPTYPE="mul" PRAGMA="" RTLNAME="mul_32ns_32ns_63_2_1_U88" SOURCE="../src/kernel.cpp:51" STORAGESUBTYPE="" URAM="0" VARIABLE="mul_ln51_1" VISIBLE="true"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="select_ln51_1_fu_465_p3" SOURCE="../src/kernel.cpp:51" STORAGESUBTYPE="" URAM="0" VARIABLE="select_ln51_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="empty_42_fu_472_p3" SOURCE="../src/kernel.cpp:51" STORAGESUBTYPE="" URAM="0" VARIABLE="empty_42" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op select" DSP="0" ID="" IMPL="auto_sel" LATENCY="0" LOOP="" OPTYPE="select" PRAGMA="" RTLNAME="empty_44_fu_507_p3" SOURCE="../src/kernel.cpp:19" STORAGESUBTYPE="" URAM="0" VARIABLE="empty_44" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op setlt" DSP="0" ID="" IMPL="auto" LATENCY="0" LOOP="i_loop" OPTYPE="setlt" PRAGMA="" RTLNAME="icmp_ln51_1_fu_525_p2" SOURCE="../src/kernel.cpp:51" STORAGESUBTYPE="" URAM="0" VARIABLE="icmp_ln51_1" VISIBLE="false"/>
+                <BindNode BINDTYPE="op" BRAM="0" BUNDLEDNAME="" DISPNAME="bind_op add" DSP="0" ID="" IMPL="fabric" LATENCY="0" LOOP="i_loop" OPTYPE="add" PRAGMA="" RTLNAME="add_ln51_fu_530_p2" SOURCE="../src/kernel.cpp:51" STORAGESUBTYPE="" URAM="0" VARIABLE="add_ln51" VISIBLE="true"/>
                 <BindNode BINDTYPE="adapter" BRAM="0" BUNDLEDNAME="control" DISPNAME="bind_adapter " DSP="0" ID="" IMPL="" LATENCY="" LOOP="" OPTYPE="" PRAGMA="" RTLNAME="control_s_axi_U" SOURCE="" STORAGESIZE="" STORAGESUBTYPE="s_axilite" STORAGEUSAGE="interface" URAM="0" VARIABLE=""/>
                 <BindNode BINDTYPE="adapter" BRAM="1" BUNDLEDNAME="gmem0" DISPNAME="bind_adapter " DSP="0" ID="" IMPL="" LATENCY="" LOOP="" OPTYPE="" PRAGMA="" RTLNAME="gmem0_m_axi_U" SOURCE="" STORAGESIZE="" STORAGESUBTYPE="m_axi" STORAGEUSAGE="interface" URAM="0" VARIABLE=""/>
                 <BindNode BINDTYPE="adapter" BRAM="1" BUNDLEDNAME="gmem1" DISPNAME="bind_adapter " DSP="0" ID="" IMPL="" LATENCY="" LOOP="" OPTYPE="" PRAGMA="" RTLNAME="gmem1_m_axi_U" SOURCE="" STORAGESIZE="" STORAGESUBTYPE="m_axi" STORAGEUSAGE="interface" URAM="0" VARIABLE=""/>
@@ -2769,25 +2860,24 @@
         <section name="M_AXI Burst Information" level="0" HEADER_NOTE="Note: All burst requests might be further partitioned into multiple requests during RTL generation based on max_read_burst_length or max_write_burst_length settings.">
             <item name="Inferred Burst Summary">
                 <table>
-                    <keys size="4">HW Interface, Direction, Length, Width</keys>
-                    <column name="m_axi_gmem0">read, variable, 32</column>
-                    <column name="m_axi_gmem1">read, variable, 32</column>
-                    <column name="m_axi_gmem2">write, variable, 32</column>
+                    <keys size="6">HW Interface, Direction, Length, Width, Loop, Loop Location</keys>
+                    <column name="m_axi_gmem0">read, variable, 32, , </column>
+                    <column name="m_axi_gmem1">read, variable, 32, kj_loop, ../src/kernel.cpp:60:18</column>
+                    <column name="m_axi_gmem2">write, variable, 32, , </column>
                 </table>
             </item>
             <item name="All M_AXI Variable Accesses">
                 <table>
                     <keys size="10">HW Interface, Variable, Access Location, Direction, Burst Status, Length, Loop, Loop Location, Resolution, Problem</keys>
-                    <column name="m_axi_gmem0">A, ../src/kernel.cpp:41:26, read, Widen Fail, , k_loop, ../src/kernel.cpp:40:17, 214-235, Start index of the access is unaligned</column>
-                    <column name="m_axi_gmem0">A, ../src/kernel.cpp:41:26, read, Widen Fail, , k_loop, ../src/kernel.cpp:40:17, 214-234, Sequential access length is not divisible by 2</column>
-                    <column name="m_axi_gmem0">A, ../src/kernel.cpp:41:26, read, Inferred, variable, i_loop, ../src/kernel.cpp:39:13, , </column>
-                    <column name="m_axi_gmem1">B, ../src/kernel.cpp:44:20, read, Widen Fail, , j_loop, ../src/kernel.cpp:42:21, 214-235, Start index of the access is unaligned</column>
-                    <column name="m_axi_gmem1">B, ../src/kernel.cpp:44:20, read, Widen Fail, , j_loop, ../src/kernel.cpp:42:21, 214-234, Sequential access length is not divisible by 2</column>
-                    <column name="m_axi_gmem1">B, ../src/kernel.cpp:44:20, read, Fail, , i_loop, ../src/kernel.cpp:39:13, 214-229, Could not analyze pattern</column>
-                    <column name="m_axi_gmem1">B, ../src/kernel.cpp:44:20, read, Inferred, variable, k_loop, ../src/kernel.cpp:40:17, , </column>
-                    <column name="m_axi_gmem2">C, ../src/kernel.cpp:49:21, write, Widen Fail, , wb_loop, ../src/kernel.cpp:47:18, 214-235, Start index of the access is unaligned</column>
-                    <column name="m_axi_gmem2">C, ../src/kernel.cpp:49:21, write, Widen Fail, , wb_loop, ../src/kernel.cpp:47:18, 214-234, Sequential access length is not divisible by 2</column>
-                    <column name="m_axi_gmem2">C, ../src/kernel.cpp:49:21, write, Inferred, variable, i_loop, ../src/kernel.cpp:39:13, , </column>
+                    <column name="m_axi_gmem0">A, ../src/kernel.cpp:56:12, read, Widen Fail, , arow_loop, ../src/kernel.cpp:54:13, 214-235, Start index of the access is unaligned</column>
+                    <column name="m_axi_gmem0">A, ../src/kernel.cpp:56:12, read, Widen Fail, , arow_loop, ../src/kernel.cpp:54:13, 214-234, Sequential access length is not divisible by 2</column>
+                    <column name="m_axi_gmem0">A, ../src/kernel.cpp:56:12, read, Inferred, variable, i_loop, ../src/kernel.cpp:51:13, , </column>
+                    <column name="m_axi_gmem1">B, ../src/kernel.cpp:65:30, read, Widen Fail, , kj_loop, ../src/kernel.cpp:60:18, 214-234, Sequential access length is not divisible by 2</column>
+                    <column name="m_axi_gmem1">B, ../src/kernel.cpp:65:30, read, Fail, , i_loop, ../src/kernel.cpp:51:13, 214-229, Could not analyze pattern</column>
+                    <column name="m_axi_gmem1">B, ../src/kernel.cpp:65:30, read, Inferred, variable, kj_loop, ../src/kernel.cpp:60:18, , </column>
+                    <column name="m_axi_gmem2">C, ../src/kernel.cpp:84:32, write, Widen Fail, , wb_loop, ../src/kernel.cpp:74:18, 214-235, Start index of the access is unaligned</column>
+                    <column name="m_axi_gmem2">C, ../src/kernel.cpp:84:32, write, Widen Fail, , wb_loop, ../src/kernel.cpp:74:18, 214-234, Sequential access length is not divisible by 2</column>
+                    <column name="m_axi_gmem2">C, ../src/kernel.cpp:84:32, write, Inferred, variable, i_loop, ../src/kernel.cpp:51:13, , </column>
                 </table>
             </item>
         </section>
@@ -2800,11 +2890,19 @@
         <Pragma type="interface" location="../src/kernel.cpp:26" status="valid" parentFunction="gemm" variable="K" isDirective="0" options="s_axilite port=K"/>
         <Pragma type="interface" location="../src/kernel.cpp:27" status="valid" parentFunction="gemm" variable="N" isDirective="0" options="s_axilite port=N"/>
         <Pragma type="interface" location="../src/kernel.cpp:28" status="valid" parentFunction="gemm" variable="return" isDirective="0" options="s_axilite port=return"/>
-        <Pragma type="pipeline" location="../src/kernel.cpp:43" status="valid" parentFunction="gemm" variable="" isDirective="0" options="ii=1"/>
-        <Pragma type="pipeline" location="../src/kernel.cpp:48" status="valid" parentFunction="gemm" variable="" isDirective="0" options="ii=1"/>
+        <Pragma type="array_partition" location="../src/kernel.cpp:41" status="valid" parentFunction="gemm" variable="crow" isDirective="0" options="variable=crow dim=1 type=complete"/>
+        <Pragma type="loop_tripcount" location="../src/kernel.cpp:46" status="valid" parentFunction="gemm" variable="" isDirective="0" options="min=1 max=1"/>
+        <Pragma type="pipeline" location="../src/kernel.cpp:47" status="valid" parentFunction="gemm" variable="" isDirective="0" options="ii=1"/>
+        <Pragma type="loop_tripcount" location="../src/kernel.cpp:52" status="valid" parentFunction="gemm" variable="" isDirective="0" options="min=1 max=1"/>
+        <Pragma type="pipeline" location="../src/kernel.cpp:55" status="valid" parentFunction="gemm" variable="" isDirective="0" options="ii=1"/>
+        <Pragma type="loop_tripcount" location="../src/kernel.cpp:61" status="valid" parentFunction="gemm" variable="" isDirective="0" options="min=1 max=1"/>
+        <Pragma type="pipeline" location="../src/kernel.cpp:62" status="valid" parentFunction="gemm" variable="" isDirective="0" options="ii=1"/>
+        <Pragma type="dependence" location="../src/kernel.cpp:63" status="valid" parentFunction="gemm" variable="crow" isDirective="0" options="variable=crow type=inter false"/>
+        <Pragma type="array_reshape" location="../src/kernel.cpp:64" status="valid" parentFunction="gemm" variable="arow" isDirective="0" options="variable=arow type=cyclic factor=16 dim=1"/>
+        <Pragma type="loop_tripcount" location="../src/kernel.cpp:75" status="valid" parentFunction="gemm" variable="" isDirective="0" options="min=1 max=1"/>
+        <Pragma type="pipeline" location="../src/kernel.cpp:76" status="valid" parentFunction="gemm" variable="" isDirective="0" options="ii=1"/>
+        <Pragma type="loop_tripcount" location="../src/kernel.cpp:79" status="valid" parentFunction="gemm" variable="" isDirective="0" options="min=1 max=1"/>
+        <Pragma type="unroll" location="../src/kernel.cpp:80" status="valid" parentFunction="gemm" variable="" isDirective="0" options=""/>
     </PragmaReport>
-    <AutoPragmaReport>
-        <AutoPragma type="loop_flatten" parentFunction="gemm" options="0" pragmaLocId="../src/kernel.cpp:40:0" srcPragmaType="performance" srcPragmaLoc="../src/kernel.cpp:40:0" srcPragmaSource="directive" srcIsDirective="1" srcIsSlxDirective="0" loopName="k_loop" loopLoc="../src/kernel.cpp:40:17"/>
-    </AutoPragmaReport>
 </profile>
 

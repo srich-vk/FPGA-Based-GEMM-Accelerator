@@ -1,7 +1,7 @@
 <profile>
 
 <section name = "Vitis HLS Report for 'gemm'" level="0">
-<item name = "Date">Mon Sep 28 22:00:08 2026
+<item name = "Date">Tue Sep 29 05:31:13 2026
 </item>
 <item name = "Version">2025.1 (Build 6135595 on May 21 2025)</item>
 <item name = "Project">hls</item>
@@ -35,8 +35,7 @@
 </item>
 <item name = "Loop"><table name="" hasTotal="0">
 <keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
-<column name="- i_loop">?, ?, ?, -, -, ?, no</column>
-<column name=" + k_loop">?, ?, ?, -, -, ?, no</column>
+<column name="- i_loop">?, ?, ?, -, -, 1, no</column>
 </table>
 </item>
 </section>
