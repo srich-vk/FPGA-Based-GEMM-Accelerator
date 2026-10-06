@@ -1,0 +1,12 @@
+# Vitis / Vivado build outputs
+build/
+_x/
+.Xil/
+*.log
+*.jou
+*.xclbin
+*.xclbin.*
+*.xo
+
+# Local, machine-specific settings (secrets, tokens)
+env.local.sh

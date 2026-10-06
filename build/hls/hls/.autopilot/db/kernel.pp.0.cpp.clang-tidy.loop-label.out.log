@@ -1,5 +1,0 @@
-/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp:211:13: warning: Added loop label VITIS_LOOP_78_1:   [xilinx-label-all-loops]
-            for(int l = 0; l < L; l++){
-            ^~~
-            VITIS_LOOP_78_1: 
-/home/cs2401.20/mini1-gemm-final-starter/mini1-gemm/build/hls/hls/.autopilot/db/kernel.pp.0.cpp:211:13: note: FIX-IT applied suggested code changes
