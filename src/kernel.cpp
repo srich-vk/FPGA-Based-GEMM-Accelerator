@@ -1,8 +1,9 @@
 // kernel.cpp - fp32 GEMM for Alveo U50 (Vitis HLS 2025.1).
 // C[M*N] = A[M*K] * B[K*N], row-major.
 //
-// Dataflow pipeline: read_A streams A from HBM exactly once in 512-bit words, B is loaded
-// once into URAM, compute produces one row of C per A row, write_C stores it.
+// Architecture: B resident in URAM, A streamed from HBM exactly once, output-stationary
+// TM x TN array; each PE keeps L=8 *different* output rows in an 8-deep register shift
+// chain (fp32 add latency 7 <= 8 -> II=1, no final reduction, k-order sums).
 #include <ap_int.h>
 #include <hls_stream.h>
 #include <stdint.h>
@@ -107,86 +108,171 @@ static void load_B(const float *B, w512 bw[KMAX * NWB], int K, int N) {
   }
 }
 
-// compute: B prologue, then one A row at a time. Each TN-column chunk of the row is a
-// K-long dot product per column; L partial sums per column hide the fadd latency (II=1).
+// tile_step: load one A tile (load_words words) into aw, then run npass passes over it.
+//   Pass jt, cycle (k,l): PE(r,c) accumulates local row l*TM+r, column jt*TN+c.
+//   At k==0 the outgoing chain value is the finished result of the PREVIOUS pass
+//   -> obuf; cycles L..L+TROWS-1 of each pass emit one TN-float row chunk each.
+static void tile_step(hls::stream<w512> &as, w512 aw[TM][L * KW],
+                      const w512 bw[KMAX * NWB], hls::stream<wout> &cs,
+                      float chain[TM][TN][L], float obuf[TM][TN][L], bool &have_prev,
+                      int npass, int K, int Kp, int Kw, bool mac, int load_words) {
+#pragma HLS INLINE off
+#pragma HLS ARRAY_PARTITION variable=aw dim=1 type=complete
+#pragma HLS ARRAY_PARTITION variable=chain dim=0 type=complete
+#pragma HLS ARRAY_PARTITION variable=obuf dim=1 type=complete
+#pragma HLS ARRAY_PARTITION variable=obuf dim=2 type=complete
+  int li = 0;      // local row being loaded
+  int lwi = 0;     // word within that row
+  int sbase = 0;   // (li / TM) * Kw, kept incrementally
+load_tile:
+  for (int x = 0; x < load_words; x++) {
+#pragma HLS PIPELINE II=1
+#pragma HLS LOOP_TRIPCOUNT min=0 max=6144
+    aw[li & (TM - 1)][sbase + lwi] = as.read();
+    if (lwi == Kw - 1) {
+      lwi = 0;
+      li++;
+      if ((li & (TM - 1)) == 0) sbase += Kw;
+    } else {
+      lwi++;
+    }
+  }
+
+  bool hp = have_prev;
+  int jt = 0, k = 0, l = 0;
+  const int total = npass * Kp * L;
+mac_loop:
+  for (int t = 0; t < total; t++) {
+#pragma HLS PIPELINE II=1
+#pragma HLS LOOP_TRIPCOUNT min=136 max=294912
+#pragma HLS DEPENDENCE variable=obuf type=inter direction=RAW distance=8 dependent=true
+    const bool kv = mac && (k < K);
+    const int kk = kv ? k : 0;
+    const int sel = kk & 15;
+    float a[TM];
+    float b[TN];
+#pragma HLS ARRAY_PARTITION variable=a dim=0 type=complete
+#pragma HLS ARRAY_PARTITION variable=b dim=0 type=complete
+  rdA:
+    for (int r = 0; r < TM; r++) {
+#pragma HLS UNROLL
+      const int ra = l * Kw + (kk >> 4);
+      const w512 wa = aw[r][ra];
+      a[r] = kv ? u2f(wa.range(32 * sel + 31, 32 * sel)) : 0.0f;
+    }
+    const w512 wb = bw[kk * NWB + jt];
+  rdB:
+    for (int c = 0; c < TN; c++) {
+#pragma HLS UNROLL
+      b[c] = kv ? u2f(wb.range(32 * c + 31, 32 * c)) : 0.0f;
+    }
+    const bool first_k = (k == 0);
+    const bool cap = first_k && hp;
+  pe_r:
+    for (int r = 0; r < TM; r++) {
+#pragma HLS UNROLL
+    pe_c:
+      for (int c = 0; c < TN; c++) {
+#pragma HLS UNROLL
+        const float old = chain[r][c][L - 1];
+        if (cap) obuf[r][c][l] = old;
+        float prod = a[r] * b[c];
+#pragma HLS BIND_OP variable=prod op=fmul impl=maxdsp
+        const float base = first_k ? 0.0f : old;
+        float acc = base + prod;
+#pragma HLS BIND_OP variable=acc op=fadd impl=fulldsp
+      shift:
+        for (int i = L - 1; i > 0; i--) {
+#pragma HLS UNROLL
+          chain[r][c][i] = chain[r][c][i - 1];
+        }
+        chain[r][c][0] = acc;
+      }
+    }
+    const int q = (k << LOG2_L) + l;
+    if (hp && q >= L && q < L + TROWS) {
+      const int d = q - L;
+      const int rr = d & (TM - 1);
+      const int ll = d >> LOG2_TM;
+      wout out;
+    emit:
+      for (int c = 0; c < TN; c++) {
+#pragma HLS UNROLL
+        out.range(32 * c + 31, 32 * c) = f2u(obuf[rr][c][ll]);
+      }
+      cs.write(out);
+    }
+    if (l == L - 1) {
+      l = 0;
+      if (k == Kp - 1) { k = 0; jt++; hp = true; } else { k++; }
+    } else {
+      l++;
+    }
+  }
+  have_prev = hp;
+
+}
+
+// compute: B prologue, then one tile_step per A tile, then one flush pass that drains the
+// results of the last pass.
 static void compute(const float *B, hls::stream<w512> &as, hls::stream<wout> &cs, int M,
                     int K, int N) {
 #pragma HLS INLINE off
   static w512 bw[KMAX * NWB];
 #pragma HLS BIND_STORAGE variable=bw type=ram_2p impl=uram
-  w512 arow[KW];
+  static w512 aw[TM][L * KW];
+#pragma HLS ARRAY_PARTITION variable=aw dim=1 type=complete
+#pragma HLS BIND_STORAGE variable=aw type=ram_2p impl=bram
+  static float chain[TM][TN][L];
+#pragma HLS ARRAY_PARTITION variable=chain dim=0 type=complete
+  static float obuf[TM][TN][L];
+#pragma HLS ARRAY_PARTITION variable=obuf dim=1 type=complete
+#pragma HLS ARRAY_PARTITION variable=obuf dim=2 type=complete
+#pragma HLS BIND_STORAGE variable=obuf type=ram_2p impl=lutram
 
   load_B(B, bw, K, N);
 
   const int Kw = (K + 15) >> 4;
+  const int Kp = (K > TM) ? K : (TM + 1);      // pass >= L + TROWS cycles for the drain
   const int NT = (N + TN - 1) >> LOG2_TN;
-rows:
-  for (int i = 0; i < M; i++) {
-#pragma HLS LOOP_TRIPCOUNT min=8 max=32000
-  ld_row:
-    for (int w = 0; w < Kw; w++) {
-#pragma HLS PIPELINE II=1
-#pragma HLS LOOP_TRIPCOUNT min=18 max=48
-      arow[w] = as.read();
-    }
-  cols:
-    for (int jt = 0; jt < NT; jt++) {
-#pragma HLS LOOP_TRIPCOUNT min=1 max=48
-      float acc[L][TN];
-#pragma HLS ARRAY_PARTITION variable=acc dim=0 type=complete
-      for (int l = 0; l < L; l++) {
-#pragma HLS UNROLL
-        for (int c = 0; c < TN; c++) {
-#pragma HLS UNROLL
-          acc[l][c] = 0.0f;
-        }
-      }
-    k_loop:
-      for (int k = 0; k < K; k++) {
-#pragma HLS PIPELINE II=1
-#pragma HLS LOOP_TRIPCOUNT min=288 max=768
-#pragma HLS DEPENDENCE variable=acc type=inter distance=8 dependent=true
-        const int sel = k & 15;
-        const float a = u2f(arow[k >> 4].range(32 * sel + 31, 32 * sel));
-        const w512 wb = bw[k * NWB + jt];
-        for (int c = 0; c < TN; c++) {
-#pragma HLS UNROLL
-          acc[k & (L - 1)][c] += a * u2f(wb.range(32 * c + 31, 32 * c));
-        }
-      }
-      wout out;
-    reduce:
-      for (int c = 0; c < TN; c++) {
-#pragma HLS UNROLL
-        float s = 0.0f;
-        for (int l = 0; l < L; l++) {
-#pragma HLS UNROLL
-          s += acc[l][c];
-        }
-        out.range(32 * c + 31, 32 * c) = f2u(s);
-      }
-      cs.write(out);
-    }
+  const int NS = (M + TROWS - 1) >> LOG2_TROWS;
+  bool have_prev = false;
+
+tiles:
+  for (int s = 0; s <= NS; s++) {
+#pragma HLS LOOP_TRIPCOUNT min=2 max=251
+    const bool flush = (s == NS);
+    const int rem = M - s * TROWS;
+    const int rows = flush ? 0 : ((rem < TROWS) ? rem : TROWS);
+    const int npass = flush ? 1 : NT;
+    const int kp = flush ? (TM + 1) : Kp;
+    tile_step(as, aw, bw, cs, chain, obuf, have_prev, npass, K, kp, Kw, !flush, rows * Kw);
   }
 }
 
-// write_C: one TN-float chunk per (row, N tile), in row order.
+// write_C: chunks arrive per tile s, per N tile jt, per local row d (TN floats each).
 static void write_C(hls::stream<wout> &cs, float *C, int M, int N) {
 #pragma HLS INLINE off
   const int NT = (N + TN - 1) >> LOG2_TN;
+  const int NS = (M + TROWS - 1) >> LOG2_TROWS;
 wr_chunks:
-  for (int t = 0; t < M * NT; t++) {
-#pragma HLS LOOP_TRIPCOUNT min=8 max=32000
-    const int i = t / NT;
-    const int col0 = (t % NT) * TN;
+  for (int t = 0; t < NS * NT * TROWS; t++) {
+#pragma HLS LOOP_TRIPCOUNT min=128 max=6144
+    const int d = t & (TROWS - 1);
+    const int jt = (t >> LOG2_TROWS) % NT;
+    const int s = (t >> LOG2_TROWS) / NT;
+    const int row = s * TROWS + d;
+    const int col0 = jt * TN;
     const int left = N - col0;
     const int ncols = (left < TN) ? left : TN;
     const wout v = cs.read();
-  wr_cols:
-    for (int c = 0; c < ncols; c++) {
+    if (row < M) {
+    wr_cols:
+      for (int c = 0; c < ncols; c++) {
 #pragma HLS PIPELINE II=1
 #pragma HLS LOOP_TRIPCOUNT min=1 max=16
-      C[(long)i * N + col0 + c] = u2f(v.range(32 * c + 31, 32 * c));
+        C[(long)row * N + col0 + c] = u2f(v.range(32 * c + 31, 32 * c));
+      }
     }
   }
 }
