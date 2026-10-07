@@ -20,3 +20,8 @@ export PART=xcu50-fsvh2104-2-e
 
 # FLEXlm license (needed for v++ hw/hw_emu; csim/csynth/cosim work without it).
 export LM_LICENSE_FILE="${LM_LICENSE_FILE:-2100@rce.iiit.ac.in}"
+
+# Machine-specific overrides (e.g. export HW_TOKEN=...) go in env.local.sh, which is gitignored.
+_here="$(dirname "${BASH_SOURCE[0]}")"
+if [ -f "$_here/env.local.sh" ]; then source "$_here/env.local.sh"; fi
+unset _here
