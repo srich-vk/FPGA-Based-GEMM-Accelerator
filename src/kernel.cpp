@@ -4,6 +4,8 @@
 // Architecture: B resident in URAM, A streamed from HBM exactly once, output-stationary
 // TM x TN array; each PE keeps L=8 *different* output rows in an 8-deep register shift
 // chain (fp32 add latency 7 <= 8 -> II=1, no final reduction, k-order sums).
+// The next A tile is loaded into the idle half of a ping-pong buffer while the current
+// tile is computed.
 #include <ap_int.h>
 #include <hls_stream.h>
 #include <stdint.h>
@@ -108,44 +110,59 @@ static void load_B(const float *B, w512 bw[KMAX * NWB], int K, int N) {
   }
 }
 
-// tile_step: load one A tile (load_words words) into aw, then run npass passes over it.
-//   Pass jt, cycle (k,l): PE(r,c) accumulates local row l*TM+r, column jt*TN+c.
-//   At k==0 the outgoing chain value is the finished result of the PREVIOUS pass
-//   -> obuf; cycles L..L+TROWS-1 of each pass emit one TN-float row chunk each.
-static void tile_step(hls::stream<w512> &as, w512 aw[TM][L * KW],
+// tile_step: one call per tile index.
+//  MAC side : npass passes over the tile in (cbuf ? aw1 : aw0), Kp*L cycles each, II=1.
+//             Cycle (k,l): PE(r,c) accumulates local row l*TM+r, column jt*TN+c.
+//             At k==0 the outgoing chain value is the finished result of the PREVIOUS pass
+//             -> obuf; cycles L..L+TROWS-1 of each pass emit one TN-float row chunk each.
+//  Load side: the next tile (load_words words) goes into the OTHER buffer: non-blocking FIFO
+//             reads inside the MAC pipeline, then blocking reads for whatever is left.
+// Within one call each of aw0/aw1 is only read or only written -> the dependences HLS would
+// otherwise assume between those accesses are genuinely false.
+static void tile_step(hls::stream<w512> &as, w512 aw0[TM][L * KW], w512 aw1[TM][L * KW],
                       const w512 bw[KMAX * NWB], hls::stream<wout> &cs,
                       float chain[TM][TN][L], float obuf[TM][TN][L], bool &have_prev,
-                      int npass, int K, int Kp, int Kw, bool mac, int load_words) {
+                      bool cbuf, int npass, int K, int Kp, int Kw, bool mac, int load_words) {
 #pragma HLS INLINE off
-#pragma HLS ARRAY_PARTITION variable=aw dim=1 type=complete
+#pragma HLS ARRAY_PARTITION variable=aw0 dim=1 type=complete
+#pragma HLS ARRAY_PARTITION variable=aw1 dim=1 type=complete
 #pragma HLS ARRAY_PARTITION variable=chain dim=0 type=complete
 #pragma HLS ARRAY_PARTITION variable=obuf dim=1 type=complete
 #pragma HLS ARRAY_PARTITION variable=obuf dim=2 type=complete
+  bool hp = have_prev;
+  int jt = 0, k = 0, l = 0;
+  int lw = 0;      // words loaded so far
   int li = 0;      // local row being loaded
   int lwi = 0;     // word within that row
   int sbase = 0;   // (li / TM) * Kw, kept incrementally
-load_tile:
-  for (int x = 0; x < load_words; x++) {
-#pragma HLS PIPELINE II=1
-#pragma HLS LOOP_TRIPCOUNT min=0 max=6144
-    aw[li & (TM - 1)][sbase + lwi] = as.read();
-    if (lwi == Kw - 1) {
-      lwi = 0;
-      li++;
-      if ((li & (TM - 1)) == 0) sbase += Kw;
-    } else {
-      lwi++;
-    }
-  }
-
-  bool hp = have_prev;
-  int jt = 0, k = 0, l = 0;
   const int total = npass * Kp * L;
 mac_loop:
   for (int t = 0; t < total; t++) {
 #pragma HLS PIPELINE II=1
 #pragma HLS LOOP_TRIPCOUNT min=136 max=294912
 #pragma HLS DEPENDENCE variable=obuf type=inter direction=RAW distance=8 dependent=true
+#pragma HLS DEPENDENCE variable=aw0 type=inter dependent=false
+#pragma HLS DEPENDENCE variable=aw1 type=inter dependent=false
+#pragma HLS DEPENDENCE variable=aw0 type=intra dependent=false
+#pragma HLS DEPENDENCE variable=aw1 type=intra dependent=false
+    // ---------------- load side (overlapped with MAC) ----------------
+    if (lw < load_words) {
+      w512 v;
+      if (as.read_nb(v)) {
+        const int bank = li & (TM - 1);
+        const int addr = sbase + lwi;
+        if (cbuf) aw0[bank][addr] = v; else aw1[bank][addr] = v;
+        lw++;
+        if (lwi == Kw - 1) {
+          lwi = 0;
+          li++;
+          if ((li & (TM - 1)) == 0) sbase += Kw;
+        } else {
+          lwi++;
+        }
+      }
+    }
+    // ---------------- MAC side ----------------
     const bool kv = mac && (k < K);
     const int kk = kv ? k : 0;
     const int sel = kk & 15;
@@ -157,7 +174,7 @@ mac_loop:
     for (int r = 0; r < TM; r++) {
 #pragma HLS UNROLL
       const int ra = l * Kw + (kk >> 4);
-      const w512 wa = aw[r][ra];
+      const w512 wa = cbuf ? aw1[r][ra] : aw0[r][ra];
       a[r] = kv ? u2f(wa.range(32 * sel + 31, 32 * sel)) : 0.0f;
     }
     const w512 wb = bw[kk * NWB + jt];
@@ -211,18 +228,42 @@ mac_loop:
   }
   have_prev = hp;
 
+  // Finish loading whatever the MAC passes did not cover (the whole tile on the first call).
+fill_rest:
+  for (int x = lw; x < load_words; x++) {
+#pragma HLS PIPELINE II=1
+#pragma HLS LOOP_TRIPCOUNT min=0 max=6144
+#pragma HLS DEPENDENCE variable=aw0 type=inter dependent=false
+#pragma HLS DEPENDENCE variable=aw1 type=inter dependent=false
+    const w512 v = as.read();
+    const int bank = li & (TM - 1);
+    const int addr = sbase + lwi;
+    if (cbuf) aw0[bank][addr] = v; else aw1[bank][addr] = v;
+    if (lwi == Kw - 1) {
+      lwi = 0;
+      li++;
+      if ((li & (TM - 1)) == 0) sbase += Kw;
+    } else {
+      lwi++;
+    }
+  }
 }
 
-// compute: B prologue, then one tile_step per A tile, then one flush pass that drains the
-// results of the last pass.
+// compute: B prologue, then one tile_step per tile index (single call site = one PE array).
+//   s = 0          : load tile 0 only
+//   1 <= s <= NS   : compute tile s-1 from aw[(s-1)&1]  ||  load tile s into aw[s&1]
+//   s = NS+1       : flush pass (drains the last pass's results)
 static void compute(const float *B, hls::stream<w512> &as, hls::stream<wout> &cs, int M,
                     int K, int N) {
 #pragma HLS INLINE off
   static w512 bw[KMAX * NWB];
 #pragma HLS BIND_STORAGE variable=bw type=ram_2p impl=uram
-  static w512 aw[TM][L * KW];
-#pragma HLS ARRAY_PARTITION variable=aw dim=1 type=complete
-#pragma HLS BIND_STORAGE variable=aw type=ram_2p impl=bram
+  static w512 aw0[TM][L * KW];
+#pragma HLS ARRAY_PARTITION variable=aw0 dim=1 type=complete
+#pragma HLS BIND_STORAGE variable=aw0 type=ram_2p impl=bram
+  static w512 aw1[TM][L * KW];
+#pragma HLS ARRAY_PARTITION variable=aw1 dim=1 type=complete
+#pragma HLS BIND_STORAGE variable=aw1 type=ram_2p impl=bram
   static float chain[TM][TN][L];
 #pragma HLS ARRAY_PARTITION variable=chain dim=0 type=complete
   static float obuf[TM][TN][L];
@@ -239,14 +280,17 @@ static void compute(const float *B, hls::stream<w512> &as, hls::stream<wout> &cs
   bool have_prev = false;
 
 tiles:
-  for (int s = 0; s <= NS; s++) {
-#pragma HLS LOOP_TRIPCOUNT min=2 max=251
-    const bool flush = (s == NS);
+  for (int s = 0; s <= NS + 1; s++) {
+#pragma HLS LOOP_TRIPCOUNT min=3 max=252
+    const bool flush = (s == NS + 1);
+    const bool mac = (s >= 1) && (s <= NS);
     const int rem = M - s * TROWS;
-    const int rows = flush ? 0 : ((rem < TROWS) ? rem : TROWS);
-    const int npass = flush ? 1 : NT;
+    const int rows = (s < NS) ? ((rem < TROWS) ? rem : TROWS) : 0;
+    const int npass = mac ? NT : (flush ? 1 : 0);
     const int kp = flush ? (TM + 1) : Kp;
-    tile_step(as, aw, bw, cs, chain, obuf, have_prev, npass, K, kp, Kw, !flush, rows * Kw);
+    const bool cbuf = (s & 1) == 0;              // tile s-1 lives in aw1 when s is even
+    tile_step(as, aw0, aw1, bw, cs, chain, obuf, have_prev, cbuf, npass, K, kp, Kw, mac,
+              rows * Kw);
   }
 }
 
