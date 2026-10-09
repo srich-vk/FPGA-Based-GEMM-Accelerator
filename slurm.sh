@@ -13,6 +13,6 @@ case "$T" in hw) TIME=03:00:00 ;; *) TIME=01:00:00 ;; esac
 
 mkdir -p build/logs
 sbatch --job-name="gemm-$T" --partition=debug --nodes=1 --ntasks=1 \
-       --cpus-per-task=8 --mem=32G --time="$TIME" \
+       --cpus-per-task=32 --mem=32G --time="$TIME" \
        --output="build/logs/$T-%j.log" --wrap="make $T"
 echo "log: build/logs/$T-<jobid>.log"
