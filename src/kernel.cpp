@@ -1,21 +1,20 @@
-// kernel.cpp v3 - fp32 GEMM for Alveo U50 (Vitis HLS 2025.1), sized for a <3 h hw build.
-// C[M*N] = A[M*K] * B[K*N], row-major.
-// Spec bounds: K <= 768, N <= 768, any M >= 1, any N >= 1.
+// kernel.cpp - fp32 GEMM accelerator for the Alveo U50 (Vitis HLS 2025.1).
 //
-// Architecture: B resident in URAM, A streamed from HBM exactly once, output-stationary
-// TM x TN array; each PE keeps L=8 *different* output rows in an 8-deep register shift
-// chain (fp32 add latency 7 <= 8 -> II=1, no final reduction, k-order sums).
+//   C[M*N] = A[M*K] * B[K*N], row-major float32.  One bitstream handles any M >= 1,
+//   any 1 <= N <= 768 and K <= 768.
+//
+// Architecture (DATAFLOW: read_A -> compute -> write_C):
+//   * B is loaded once into URAM; A is streamed from HBM exactly once in 512-bit words.
+//   * compute drives an output-stationary TM x TN PE array. Each PE keeps L = 8 different
+//     output rows in an 8-deep register shift chain: the fp32 add latency (7) fits inside
+//     the chain, so the MAC loop runs at II=1 with no final reduction tree.
+//   * A tiles are double-buffered: the next tile is read into the idle buffer with
+//     non-blocking FIFO reads inside the MAC pipeline, overlapping load and compute.
+//   * write_C has a wide 512-bit path for N % 16 == 0 and a cheap scalar path (e.g. N = 1).
 //
 // Array-size knobs (compile flags):
-//   default            TM=16, TN=16 : 256 MAC/cycle  (fast build, ~half of v1's logic)
-//   -DGEMM_TN=32       TM=16, TN=32 : 512 MAC/cycle  (v1/v2 "SAFE" size, slower build)
-//
-// Changes vs v1:
-//  * A-tile load is fused into the MAC pipeline (non-blocking FIFO reads into the idle
-//    ping-pong buffer) -> load overlaps compute (v1 ran them back to back).
-//  * Scalar C writer: no multiplies / dynamic 1024-bit part-select (was the -1.02 ns path).
-//  * Naive fallback removed (spec guarantees K, N <= 768): less logic, shorter HLS.
-//  * TN is a knob; B and C chunks are NH = TN/16 512-bit words.
+//   default            TM=16, TN=16 : 256 MAC/cycle
+//   -DGEMM_TN=32       TM=16, TN=32 : 512 MAC/cycle (more DSP/LUT, longer hw build)
 #include <ap_int.h>
 #include <hls_stream.h>
 #include <stdint.h>
