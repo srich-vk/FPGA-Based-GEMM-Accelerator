@@ -122,6 +122,6 @@ The commit log follows the design from a naive triple loop to the final array:
 
 ## Acknowledgements
 
-Built as a mini-project for **CS2401** at IIIT Hyderabad. The course provided the build flow (Makefile, `env.sh`,
+Built as a mini-project for **CS2.401: FPGA Based Accelerator Design** at IIIT Hyderabad. The course provided the build flow (Makefile, `env.sh`,
 `slurm.sh`), the testbench, the grader scripts and the problem statement. The kernel design and implementation in
 `src/kernel.cpp` are my own.
