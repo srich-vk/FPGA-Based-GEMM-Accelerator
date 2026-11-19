@@ -1,123 +1,127 @@
-# Mini-Project 1 — a GEMM kernel on the U50
+# FPGA GEMM Accelerator (Alveo U50)
 
-You write **one FPGA kernel: a matrix multiply (GEMM)**, `C = A · B`. You build it for the
-Alveo U50 card and submit it. The grader measures how fast it is and checks that it's correct.
-It also uses your kernel to run a small language model that writes a short story, and reports
-how many tokens per second it reaches.
-
-## Why these matrix sizes
-
-A language model spends nearly all its time on matrix multiplies. The grader runs
-**TinyStories** (llama2.c, 15 M parameters). To write each word-piece (token), it does 43 of them:
-
-| Name | M | K | Where in the model | Per token |
-|------|:-:|:-:|---|:-:|
-| attn-proj | 288 | 288 | attention: query, key, value, output | 24 |
-| ffn-up | 768 | 288 | feed-forward, widen | 12 |
-| ffn-down | 288 | 768 | feed-forward, shrink | 6 |
-| classifier | 32000 | 288 | a score for each of the 32000 possible next tokens | 1 |
-
-The model writes one token at a time, so it calls your kernel with **N = 1** (a matrix times one
-vector). The grader also tests **N = 32** (32 vectors at once) and one **square** GEMM,
-**768 × 768 × 768**. Background: [slm-background.md](slm-background.md) (optional).
-
-## The kernel contract
-
-The grader calls exactly this function. **Don't change its name, argument order, or types:**
+A single-precision matrix-multiply (GEMM) kernel for the AMD/Xilinx **Alveo U50**, written in C++ with **Vitis HLS 2025.1**.
+One bitstream handles every shape a small language model needs. It runs end-to-end inference of
+**TinyStories-15M** ([llama2.c](https://github.com/karpathy/llama2.c)), with every matrix multiply offloaded to the FPGA.
 
 ```c
 extern "C" void gemm(const float *A, const float *B, float *C, int M, int K, int N);
-// C[M×N] = A[M×K] · B[K×N]   row-major float32. A, B, C are memory pointers; M, K, N arrive at run time.
+// C[M×N] = A[M×K] · B[K×N]   row-major fp32; M, K, N are runtime arguments
 ```
 
-One bitstream must handle all the shapes above, with any `N ≥ 1` (K goes up to 768, M up to 32000).
+## Highlights
 
-## How to use this repo
+- **16 × 16 output-stationary PE array**: 256 fp32 multiply-accumulates per cycle. The array size is a compile-time knob (`-DGEMM_TN=32` gives 512 MAC/cycle).
+- **Shift-chain accumulators.** Each PE interleaves 8 independent output rows through an 8-deep register chain. The 7-cycle fp32 adder latency is hidden, so the MAC loop runs at **II = 1** with no reduction tree.
+- **Each input read from DRAM exactly once.** B stays resident in URAM, and A streams in over a 512-bit AXI port in long bursts.
+- **Load/compute overlap.** A tiles are double-buffered. The next tile is pulled in with non-blocking FIFO reads inside the MAC pipeline itself.
+- **Shape-generic.** It handles any `M ≥ 1`, `1 ≤ N ≤ 768` and `K ≤ 768`, from matrix-vector (`N = 1`, used for decoding) to square 768³.
 
+## Architecture
+
+```mermaid
+flowchart LR
+    HBM_A[(A in HBM)] -->|512-bit bursts| RA[read_A]
+    HBM_B[(B in HBM)] -->|once per call| LB[load_B]
+    LB --> BW[(B buffer<br/>URAM)]
+    RA -->|hls::stream| TS
+    subgraph compute
+      TS[tile_step<br/>16×16 PE array<br/>II = 1]
+      AW[(A tile<br/>ping-pong BRAM)] <--> TS
+      BW --> TS
+    end
+    TS -->|row chunks| WC[write_C]
+    WC -->|512-bit / scalar| HBM_C[(C in HBM)]
 ```
-src/kernel.cpp       ← your kernel. Ships with the contract and a slow but correct placeholder
-src/kernel_tb.cpp    testbench used by csim and cosim
-Makefile             all the build steps (hls_config.cfg and env.sh hold its settings)
-slurm.sh             submits a make step with sbatch (for the long hw build)
-scripts/             hw-submit.sh (used by make submit), hw-status.sh
-```
 
-## ⚠️ Running on RCE: accounts (important)
+The top level is an HLS `DATAFLOW` region with three concurrent processes connected by FIFOs:
 
-> **Never build on the login node.** Everything runs on a compute node, under the course's
-> Slurm **account `cs2401`** (`-A cs2401`).
-
-- **Quick things** (csim, cosim, trying commands): get a shell on a compute node, then run `make csim` etc. there.
-  ```bash
-  sinteractive -c 8 -A cs2401
-  ```
-  `source env.sh` if you want to run the Vitis tools by hand.
-- **Long things** (the ~1 h `hw` build): `./slurm.sh hw` submits it with `sbatch`.
-  Check it with `squeue -u $USER`; the log is `build/logs/hw-<jobid>.log`.
-  If `sbatch` asks for an account, run it as `SBATCH_ACCOUNT=cs2401 ./slurm.sh hw`.
-- **If it doesn't start:**
-  - try **with and without** `-A cs2401` (or `SBATCH_ACCOUNT=cs2401`), since the account setup may change;
-  - if neither works, **ask on the course forum**.
-
-## Steps
-
-1. **Write your kernel** in `src/kernel.cpp`.
-2. **`make csim`** (seconds): runs your C++ on all shapes. Every case must say `PASS`.
-3. **`make cosim`** (minutes): synthesizes the hardware and simulates it on small inputs.
-   Look for `C/RTL co-simulation finished: PASS`. Check the loop II, and that the clock meets 300 MHz, in
-   `build/hls/hls/syn/report/gemm_csynth.rpt`.
-4. **`./slurm.sh hw`** (about 1 hour): builds the bitstream, `build/hw/gemm.xclbin`.
-5. **Submit** from the login node: `HW_TOKEN=<your-token> make submit`.
-6. **See your results** in a browser on the campus network:
-   - your runs: `http://10.4.25.39:18080/?token=<your-token>`
-   - leaderboard: `http://10.4.25.39:18080/leaderboard`
-
-   Reload the page for updates. From a terminal: `HW_TOKEN=<token> ./scripts/hw-status.sh`.
-
-Other steps:
-
-- `make csynth`: synthesis only. `make hw_emu`: emulation image (about 5 min). `make clean`: removes `build/`.
-- Any step can also go to `sbatch`: `./slurm.sh <step>`.
-- Run one of csim, csynth or cosim at a time, because they share `build/hls/`.
-
-Submitting:
-
-- Your token comes from the instructor. It is your identity, so keep it private.
-- Submissions run on the card one at a time, and each takes about a minute.
-- **If you submit again while your earlier one is still waiting, the new one replaces it.**
-
-## Scoring
-
-The grader runs 9 cases: the 4 shapes at N = 1, the 4 shapes at N = 32, and the square case.
-Every output must be within `1e-2` of an exact result. **If all 9 pass**, you get three scores, in
-milliseconds of kernel time (lower is better):
-
-| Score | Adds up |
+| Stage | What it does |
 |---|---|
-| **square** | the 768 × 768 × 768 case (the leaderboard ranks by this) |
-| **N=1** | the 4 shapes at N = 1 |
-| **N=32** | the 4 shapes at N = 32 |
+| `read_A` | Streams A once, packing each row into 512-bit words. A wide path is used when `K % 16 == 0` and a packing path otherwise. |
+| `compute` | Loads B into URAM, then calls `tile_step` once per 128-row tile of A. |
+| `write_C` | Writes C with a 512-bit path when `N % 16 == 0`. Otherwise it uses a scalar path (e.g. `N = 1`) that has no multipliers or dynamic part-selects in its address logic. |
 
-Then TinyStories writes a new 256-token story with every matrix multiply on your kernel, and you get the
-story and its **tokens/sec**. Every run writes the same number of tokens, so tok/s compares fairly.
+**Shift-chain PE.** A tile covers `TM × L = 16 × 8 = 128` rows of A. On cycle `(k, l)`, PE `(r, c)` adds
+`A[l·TM + r][k] · B[k][jt·TN + c]` to the value leaving its 8-deep chain and pushes the result back in.
+Each of the 8 slots belongs to a different output row, so a sum is only touched again 8 cycles later. That is longer than
+the adder latency, which gives II = 1 without splitting any sum into partials. When a pass over K finishes, the
+finished values fall out of the chain during the first 8 cycles of the next pass. They are captured into a small LUTRAM
+buffer and drained to `write_C`, so the array never stalls between passes.
 
-Time limits: 5 minutes for the 9 cases, 3 minutes for the story. The shipped placeholder needs
-about 45 s + 110 s (2 tok/s). A simple tiled kernel reaches about 7 tok/s, and a well-optimized one
-can go much higher.
+## Results
 
-## Making it fast
+From the Vitis HLS synthesis report and the hardware link of the final design (default `TM = TN = 16`):
 
-- **N = 1** reads every element of A once and uses it once, so the speed limit is memory bandwidth.
-  Read A with wide ports and long bursts, and keep many multiply-adds running at once.
-- **N > 1** reuses each element of A across N columns. Buffer tiles on-chip and compute many outputs in parallel.
-- The placeholder's inner loop runs at II = 8 because each add waits for the previous one. Splitting the sum
-  into several partial accumulators brings it to II = 1.
-
-## Troubleshooting
-
-| Symptom | Fix |
+| Metric | Value |
 |---|---|
-| cosim `SIGSEGV` or memory errors | The `depth=` values in `kernel.cpp` must equal `COSIM_*_ELEMS` in `kernel_tb.cpp` |
-| result says `ERROR … kernel` | The kernel's name or arguments don't match the contract |
-| FAIL only for K = 768 or large N | Your buffers or tiling don't cover K = 768, or N beyond your tile size |
-| all cases PASS but the story is nonsense | A bug the test shapes don't catch. Re-check csim |
+| MAC loop initiation interval | **1** (target 1) |
+| Kernel clock (achieved after place-and-route) | **245 MHz** (300 MHz target, auto-scaled by `v++`) |
+| Peak compute | 256 MAC/cycle ≈ **125 GFLOP/s** at 245 MHz |
+| DSP / LUT / FF | 1,291 (21%) / 145k (16%) / 240k (13%) |
+| BRAM / URAM | 330 (12%) / 152 (23%) |
+
+For the 768 × 768 × 768 case, the MAC pipeline runs 6 tiles × 48 column tiles × 768 × 8 ≈ 1.77 M cycles. That is about
+**7.2 ms of compute at 245 MHz**, estimated from the cycle count rather than measured.
+
+## Target workload
+
+TinyStories-15M generates one token at a time. Each token costs 43 matrix-vector products (`N = 1`) of four shapes:
+
+| Layer | M | K | Per token |
+|---|:-:|:-:|:-:|
+| attention q/k/v/o | 288 | 288 | 24 |
+| feed-forward up | 768 | 288 | 12 |
+| feed-forward down | 288 | 768 | 6 |
+| classifier | 32000 | 288 | 1 |
+
+At `N = 1` each weight is used once, so decoding is **memory-bandwidth-bound** and the kernel's job is to stream A as
+fast as possible. Batched shapes (`N = 32`) and the square case reuse A across columns and are **compute-bound**, which
+is where the PE array matters. See [docs/llm-background.md](docs/llm-background.md) for how the model calls the kernel.
+
+## Building
+
+Requires Vitis 2025.1, XRT, and the `xilinx_u50_gen3x16_xdma_5_202210_1` platform. Toolchain paths are set in
+[`env.sh`](env.sh), and machine-specific overrides go in a gitignored `env.local.sh`.
+
+```bash
+make csim      # C simulation: all target shapes at N = 1 and 32, plus 768³ (seconds)
+make csynth    # HLS synthesis -> build/hls/gemm.xo and build/hls/hls/syn/report/
+make cosim     # C/RTL co-simulation on small shapes (minutes)
+make hw_emu    # hardware-emulation xclbin (~5 min)
+make hw        # full bitstream build/hw/gemm.xclbin (~1-3 h)
+```
+
+On a Slurm cluster, `./slurm.sh <target>` submits any of these as a batch job.
+
+The testbench ([`src/kernel_tb.cpp`](src/kernel_tb.cpp)) checks every output against a double-precision reference
+(tolerance `1e-2`).
+
+## Repository layout
+
+```
+src/kernel.cpp        the accelerator (HLS C++)
+src/kernel_tb.cpp     C-sim / co-sim testbench
+hls_config.cfg        Vitis HLS settings (part, 300 MHz clock, testbench args)
+Makefile              csim / csynth / cosim / hw_emu / hw flow
+env.sh                toolchain environment
+slurm.sh              run a make target as a Slurm job
+scripts/              submit / status clients for the course's hardware grader
+docs/                 background on the LLM workload
+```
+
+## Development history
+
+The commit log follows the design from a naive triple loop to the final array:
+
+1. Naive kernel → split accumulators to break the fp32 add dependency, plus loop flattening.
+2. Dataflow restructure: A streamed once, B in URAM.
+3. 16 × 16 output-stationary PE array with shift-chain accumulators.
+4. Ping-pong A buffers, overlapping tile loads with compute.
+5. Timing closure: removed the multiplier/part-select path in `write_C`, made the array size configurable, and dropped the unused fallback.
+
+## Acknowledgements
+
+Built as a mini-project for **CS2401** at IIIT Hyderabad. The course provided the build flow (Makefile, `env.sh`,
+`slurm.sh`), the testbench, the grader scripts and the problem statement. The kernel design and implementation in
+`src/kernel.cpp` are my own.
